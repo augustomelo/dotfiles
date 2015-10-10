@@ -23,13 +23,13 @@ syntax on
 colorscheme codeschool
 set t_Co=256
 
-" ------- IDENTATION 
+" ------- INDENTATION 
 set noexpandtab
 set shiftround
 set shiftwidth=4
 set tabstop=4
 
-"  ------- SEARCH CONFIG
+"  ------- SEARCH
 set hlsearch
 set smartcase
 
