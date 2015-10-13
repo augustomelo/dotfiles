@@ -45,7 +45,7 @@ if has("gui_running")
 	set clipboard=unnamedplus
 	cd /home/augusto/workspace
   elseif has("gui_win32")
-    set guifont=Consolas:h11:b
+    set guifont=Consolas:h10:b
 	set clipboard=unnamed
 	cd C:\Users\augustomelo\workspace
   endif
@@ -60,4 +60,6 @@ while c <= 'z'
   let c = nr2char(1+char2nr(c))
 endw
 set timeout ttimeoutlen=50
+
+set backspace=2
 
