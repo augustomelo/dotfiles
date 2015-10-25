@@ -9,10 +9,10 @@ Plug 'bling/vim-airline'
 Plug 'ervandew/supertab'
 
 " ------- Web development.
-Plug 'pangloss/vim-javascript'
+"Plug 'pangloss/vim-javascript'
 
 " ------- University
-Plug 'javacomplete'
+"Plug 'javacomplete'
 call plug#end()
 " --- vim-plug end.
 
@@ -26,6 +26,7 @@ set noswapfile
 set number
 set relativenumber
 set linebreak
+set showcmd
 
 " ------- COLOR
 syntax on
@@ -50,7 +51,8 @@ set guioptions-=T  "remove toolbar
 set lines=50 columns=100
 if has("gui_running")
   if has("gui_gtk2")
-    set guifont=Inconsolata\ Bold\ 11
+    "set guifont=Inconsolata\ Bold\ 11
+	set guifont=Inconsolata\ for\ Powerline\ Bold\ 11
 	set clipboard=unnamedplus
 	cd /home/augusto/workspace
   elseif has("gui_win32")
@@ -76,9 +78,9 @@ set backspace=2
 " ------- Plugin Config
 " airline
 set laststatus=2
-"let g:airline_powerline_fonts = 1
-let g:airline_left_sep=''
-let g:airline_right_sep=''
+let g:airline_powerline_fonts = 1
+"let g:airline_left_sep=''
+"let g:airline_right_sep=''
 
 " syntastic
 set statusline+=%#warningmsg#
