@@ -2,8 +2,17 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'jiangmiao/auto-pairs'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-surround'
+Plug 'kien/ctrlp.vim'
+Plug 'bling/vim-airline'
+Plug 'ervandew/supertab'
+
+" ------- Web development.
 Plug 'pangloss/vim-javascript'
 
+" ------- University
+Plug 'javacomplete'
 call plug#end()
 " --- vim-plug end.
 
@@ -63,3 +72,21 @@ set timeout ttimeoutlen=50
 
 set backspace=2
 
+
+" ------- Plugin Config
+" airline
+set laststatus=2
+"let g:airline_powerline_fonts = 1
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_loc_list_height=3
