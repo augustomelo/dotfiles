@@ -7,6 +7,7 @@ Plug 'tpope/vim-surround'
 Plug 'kien/ctrlp.vim'
 Plug 'bling/vim-airline'
 Plug 'ervandew/supertab'
+Plug 'godlygeek/tabular'
 
 " ------- Web development.
 Plug 'pangloss/vim-javascript'
