@@ -8,20 +8,21 @@ Plug 'kien/ctrlp.vim'
 Plug 'bling/vim-airline'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
-
+Plug 'Raimondi/delimitMate'
+Plug 'Yggdroot/indentLine'
+Plug 'wombat256.vim'
 " ------- Web development.
-Plug 'pangloss/vim-javascript'
-Plug 'gregsexton/MatchTag'
-Plug 'alvan/vim-closetag'
+"Plug 'pangloss/vim-javascript'
+"Plug 'alvan/vim-closetag'
 
 " ------- University
-"Plug 'javacomplete'
 call plug#end()
 " --- vim-plug end.
 
 " ------- EDITOR CONFIG
 " be iMproved, required.
 set nocompatible
+filetype plugin indent on
 set encoding=utf-8
 set fileencoding=utf-8
 set cursorline
@@ -33,8 +34,8 @@ set showcmd
 
 " ------- COLOR
 syntax on
-colorscheme codeschool
-set t_Co=256
+set background=dark
+colorscheme wombat256mod
 
 " ------- INDENTATION 
 set noexpandtab
@@ -56,11 +57,9 @@ if has("gui_running")
   if has("gui_gtk2")
     "set guifont=Inconsolata\ Bold\ 11
 	set guifont=Inconsolata\ for\ Powerline\ Bold\ 11
-	set clipboard=unnamedplus
-	cd /home/augusto/workspace
+	cd ~/workspace
   elseif has("gui_win32")
     set guifont=Consolas:h10:b
-	set clipboard=unnamed
 	cd C:\Users\augustomelo\workspace
 	
 	" Syntastic config to find jshint in windows.
@@ -140,3 +139,10 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/bower_components/*,*/node_modules/*,
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 "set local working directory. 
 let g:ctrlp_working_path_mode = 'ra'
+
+"INDENTLINE
+let g:indentLine_char = '.'
+
+" SUPERTAB
+let g:SuperTabDefaultCompletionType = 'context'
+
