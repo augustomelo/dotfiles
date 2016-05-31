@@ -74,7 +74,7 @@ if has("gui_running")
 		cd ~/workspace
 	elseif has("gui_win32")
 		cd ~\workspace
-		set guifont=DejaVuSansMonoForPowerline_Nerd:h10:b,Consolas:h10:b
+		set guifont=DejaVuSansMonoForPowerline_NF:h9:b,Consolas:h10:b
 		
 		"Better font rendering 
 		if (v:version == 704 && has("patch393")) || v:version > 704
@@ -130,11 +130,13 @@ set backspace=2
 " AIRLINE
 set laststatus=2
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 "let g:airline_left_sep=''
 "let g:airline_right_sep=''
 
 " NERDTREE
 map <C-e> :NERDTreeToggle<CR>
+let g:NERDTreeWinPos = "right"
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
