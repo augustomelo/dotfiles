@@ -4,7 +4,7 @@ call plug#begin('~/.vim/plugged')
 " Global
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'bling/vim-airline'
 Plug 'ervandew/supertab'
@@ -20,6 +20,9 @@ Plug 'wombat256.vim'
 Plug 'tpope/vim-dispatch'
 Plug 'omnisharp/omnisharp-vim'
 Plug 'oranget/vim-csharp'
+
+" ------- Cosmetic 
+Plug 'ryanoasis/vim-devicons'
 
 " ------- University
 call plug#end()
@@ -51,7 +54,9 @@ set tabstop=4
 
 " ------- SEARCH
 set hlsearch
+set ignorecase
 set smartcase
+set incsearch
 
 " ------- MOVIMENT
 nnoremap j gj
@@ -65,16 +70,17 @@ set guioptions-=T  "remove toolbar
 set lines=50 columns=100
 if has("gui_running")
 	if has("gui_gtk2")
-		"set guifont=Inconsolata\ Bold\ 11
-	set guifont=Inconsolata\ for\ Powerline\ Bold\ 11
-	cd ~/workspace
+		set guifont=Inconsolata\ for\ Powerline\ Bold\ 11,Inconsolata\ Bold\ 11
+		cd ~/workspace
 	elseif has("gui_win32")
-		set guifont=Consolas:h10:b
-	"cd C:\Users\augusto.melo\workspace
-	cd ~\workspace
-	
-	" Syntastic config to find jshint in windows.
-	"let g:syntastic_javascript_jshint_exec='C:\Users\augustomelo\AppData\Roaming\npm\jshint.cmd'
+		cd ~\workspace
+		set guifont=DejaVuSansMonoForPowerline_Nerd:h10:b,Consolas:h10:b
+		
+		"Better font rendering 
+		if (v:version == 704 && has("patch393")) || v:version > 704
+			set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1	
+		endif
+		
 	endif
 endif
 
@@ -123,24 +129,34 @@ set backspace=2
 " ------- Plugin Config
 " AIRLINE
 set laststatus=2
-"let g:airline_powerline_fonts = 1
-let g:airline_left_sep=''
-let g:airline_right_sep=''
+let g:airline_powerline_fonts = 1
+"let g:airline_left_sep=''
+"let g:airline_right_sep=''
 
-" SYNTASTIC
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" NERDTREE
+map <C-e> :NERDTreeToggle<CR>
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_loc_list_height=3
+" OMNISHARP
+let g:OmniSharp_timeout = 1
+set noshowmatch
+"Super tab settings 
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
+let g:SuperTabClosePreviewOnPopupClose = 1
+let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+set completeopt=longest,menuone,preview
+set splitbelow
+set updatetime=500
+set hidden
+augroup omnisharp_commands
+	autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+	autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
+	autocmd FileType cs nnoremap <C-,>  :OmniSharpFixIssue<cr>
+augroup END
 
-
-" CLOSETAG
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml"
 
 " CTRL-P
 "ignore folders
@@ -149,14 +165,3 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/bower_components/*,*/node_modules/*,
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 "set local working directory. 
 let g:ctrlp_working_path_mode = 'ra'
-
-"INDENTLINE
-let g:indentLine_char = '.'
-
-" SUPERTAB
-let g:SuperTabDefaultCompletionType = 'context'
-
-" NERDTREE
-map <C-e> :NERDTreeToggle<CR>
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
