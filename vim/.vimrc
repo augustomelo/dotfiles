@@ -62,6 +62,9 @@ set incsearch
 nnoremap j gj
 nnoremap k gk
 
+" ------- Abbreviation
+cabbrev h vert h
+
 " ------- GVIM
 " Hide toolbar vim
 set guioptions-=m  "remove menu bar
@@ -74,8 +77,8 @@ if has("gui_running")
 		cd ~/workspace
 	elseif has("gui_win32")
 		cd ~\workspace
-		set guifont=DejaVuSansMonoForPowerline_NF:h9:b,Consolas:h10:b
-		
+		set guifont=DejaVuSansMonoForPowerline_Nerd:h9:b,Consolas:h10:b
+
 		"Better font rendering 
 		if (v:version == 704 && has("patch393")) || v:version > 704
 			set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1	
@@ -143,7 +146,7 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 " OMNISHARP
 let g:OmniSharp_timeout = 1
 set noshowmatch
-"Super tab settings 
+set foldmethod=syntax
 let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
@@ -153,10 +156,18 @@ set completeopt=longest,menuone,preview
 set splitbelow
 set updatetime=500
 set hidden
+nnoremap <F2> :OmniSharpRename<cr>
 augroup omnisharp_commands
+	autocmd!
+
 	autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+	autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
+
 	autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
-	autocmd FileType cs nnoremap <C-,>  :OmniSharpFixIssue<cr>
+	autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr>
+	"navigate up/down by method/property/field
+    "autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
+    "autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
 augroup END
 
 
@@ -167,3 +178,9 @@ set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/bower_components/*,*/node_modules/*,
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 "set local working directory. 
 let g:ctrlp_working_path_mode = 'ra'
+
+" SYNTASTIC
+let g:syntastic_error_symbol = '✗✗'
+let g:syntastic_style_error_symbol = '✠✠'
+let g:syntastic_warning_symbol = '∆∆'
+let g:syntastic_style_warning_symbol = '≈≈'
