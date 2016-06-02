@@ -64,6 +64,7 @@ nnoremap k gk
 
 " ------- Abbreviation
 cabbrev h vert h
+cabbrev sb vert belowright sb
 
 " ------- GVIM
 " Hide toolbar vim
@@ -172,12 +173,12 @@ augroup END
 
 
 " CTRL-P
-"ignore folders
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/bower_components/*,*/node_modules/*,*/.tmp/*
-"ignore files
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-"set local working directory. 
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_use_caching = 1
+let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_by_filename = 1
 
 " SYNTASTIC
 let g:syntastic_error_symbol = '✗✗'
