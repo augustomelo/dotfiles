@@ -64,7 +64,7 @@ nnoremap k gk
 
 " ------- Abbreviation
 cabbrev h vert h
-cabbrev sb vert belowright sb
+cabbrev sb vert sb
 
 " ------- GVIM
 " Hide toolbar vim
@@ -78,8 +78,7 @@ if has("gui_running")
 		cd ~/workspace
 	elseif has("gui_win32")
 		cd ~\workspace
-		set guifont=DejaVuSansMonoForPowerline_Nerd:h9:b,Consolas:h10:b
-
+		set guifont=DejaVuSansMonoForPowerline_NF:h9:b,DejaVuSansMonoForPowerline_Nerd:h9:b,Consolas:h10:b
 		"Better font rendering 
 		if (v:version == 704 && has("patch393")) || v:version > 704
 			set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1	
@@ -143,6 +142,7 @@ map <C-e> :NERDTreeToggle<CR>
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeIgnore = ['\.csproj$'] 
 
 " OMNISHARP
 let g:OmniSharp_timeout = 1
@@ -153,7 +153,7 @@ let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
 let g:SuperTabClosePreviewOnPopupClose = 1
 let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-set completeopt=longest,menuone,preview
+set completeopt=menuone,preview
 set splitbelow
 set updatetime=500
 set hidden
@@ -163,6 +163,7 @@ augroup omnisharp_commands
 
 	autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 	autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
+	autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
 
 	autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
 	autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr>
@@ -175,9 +176,7 @@ augroup END
 " CTRL-P
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/bower_components/*,*/node_modules/*,*/.tmp/*
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_use_caching = 1
-let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_working_path_mode = 0
 let g:ctrlp_by_filename = 1
 
 " SYNTASTIC
