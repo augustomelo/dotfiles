@@ -11,6 +11,7 @@ Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'wombat256.vim'
+Plug 'xolox/vim-session'
 "Plug 'godlygeek/tabular'
 " ------- Web development.
 "Plug 'pangloss/vim-javascript'
@@ -184,3 +185,7 @@ let g:syntastic_error_symbol = '✗✗'
 let g:syntastic_style_error_symbol = '✠✠'
 let g:syntastic_warning_symbol = '∆∆'
 let g:syntastic_style_warning_symbol = '≈≈'
+
+" VIM-SESSION
+set sessionoptions-=buffers
+set sessionoptions-=options
