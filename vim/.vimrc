@@ -12,6 +12,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'wombat256.vim'
 Plug 'xolox/vim-session'
+Plug 'vim-misc'
 "Plug 'godlygeek/tabular'
 " ------- Web development.
 "Plug 'pangloss/vim-javascript'
