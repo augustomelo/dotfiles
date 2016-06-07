@@ -154,7 +154,7 @@ let g:SuperTabCrMapping=1
 autocmd FileType *
     \ if &omnifunc != '' |
     \   call SuperTabChain(&omnifunc, "<c-p>") |
-	\ 	call SuperTabSetDefaultCompletionType("<c-x><c-o>")
+	\ 	call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
     \ endif
 
 " CTRL-P
