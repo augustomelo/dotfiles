@@ -146,15 +146,40 @@ let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDTreeIgnore = ['\.csproj$'] 
 
+"SUPERTAB
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>"]
+let g:SuperTabClosePreviewOnPopupClose = 1
+let g:SuperTabCrMapping=1
+autocmd FileType *
+    \ if &omnifunc != '' |
+    \   call SuperTabChain(&omnifunc, "<c-p>") |
+	\ 	call SuperTabSetDefaultCompletionType("<c-x><c-o>")
+    \ endif
+
+" CTRL-P
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/bower_components/*,*/node_modules/*,*/.tmp/*
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_by_filename = 1
+
+" SYNTASTIC
+let g:syntastic_error_symbol = '✗✗'
+let g:syntastic_style_error_symbol = '✠✠'
+let g:syntastic_warning_symbol = '∆∆'
+let g:syntastic_style_warning_symbol = '≈≈'
+
+" VIM-SESSION
+set sessionoptions-=buffers
+set sessionoptions-=options
+let g:session_autosave = 'no'
+let g:session_autoload = 'no'
+
 " OMNISHARP
 let g:OmniSharp_timeout = 1
+let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
 set noshowmatch
 set foldmethod=syntax
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
-let g:SuperTabClosePreviewOnPopupClose = 1
-let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
 set completeopt=menuone,preview
 set splitbelow
 set updatetime=500
@@ -175,18 +200,4 @@ augroup omnisharp_commands
 augroup END
 
 
-" CTRL-P
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/bower_components/*,*/node_modules/*,*/.tmp/*
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_by_filename = 1
 
-" SYNTASTIC
-let g:syntastic_error_symbol = '✗✗'
-let g:syntastic_style_error_symbol = '✠✠'
-let g:syntastic_warning_symbol = '∆∆'
-let g:syntastic_style_warning_symbol = '≈≈'
-
-" VIM-SESSION
-set sessionoptions-=buffers
-set sessionoptions-=options
