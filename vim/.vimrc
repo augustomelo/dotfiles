@@ -158,7 +158,7 @@ autocmd FileType *
     \ endif
 
 " CTRL-P
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/bower_components/*,*/node_modules/*,*/.tmp/*
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/bower_components/*,*/node_modules/*,*/.tmp/*,*.csproj,*.sln,*.suo,*.csproj.*
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_by_filename = 1
@@ -189,15 +189,12 @@ augroup omnisharp_commands
 	autocmd!
 
 	autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-	autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
+	autocmd TextChanged,InsertLeave *.cs SyntasticCheck
 	autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
 
 	autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
-	autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr>
+	autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr> :OmniSharpFixUsings<cr>
 	"navigate up/down by method/property/field
     "autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
     "autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
 augroup END
-
-
-
