@@ -50,6 +50,7 @@ set number
 set relativenumber
 set linebreak
 set showcmd
+set spell spelllang=en_us
 
 " ------- COLOR
 syntax on
