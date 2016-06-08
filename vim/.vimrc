@@ -13,7 +13,10 @@ Plug 'Yggdroot/indentLine'
 Plug 'wombat256.vim'
 Plug 'xolox/vim-session'
 Plug 'vim-misc'
+Plug 'scrooloose/nerdcommenter'
+Plug 'majutsushi/tagbar'
 "Plug 'godlygeek/tabular'
+ 
 " ------- Web development.
 "Plug 'pangloss/vim-javascript'
 "Plug 'alvan/vim-closetag'
@@ -22,6 +25,11 @@ Plug 'vim-misc'
 Plug 'tpope/vim-dispatch'
 Plug 'omnisharp/omnisharp-vim'
 Plug 'oranget/vim-csharp'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+
 
 " ------- Cosmetic 
 Plug 'ryanoasis/vim-devicons'
@@ -174,6 +182,10 @@ set sessionoptions-=buffers
 set sessionoptions-=options
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
+
+" TAGBAR
+let g:tagbar_ctags_bin = '~\.vim\ctags58\ctags.exe'
+nmap <F8> :TagbarToggle<CR>
 
 " OMNISHARP
 let g:OmniSharp_timeout = 1
