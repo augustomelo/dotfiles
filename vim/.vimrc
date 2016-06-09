@@ -58,7 +58,7 @@ set background=dark
 colorscheme wombat256mod
 
 " ------- INDENTATION 
-set noexpandtab
+set expandtab
 set shiftround
 set shiftwidth=4
 set tabstop=4
@@ -145,6 +145,7 @@ set backspace=2
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+ let g:airline_detect_spell=0
 "let g:airline_left_sep=''
 "let g:airline_right_sep=''
 
@@ -203,7 +204,7 @@ augroup omnisharp_commands
 
 	autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 	autocmd TextChanged,InsertLeave *.cs SyntasticCheck
-	autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+	autocmd CursorHold *.cs call OmniSharp#TypeLookupWithDocumentation()
 
 	autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
 	autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr> :OmniSharpFixUsings<cr>
