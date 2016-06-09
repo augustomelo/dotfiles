@@ -199,15 +199,17 @@ set splitbelow
 set updatetime=500
 set hidden
 nnoremap <F2> :OmniSharpRename<cr>
+nnoremap <leader><space> :OmniSharpGetCodeActions<cr>
 augroup omnisharp_commands
 	autocmd!
 
 	autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 	autocmd TextChanged,InsertLeave *.cs SyntasticCheck
-	autocmd CursorHold *.cs call OmniSharp#TypeLookupWithDocumentation()
+	autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
 
 	autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
 	autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr> :OmniSharpFixUsings<cr>
+    autocmd FileType cs nnoremap <leader>dc :OmniSharpDocumentation<cr>
 	"navigate up/down by method/property/field
     "autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
     "autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
