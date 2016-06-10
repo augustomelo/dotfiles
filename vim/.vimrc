@@ -174,16 +174,17 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_by_filename = 1
 
 " SYNTASTIC
-let g:syntastic_error_symbol = '✗✗'
-let g:syntastic_style_error_symbol = '✠✠'
-let g:syntastic_warning_symbol = '∆∆'
-let g:syntastic_style_warning_symbol = '≈≈'
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_style_error_symbol = '✠'
+let g:syntastic_warning_symbol = '∆'
+let g:syntastic_style_warning_symbol = '≈'
 
 " VIM-SESSION
 set sessionoptions-=buffers
 set sessionoptions-=options
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
+nmap <C-S-o> :OpenSession <cr>
 
 " TAGBAR
 let g:tagbar_ctags_bin = '~\.vim\ctags58\ctags.exe'
