@@ -73,9 +73,12 @@ set incsearch
 nnoremap j gj
 nnoremap k gk
 
+
 " ------- Abbreviation
 cabbrev h vert h
 cabbrev sb vert sb
+nnoremap <Tab> :bn<CR>
+nnoremap <S-Tab> :bp<CR>
 
 " ------- GVIM
 " Hide toolbar vim
