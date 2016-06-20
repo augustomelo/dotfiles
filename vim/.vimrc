@@ -16,7 +16,7 @@ Plug 'vim-misc'
 Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
 "Plug 'godlygeek/tabular'
- 
+
 " ------- Web development.
 "Plug 'pangloss/vim-javascript'
 "Plug 'alvan/vim-closetag'
@@ -29,7 +29,6 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
-
 
 " ------- Cosmetic 
 Plug 'ryanoasis/vim-devicons'
@@ -87,27 +86,27 @@ set guioptions-=T  "remove toolbar
 " Start window size
 set lines=50 columns=100
 if has("gui_running")
-	if has("gui_gtk2")
-		set guifont=Inconsolata\ for\ Powerline\ Bold\ 11,Inconsolata\ Bold\ 11
-		cd ~/workspace
-	elseif has("gui_win32")
-		cd ~\workspace
-		set guifont=DejaVuSansMonoForPowerline_NF:h9:b,DejaVuSansMonoForPowerline_Nerd:h9:b,Consolas:h10:b
-		"Better font rendering 
-		if (v:version == 704 && has("patch393")) || v:version > 704
-			set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1	
-		endif
-		
-	endif
+    if has("gui_gtk2")
+        set guifont=Inconsolata\ for\ Powerline\ Bold\ 11,Inconsolata\ Bold\ 11
+        cd ~/workspace
+    elseif has("gui_win32")
+        cd ~\workspace
+        set guifont=DejaVuSansMonoForPowerline_NF:h9:b,DejaVuSansMonoForPowerline_Nerd:h9:b,Consolas:h10:b
+        "Better font rendering 
+        if (v:version == 704 && has("patch393")) || v:version > 704
+            set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1	
+        endif
+
+    endif
 endif
 
 " ------- FIXES
 " This make the alt biding work on the gnome-terminal, vim, etc.
 let c='a'
 while c <= 'z'
-	exec "set <M-".c.">=\e".c
-	exec "imap \e".c." <M-".c.">"
-	let c = nr2char(1+char2nr(c))
+    exec "set <M-".c.">=\e".c
+    exec "imap \e".c." <M-".c.">"
+    let c = nr2char(1+char2nr(c))
 endw
 set timeout ttimeoutlen=50
 set backspace=2
@@ -147,8 +146,10 @@ set backspace=2
 " AIRLINE
 set laststatus=2
 let g:airline_powerline_fonts = 1
+let g:airline_detect_spell=0
 let g:airline#extensions#tabline#enabled = 1
- let g:airline_detect_spell=0
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
 "let g:airline_left_sep=''
 "let g:airline_right_sep=''
 
@@ -165,14 +166,16 @@ let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>"]
 let g:SuperTabClosePreviewOnPopupClose = 1
 let g:SuperTabCrMapping=1
 autocmd FileType *
-    \ if &omnifunc != '' |
-    \   call SuperTabChain(&omnifunc, "<c-p>") |
-	\ 	call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
-    \ endif
+            \ if &omnifunc != '' |
+            \   call SuperTabChain(&omnifunc, "<c-p>") |
+            \ 	call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
+            \ endif
 
 " CTRL-P
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/bower_components/*,*/node_modules/*,*/.tmp/*,*.csproj,*.sln,*.suo,*.csproj.*
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+            \ 'dir':  '\v[\/][\._]?(bin|obj|references|svn|git)',
+            \ 'file': '\v\.(exe|so|dll|csproj)$',
+            \ }
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_by_filename = 1
 
@@ -205,16 +208,16 @@ set hidden
 nnoremap <F2> :OmniSharpRename<cr>
 nnoremap <leader><space> :OmniSharpGetCodeActions<cr>
 augroup omnisharp_commands
-	autocmd!
+    autocmd!
 
-	autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-	autocmd TextChanged,InsertLeave *.cs SyntasticCheck
-	autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+    autocmd TextChanged,InsertLeave *.cs SyntasticCheck
+    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
 
-	autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
-	autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr> :OmniSharpFixUsings<cr>
+    autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
+    autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr> :OmniSharpFixUsings<cr>
     autocmd FileType cs nnoremap <leader>dc :OmniSharpDocumentation<cr>
-	"navigate up/down by method/property/field
+    "navigate up/down by method/property/field
     "autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
     "autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
 augroup END
