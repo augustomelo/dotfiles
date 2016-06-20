@@ -158,7 +158,7 @@ map <C-e> :NERDTreeToggle<CR>
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-let g:NERDTreeIgnore = ['\.csproj$'] 
+let g:NERDTreeIgnore = ['\.csproj$', '\.suo$'] 
 
 "SUPERTAB
 let g:SuperTabDefaultCompletionType = 'context'
@@ -174,7 +174,7 @@ autocmd FileType *
 " CTRL-P
 let g:ctrlp_custom_ignore = {
             \ 'dir':  '\v[\/][\._]?(bin|obj|references|svn|git)',
-            \ 'file': '\v\.(exe|so|dll|csproj)$',
+            \ 'file': '\v\.(exe|so|dll|csproj|sln|suo)$',
             \ }
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_by_filename = 1
