@@ -30,7 +30,7 @@ Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 
-" ------- Cosmetic 
+" ------- Cosmetic
 Plug 'ryanoasis/vim-devicons'
 
 " ------- University
@@ -50,13 +50,15 @@ set relativenumber
 set linebreak
 set showcmd
 set spell spelllang=en_us
+set equalalways
+set listchars=eol:¬,trail:·,tab:▸\
 
 " ------- COLOR
 syntax on
 set background=dark
 colorscheme wombat256mod
 
-" ------- INDENTATION 
+" ------- INDENTATION
 set expandtab
 set shiftround
 set shiftwidth=4
@@ -73,9 +75,11 @@ nnoremap j gj
 nnoremap k gk
 
 
-" ------- Abbreviation
+" ------- ABBREVIATION
 cabbrev h vert h
 cabbrev sb vert sb
+
+" ------- BINDINGS
 nnoremap <Tab> :bn<CR>
 nnoremap <S-Tab> :bp<CR>
 
@@ -92,9 +96,9 @@ if has("gui_running")
     elseif has("gui_win32")
         cd ~\workspace
         set guifont=DejaVuSansMonoForPowerline_NF:h9:b,DejaVuSansMonoForPowerline_Nerd:h9:b,Consolas:h10:b
-        "Better font rendering 
+        "Better font rendering
         if (v:version == 704 && has("patch393")) || v:version > 704
-            set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1	
+            set rop=type:directx,gamma:1.0,contrast:0.5,level:1,geom:1,renmode:4,taamode:1
         endif
 
     endif
@@ -150,6 +154,19 @@ let g:airline_detect_spell=0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_mode_map = {
+            \ '__' : '-',
+            \ 'n'  : 'N',
+            \ 'i'  : 'I',
+            \ 'R'  : 'R',
+            \ 'c'  : 'C',
+            \ 'v'  : 'V',
+            \ 'V'  : 'VL',
+            \ '' : 'VC',
+            \ 's'  : 'S',
+            \ 'S'  : 'S',
+            \ '' : 'S',
+            \ }
 "let g:airline_left_sep=''
 "let g:airline_right_sep=''
 
@@ -158,7 +175,7 @@ map <C-e> :NERDTreeToggle<CR>
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-let g:NERDTreeIgnore = ['\.csproj$', '\.suo$'] 
+let g:NERDTreeIgnore = ['\.csproj$', '\.suo$']
 
 "SUPERTAB
 let g:SuperTabDefaultCompletionType = 'context'
