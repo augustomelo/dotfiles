@@ -59,10 +59,7 @@ set background=dark
 colorscheme wombat256mod
 
 " ------- INDENTATION
-set expandtab
-set shiftround
-set shiftwidth=4
-set tabstop=4
+set ts=4 sts=4 sw=4 expandtab
 
 " ------- SEARCH
 set hlsearch
