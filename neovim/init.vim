@@ -1,8 +1,9 @@
 " --- vim-plug begin.
-call plug#begin('~/.vim/plugged')
+call plug#begin()
 
 " Global
-Plug 'scrooloose/syntastic'
+""Plug 'scrooloose/syntastic'
+Plug 'neomake/neomake'
 Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
@@ -15,6 +16,7 @@ Plug 'xolox/vim-session'
 Plug 'vim-misc'
 Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
+
 "Plug 'godlygeek/tabular'
 
 " ------- Web development.
@@ -32,6 +34,7 @@ Plug 'honza/vim-snippets'
 
 " ------- Cosmetic
 Plug 'ryanoasis/vim-devicons'
+Plug 'equalsraf/neovim-gui-shim'
 
 " ------- University
 call plug#end()
@@ -39,6 +42,9 @@ call plug#end()
 
 " ------- EDITOR CONFIG
 " be iMproved, required.
+
+set termguicolors
+cd ~/workspace
 set nocompatible
 filetype plugin indent on
 set encoding=utf-8
@@ -78,21 +84,7 @@ cabbrev sb vert sb
 
 " ------- BINDINGS
 nnoremap <Tab> :bn<CR>
-nnoremap <S-Tab> :bp<CR>
-
-" ------- FIXES
-" This make the alt biding work on the gnome-terminal, vim, etc.
-let c='a'
-while c <= 'z'
-    exec "set <M-".c.">=\e".c
-    exec "imap \e".c." <M-".c.">"
-    let c = nr2char(1+char2nr(c))
-endw
-set timeout ttimeoutlen=50
-set backspace=2
-
-" autocmd
-autocmd FileType text set autoindent
+noremap <S-Tab> :bp<CR>
 
 " ------- NETRW config
 " Toggle Vexplore with Ctrl-E
@@ -176,10 +168,11 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_by_filename = 1
 
 " SYNTASTIC
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_style_error_symbol = '✠'
-let g:syntastic_warning_symbol = '∆'
-let g:syntastic_style_warning_symbol = '≈'
+"let g:syntastic_error_symbol = '✗'
+"let g:syntastic_style_error_symbol = '✠'
+"let g:syntastic_warning_symbol = '∆'
+"let g:syntastic_style_warning_symbol = '≈'
+autocmd! BufWritePost * Neomake
 
 " VIM-SESSION
 set sessionoptions-=buffers
@@ -207,7 +200,8 @@ augroup omnisharp_commands
     autocmd!
 
     autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-    autocmd TextChanged,InsertLeave *.cs SyntasticCheck
+    "autocmd TextChanged,InsertLeave *.cs SyntasticCheck
+    autocmd TextChanged,InsertLeave *.cs Neomake
     autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
 
     autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
