@@ -91,9 +91,6 @@ endw
 set timeout ttimeoutlen=50
 set backspace=2
 
-" autocmd
-autocmd FileType text set autoindent
-
 " ------- NETRW config
 " Toggle Vexplore with Ctrl-E
 "function! ToggleVExplorer()
