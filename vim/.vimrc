@@ -183,6 +183,7 @@ set sessionoptions-=buffers
 set sessionoptions-=options
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
+let g:session_lock_enabled = 0
 nmap <C-S-o> :OpenSession <cr>
 
 " TAGBAR
@@ -190,6 +191,7 @@ let g:tagbar_ctags_bin = '~\.vim\ctags58\ctags.exe'
 nmap <F8> :TagbarToggle<CR>
 
 " OMNISHARP
+let g:OmniSharp_selector_ui = 'ctrlp'
 let g:OmniSharp_timeout = 1
 let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
 set noshowmatch
