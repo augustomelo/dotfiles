@@ -1,3 +1,11 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                       __             "
+"   _____   __ __  ____  __ __  _______/  |_  ____     "
+"   \__  \ |  |  \/ ___\|  |  \/  ___/\   __\/  _ \    " 
+"    / __ \|  |  / /_/  >  |  /\___ \  |  | (  <_> )   "
+"   (____  /____/\___  /|____//____  > |__|  \____/    "
+"         \/     /_____/            \/                 " 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " --- vim-plug begin.
 call plug#begin()
 
@@ -10,7 +18,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'bling/vim-airline'
 Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
-Plug 'Yggdroot/indentLine'
+Plug 'flazz/vim-colorschemes'
 Plug 'wombat256.vim'
 Plug 'xolox/vim-session'
 Plug 'vim-misc'
@@ -24,13 +32,13 @@ Plug 'majutsushi/tagbar'
 "Plug 'alvan/vim-closetag'
 
 " ------- C# development.
-Plug 'tpope/vim-dispatch'
-Plug 'omnisharp/omnisharp-vim'
-Plug 'oranget/vim-csharp'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'garbas/vim-snipmate'
-Plug 'honza/vim-snippets'
+"Plug 'tpope/vim-dispatch'
+"Plug 'omnisharp/omnisharp-vim'
+"Plug 'oranget/vim-csharp'
+"Plug 'MarcWeber/vim-addon-mw-utils'
+"Plug 'tomtom/tlib_vim'
+"Plug 'garbas/vim-snipmate'
+"Plug 'honza/vim-snippets'
 
 " ------- Cosmetic
 Plug 'ryanoasis/vim-devicons'
@@ -43,7 +51,6 @@ call plug#end()
 " ------- EDITOR CONFIG
 " be iMproved, required.
 
-set termguicolors
 cd ~/workspace
 set nocompatible
 filetype plugin indent on
