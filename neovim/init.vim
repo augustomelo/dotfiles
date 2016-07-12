@@ -12,6 +12,7 @@ call plug#begin()
 " Global
 Plug 'neomake/neomake'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'bling/vim-airline'
@@ -43,6 +44,7 @@ Plug 'majutsushi/tagbar'
 " ------- Cosmetic
 Plug 'ryanoasis/vim-devicons'
 Plug 'equalsraf/neovim-gui-shim'
+Plug 'vim-airline/vim-airline-themes'
 
 " ------- University
 call plug#end()
@@ -158,7 +160,7 @@ let g:airline_mode_map = {
 "let g:airline_right_sep=''
 
 " NERDTREE
-map <C-e> :NERDTreeToggle<CR>
+map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
@@ -178,7 +180,7 @@ autocmd FileType *
 " SYNTASTIC
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_style_error_symbol = '✠'
-let g:syntastic_warning_symbol = '∆'
+let g:syntastic_warning_symbol = '!'
 let g:syntastic_style_warning_symbol = '≈'
 
 
@@ -193,7 +195,7 @@ let g:ctrlp_by_filename = 1
 " NEOMAKE
 autocmd! TextChanged,InsertLeave * Neomake
 let g:neomake_warning_sign = {
-            \ 'text': '∆',
+            \ 'text': '!',
             \ 'texthl': 'WarningMsg',
             \ }
 let g:neomake_error_sign = {
