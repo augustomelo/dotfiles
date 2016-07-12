@@ -10,20 +10,17 @@
 call plug#begin()
 
 " Global
-Plug 'neomake/neomake'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'bling/vim-airline'
+Plug 'neomake/neomake'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
-Plug 'flazz/vim-colorschemes'
-Plug 'wombat256.vim'
-Plug 'xolox/vim-session'
-Plug 'vim-misc'
 Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar'
+Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'garbas/vim-snipmate'
+Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline-themes' | Plug 'bling/vim-airline'
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
 
 "Plug 'godlygeek/tabular'
 
@@ -32,19 +29,15 @@ Plug 'majutsushi/tagbar'
 "Plug 'alvan/vim-closetag'
 
 " ------- C# development.
-"Plug 'scrooloose/syntastic' 
-"Plug 'tpope/vim-dispatch'
-"Plug 'omnisharp/omnisharp-vim'
-"Plug 'oranget/vim-csharp'
-"Plug 'MarcWeber/vim-addon-mw-utils'
-"Plug 'tomtom/tlib_vim'
-"Plug 'garbas/vim-snipmate'
-"Plug 'honza/vim-snippets'
+"Plug 'scrooloose/syntastic', {'for': 'cs'}
+"Plug 'tpope/vim-dispatch', {'for': 'cs'}
+"Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
+"Plug 'oranget/vim-csharp', {'for': 'cs'}
 
 " ------- Cosmetic
+Plug 'flazz/vim-colorschemes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'equalsraf/neovim-gui-shim'
-Plug 'vim-airline/vim-airline-themes'
 
 " ------- University
 call plug#end()
