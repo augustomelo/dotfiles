@@ -4,7 +4,7 @@
 "   \__  \ |  |  \/ ___\|  |  \/  ___/\   __\/  _ \    " 
 "    / __ \|  |  / /_/  >  |  /\___ \  |  | (  <_> )   "
 "   (____  /____/\___  /|____//____  > |__|  \____/    "
-"         \/     /_____/            \/                 " 
+"        \/     /_____/            \/                 " 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 " --- vim-plug begin.
 call plug#begin()
@@ -31,14 +31,14 @@ Plug 'majutsushi/tagbar'
 "Plug 'alvan/vim-closetag'
 
 " ------- C# development.
-Plug 'scrooloose/syntastic' 
-Plug 'tpope/vim-dispatch'
-Plug 'omnisharp/omnisharp-vim'
-Plug 'oranget/vim-csharp'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'garbas/vim-snipmate'
-Plug 'honza/vim-snippets'
+"Plug 'scrooloose/syntastic' 
+"Plug 'tpope/vim-dispatch'
+"Plug 'omnisharp/omnisharp-vim'
+"Plug 'oranget/vim-csharp'
+"Plug 'MarcWeber/vim-addon-mw-utils'
+"Plug 'tomtom/tlib_vim'
+"Plug 'garbas/vim-snipmate'
+"Plug 'honza/vim-snippets'
 
 " ------- Cosmetic
 Plug 'ryanoasis/vim-devicons'
@@ -84,6 +84,10 @@ set incsearch
 " ------- MOVIMENT
 nnoremap j gj
 nnoremap k gk
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 
 " ------- ABBREVIATION
@@ -93,6 +97,10 @@ cabbrev sb vert sb
 " ------- BINDINGS
 nnoremap <Tab> :bn<CR>
 noremap <S-Tab> :bp<CR>
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l  
 
 " ------- NETRW config
 " Toggle Vexplore with Ctrl-E
