@@ -1,10 +1,10 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                                       __             "
 "   _____   __ __  ____  __ __  _______/  |_  ____     "
-"   \__  \ |  |  \/ ___\|  |  \/  ___/\   __\/  _ \    " 
+"   \__  \ |  |  \/ ___\|  |  \/  ___/\   __\/  _ \    "
 "    / __ \|  |  / /_/  >  |  /\___ \  |  | (  <_> )   "
 "   (____  /____/\___  /|____//____  > |__|  \____/    "
-"        \/     /_____/            \/                 " 
+"        \/     /_____/            \/                  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 " --- vim-plug begin.
 call plug#begin()
@@ -29,10 +29,10 @@ Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
 "Plug 'alvan/vim-closetag'
 
 " ------- C# development.
-"Plug 'scrooloose/syntastic', {'for': 'cs'}
-"Plug 'tpope/vim-dispatch', {'for': 'cs'}
-"Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
-"Plug 'oranget/vim-csharp', {'for': 'cs'}
+Plug 'scrooloose/syntastic', {'for': 'cs'}
+Plug 'tpope/vim-dispatch', {'for': 'cs'}
+Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
+Plug 'oranget/vim-csharp', {'for': 'cs'}
 
 " ------- Cosmetic
 Plug 'flazz/vim-colorschemes'
@@ -95,7 +95,7 @@ noremap <S-Tab> :bp<CR>
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
-map <C-l> <C-w>l  
+map <C-l> <C-w>l
 
 " ------- NETRW config
 " Toggle Vexplore with Ctrl-E
@@ -186,6 +186,7 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_by_filename = 1
 
 " NEOMAKE
+let g:neomake_verbose = 3
 autocmd! TextChanged,InsertLeave * Neomake
 let g:neomake_warning_sign = {
             \ 'text': '!',
@@ -195,6 +196,18 @@ let g:neomake_error_sign = {
             \ 'text': '✗',
             \ 'texthl': 'ErrorMsg',
             \ }
+
+""let g:neomake_cs_msbuild_maker = {
+""            \ 'args': [],
+""            \ 'errorformat': '\ %#%f(%l\\\,%c):\ %m',
+""            \ }
+""
+""let g:neomake_cs_msbuild_maker = {
+""            \ 'args': ['/nologo\', '/v:q', '/property:GenerateFullPaths=true'],
+""            \ 'errorformat': '\ %#%f(%l\\\,%c):\ %m',
+""            \ }
+""
+""let g:neomake_cs_enabled_makers = ['msbuild']
 
 " VIM-SESSION
 set sessionoptions-=buffers
