@@ -186,7 +186,7 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_by_filename = 1
 
 " NEOMAKE
-let g:neomake_verbose = 3
+""let g:neomake_verbose = 3
 autocmd! TextChanged,InsertLeave * Neomake
 let g:neomake_warning_sign = {
             \ 'text': '!',
