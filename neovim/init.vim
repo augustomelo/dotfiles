@@ -196,18 +196,41 @@ let g:neomake_error_sign = {
             \ 'text': '✗',
             \ 'texthl': 'ErrorMsg',
             \ }
+" FUNCTION find *.sln file going up directory
+"function! FindSLN()
+"    let dir = expand('%:p:h')
+"    let solution_files = ""
+"
+"    while empty(solution_files)
+"        let solution_files = globpath(dir , '*.sln')
+"        let lastfolder = dir
+"        let dir = fnamemodify(dir, ':h')
+"
+"        if dir ==# lastfolder
+"            break
+"        endif
+"    endwhile
+"
+"    if empty(solution_files)
+"        let solution_files = '.'
+"    endif
+"
+"    return solution_files
+"endfunction
 
-""let g:neomake_cs_msbuild_maker = {
-""            \ 'args': [],
-""            \ 'errorformat': '\ %#%f(%l\\\,%c):\ %m',
-""            \ }
-""
-""let g:neomake_cs_msbuild_maker = {
-""            \ 'args': ['/nologo\', '/v:q', '/property:GenerateFullPaths=true'],
-""            \ 'errorformat': '\ %#%f(%l\\\,%c):\ %m',
-""            \ }
-""
-""let g:neomake_cs_enabled_makers = ['msbuild']
+"let g:neomake_cs_msbuild_maker = {
+"            \ 'args': [],
+"            \ 'errorformat': '\ %#%f(%l\\\,%c):\ %m',
+"            \ }
+"
+"let g:neomake_cs_msbuild_maker = {
+"            \ 'args': ['/nologo\', '/v:q', '/property:GenerateFullPaths=true'],
+"            \ 'errorformat': '\ %#%f(%l\\\,%c):\ %m',
+"            \ }
+"
+"let g:neomake_cs_enabled_makers = ['msbuild']
+
+
 
 " VIM-SESSION
 set sessionoptions-=buffers
