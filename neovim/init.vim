@@ -186,7 +186,7 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_by_filename = 1
 
 " NEOMAKE
-let g:neomake_verbose = 3
+"let g:neomake_verbose = 3
 autocmd! TextChanged,InsertLeave * Neomake
 let g:neomake_warning_sign = {
             \ 'text': '!',
@@ -196,6 +196,7 @@ let g:neomake_error_sign = {
             \ 'text': '✗',
             \ 'texthl': 'ErrorMsg',
             \ }
+
 " FUNCTION find *.sln file going up directory
 "function! FindSLN()
 "    let dir = expand('%:p:h')
@@ -212,18 +213,18 @@ let g:neomake_error_sign = {
 "    endwhile
 "
 "    if empty(solution_files)
-"        let solution_files = '.'
+"        let solution_files = ''
 "    endif
 "
 "    return solution_files
 "endfunction
 
-"autocmd FileType cs let &l:makeprg="msbuild\ " . FindSLN() . " /nologo\ /v:q\ /property:GenerateFullPaths=true" 
+"autocmd FileType cs let &l:makeprg="msbuild\ " . FindSLN() . " -nologo -v:q -property:GenerateFullPaths=true"
 "autocmd FileType cs setlocal errorformat=\ %#%f(%l\\\,%c):\ %m
 "let g:neomake_cs_enabled_makers = []
 
 "let g:neomake_cs_msbuild_maker = {
-"            \ 'args': [],
+"            \ 'args': [ FindSLN(), '/nologo', '/v:q', '/property:GenerateFullPaths=true' ],
 "            \ 'errorformat': '\ %#%f(%l\\\,%c):\ %m',
 "            \ }
 "let g:neomake_cs_enabled_makers = ['msbuild']
