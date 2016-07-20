@@ -186,7 +186,7 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_by_filename = 1
 
 " NEOMAKE
-""let g:neomake_verbose = 3
+let g:neomake_verbose = 3
 autocmd! TextChanged,InsertLeave * Neomake
 let g:neomake_warning_sign = {
             \ 'text': '!',
@@ -218,16 +218,14 @@ let g:neomake_error_sign = {
 "    return solution_files
 "endfunction
 
+"autocmd FileType cs let &l:makeprg="msbuild\ " . FindSLN() . " /nologo\ /v:q\ /property:GenerateFullPaths=true" 
+"autocmd FileType cs setlocal errorformat=\ %#%f(%l\\\,%c):\ %m
+"let g:neomake_cs_enabled_makers = []
+
 "let g:neomake_cs_msbuild_maker = {
 "            \ 'args': [],
 "            \ 'errorformat': '\ %#%f(%l\\\,%c):\ %m',
 "            \ }
-"
-"let g:neomake_cs_msbuild_maker = {
-"            \ 'args': ['/nologo\', '/v:q', '/property:GenerateFullPaths=true'],
-"            \ 'errorformat': '\ %#%f(%l\\\,%c):\ %m',
-"            \ }
-"
 "let g:neomake_cs_enabled_makers = ['msbuild']
 
 
@@ -245,6 +243,7 @@ let g:tagbar_ctags_bin = '~\.vim\ctags58\ctags.exe'
 nmap <F8> :TagbarToggle<CR>
 
 " OMNISHARP
+"let g:Omnisharp_start_server = 0
 let g:OmniSharp_selector_ui = 'ctrlp'
 let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
 let g:OmniSharp_timeout = 1
