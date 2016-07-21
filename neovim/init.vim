@@ -216,6 +216,7 @@ let g:neomake_error_sign = {
 "        let solution_files = ''
 "    endif
 "
+"    let solution_files = lastfolder
 "    return solution_files
 "endfunction
 
@@ -224,8 +225,10 @@ let g:neomake_error_sign = {
 "let g:neomake_cs_enabled_makers = []
 
 "let g:neomake_cs_msbuild_maker = {
-"            \ 'args': [ FindSLN(), '/nologo', '/v:q', '/property:GenerateFullPaths=true' ],
+"            \ 'args': [ '--nologo', '--v:q', '--property:GenerateFullPaths=true' ],
 "            \ 'errorformat': '\ %#%f(%l\\\,%c):\ %m',
+"            \ 'append_file': 0,
+"            \ 'cwd' : FindSLN()
 "            \ }
 "let g:neomake_cs_enabled_makers = ['msbuild']
 
@@ -245,28 +248,28 @@ nmap <F8> :TagbarToggle<CR>
 
 " OMNISHARP
 "let g:Omnisharp_start_server = 0
-let g:OmniSharp_selector_ui = 'ctrlp'
-let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-let g:OmniSharp_timeout = 1
-set noshowmatch
-set foldmethod=syntax
-set completeopt=menuone,preview
-set splitbelow
-set updatetime=500
-set hidden
-nnoremap <F2> :OmniSharpRename<cr>
-nnoremap <leader><space> :OmniSharpGetCodeActions<cr>
-augroup omnisharp_commands
-    autocmd!
-
-    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-    autocmd TextChanged,InsertLeave *.cs SyntasticCheck
-    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-
-    autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
-    autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr> :OmniSharpFixUsings<cr>
-    autocmd FileType cs nnoremap <leader>dc :OmniSharpDocumentation<cr>
-    "navigate up/down by method/property/field
-    "autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
-    "autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
-augroup END
+"let g:OmniSharp_selector_ui = 'ctrlp'
+"let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+"let g:OmniSharp_timeout = 1
+"set noshowmatch
+"set foldmethod=syntax
+"set completeopt=menuone,preview
+"set splitbelow
+"set updatetime=500
+"set hidden
+"nnoremap <F2> :OmniSharpRename<cr>
+"nnoremap <leader><space> :OmniSharpGetCodeActions<cr>
+"augroup omnisharp_commands
+"    autocmd!
+"
+"    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+"    autocmd TextChanged,InsertLeave *.cs SyntasticCheck
+"    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+"
+"    autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
+"    autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr> :OmniSharpFixUsings<cr>
+"    autocmd FileType cs nnoremap <leader>dc :OmniSharpDocumentation<cr>
+"    "navigate up/down by method/property/field
+"    "autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
+"    "autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
+"augroup END
