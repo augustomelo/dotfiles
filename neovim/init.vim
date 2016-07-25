@@ -21,7 +21,6 @@ Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-s
 Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline-themes' | Plug 'bling/vim-airline'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
-
 "Plug 'godlygeek/tabular'
 
 " ------- Web development.
@@ -29,7 +28,7 @@ Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
 "Plug 'alvan/vim-closetag'
 
 " ------- C# development.
-Plug 'scrooloose/syntastic', {'for': 'cs'}
+"Plug 'scrooloose/syntastic', {'for': 'cs'}
 Plug 'tpope/vim-dispatch', {'for': 'cs'}
 Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
 Plug 'oranget/vim-csharp', {'for': 'cs'}
@@ -171,10 +170,10 @@ autocmd FileType *
             \ endif
 
 " SYNTASTIC
-let g:syntastic_error_symbol = '✗'
-let g:syntastic_style_error_symbol = '✠'
-let g:syntastic_warning_symbol = '!'
-let g:syntastic_style_warning_symbol = '≈'
+"let g:syntastic_error_symbol = '✗'
+"let g:syntastic_style_error_symbol = '✠'
+"let g:syntastic_warning_symbol = '!'
+"let g:syntastic_style_warning_symbol = '≈'
 
 
 " CTRL-P
@@ -186,8 +185,8 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_by_filename = 1
 
 " NEOMAKE
-"let g:neomake_verbose = 3
-"autocmd! TextChanged,InsertLeave * Neomake
+" let g:neomake_verbose = 3
+autocmd! BufWritePost * Neomake
 let g:neomake_error_sign = {
             \ 'text': '✗',
             \ 'texthl': 'ErrorMsg',
@@ -223,16 +222,16 @@ endfunction
 "autocmd FileType cs setlocal errorformat=\ %#%f(%l\\\,%c):\ %m
 "let g:neomake_cs_enabled_makers = []
 
-"augroup teste
-"    au!
-"    au FileType cs let g:neomake_cs_msbuild_maker = {
-"                \ 'args': [ '-nologo', '-v:q', '-property:GenerateFullPaths=true' ],
-"                \ 'cwd' : FindSLN(),
-"                \ 'errorformat': '\ %#%f(%l\\\,%c):\ %m',
-"                \ 'append_file' : 0,
-"                \ }
-"    au FileType cs let g:neomake_cs_enabled_makers = ['msbuild']
-"augroup END
+augroup neomake_cs_maker
+    au!
+    au FileType cs let g:neomake_cs_msbuild_maker = {
+                \ 'args': [ '-nologo', '-v:q', '-property:GenerateFullPaths=true' ],
+                \ 'cwd' : FindSLN(),
+                \ 'errorformat': '\ %#%f(%l\\\,%c):\ %m',
+                \ 'append_file' : 0,
+                \ }
+    au FileType cs let g:neomake_cs_enabled_makers = ['msbuild']
+augroup END
 
 
 
@@ -249,9 +248,9 @@ let g:tagbar_ctags_bin = '~\.vim\ctags58\ctags.exe'
 nmap <F8> :TagbarToggle<CR>
 
 " OMNISHARP
-"let g:Omnisharp_start_server = 0
+let g:Omnisharp_start_server = 0
 let g:OmniSharp_selector_ui = 'ctrlp'
-let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+"let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
 let g:OmniSharp_timeout = 1
 set noshowmatch
 set foldmethod=syntax
@@ -265,7 +264,7 @@ augroup omnisharp_commands
     autocmd!
 
     autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-    autocmd TextChanged,InsertLeave *.cs SyntasticCheck
+    "autocmd TextChanged,InsertLeave *.cs SyntasticCheck
     autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
 
     autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
