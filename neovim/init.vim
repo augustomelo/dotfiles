@@ -20,7 +20,7 @@ Plug 'majutsushi/tagbar'
 Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'garbas/vim-snipmate'
 Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline-themes' | Plug 'bling/vim-airline'
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
+"Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
 "Plug 'godlygeek/tabular'
 
 " ------- Web development.
@@ -28,15 +28,15 @@ Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
 "Plug 'alvan/vim-closetag'
 
 " ------- C# development.
-"Plug 'scrooloose/syntastic', {'for': 'cs'}
 Plug 'tpope/vim-dispatch', {'for': 'cs'}
 Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
 Plug 'oranget/vim-csharp', {'for': 'cs'}
+"Plug 'scrooloose/syntastic', {'for': 'cs'}
 
 " ------- Cosmetic
 Plug 'flazz/vim-colorschemes'
-Plug 'ryanoasis/vim-devicons'
 Plug 'equalsraf/neovim-gui-shim'
+Plug 'ryanoasis/vim-devicons'
 
 " ------- University
 call plug#end()
@@ -44,7 +44,6 @@ call plug#end()
 
 " ------- EDITOR CONFIG
 " be iMproved, required.
-
 cd ~/workspace
 set nocompatible
 set termguicolors
@@ -82,7 +81,7 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-
+let mapleader=","
 
 " ------- ABBREVIATION
 cabbrev h vert h
@@ -95,37 +94,6 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
-
-" ------- NETRW config
-" Toggle Vexplore with Ctrl-E
-"function! ToggleVExplorer()
-"	if exists("t:expl_buf_num")
-"		let expl_win_num = bufwinnr(t:expl_buf_num)
-"		if expl_win_num != -1
-"			let cur_win_nr = winnr()
-"			exec expl_win_num . 'wincmd w'
-"			close
-"			exec cur_win_nr . 'wincmd w'
-"			unlet t:expl_buf_num
-"		else
-"			unlet t:expl_buf_num
-"		endif
-"	else
-"		exec '1wincmd w'
-"		Vexplore
-"		let t:expl_buf_num = bufnr("%")
-"	endif
-"endfunction
-"map <silent> <C-E> :call ToggleVExplorer()<CR>
-"
-"" Hit enter in the file browser to open the selected
-"" file with :vsplit to the right of the browser.
-"let g:netrw_browse_split = 4
-"let g:netrw_altv = 1
-"
-"" Default to tree mode
-"let g:netrw_liststyle=3
-
 
 " ------- Plugin Config
 " AIRLINE
@@ -185,8 +153,10 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_by_filename = 1
 
 " NEOMAKE
-" let g:neomake_verbose = 3
+"let g:neomake_verbose = 3
+let g:neomake_open_list = 2
 autocmd! BufWritePost * Neomake
+
 let g:neomake_error_sign = {
             \ 'text': '✗',
             \ 'texthl': 'ErrorMsg',
@@ -195,6 +165,7 @@ let g:neomake_warning_sign = {
             \ 'text': '!',
             \ 'texthl': 'WarningMsg',
             \ }
+
 " FUNCTION find *.sln file going up directory
 function! FindSLN()
     let dir = expand('%:p:h')
@@ -233,19 +204,18 @@ augroup neomake_cs_maker
     au FileType cs let g:neomake_cs_enabled_makers = ['msbuild']
 augroup END
 
-
-
 " VIM-SESSION
-set sessionoptions-=buffers
-set sessionoptions-=options
-let g:session_autosave = 'no'
-let g:session_autoload = 'no'
-let g:session_lock_enabled = 0
-nmap <C-S-o> :OpenSession <cr>
+"set sessionoptions-=buffers
+"set sessionoptions-=options
+"let g:session_autosave = 'no'
+"let g:session_autoload = 'no'
+"let g:session_lock_enabled = 0
+"nmap <C-S-o> :OpenSession <cr>
 
 " TAGBAR
-let g:tagbar_ctags_bin = '~\.vim\ctags58\ctags.exe'
 nmap <F8> :TagbarToggle<CR>
+if has("win32")
+    let g:tagbar_ctags_bin = '~\AppData\Local\nvim\autoload\ctags58\ctags.exe'
 
 " OMNISHARP
 let g:Omnisharp_start_server = 0
@@ -265,7 +235,7 @@ augroup omnisharp_commands
 
     autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
     "autocmd TextChanged,InsertLeave *.cs SyntasticCheck
-    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+    "autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
 
     autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
     autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr> :OmniSharpFixUsings<cr>
