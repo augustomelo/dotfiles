@@ -30,11 +30,12 @@ Plug 'vim-airline/vim-airline-themes' | Plug 'bling/vim-airline'
 " ------- C# development.
 Plug 'tpope/vim-dispatch', {'for': 'cs'}
 Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
-Plug 'oranget/vim-csharp', {'for': 'cs'}
+"Plug 'oranget/vim-csharp', {'for': 'cs'}
 "Plug 'scrooloose/syntastic', {'for': 'cs'}
 
 " ------- Cosmetic
-Plug 'flazz/vim-colorschemes'
+"Plug 'flazz/vim-colorschemes'
+Plug 'chriskempson/base16-vim'
 Plug 'equalsraf/neovim-gui-shim'
 Plug 'ryanoasis/vim-devicons'
 
@@ -44,10 +45,8 @@ call plug#end()
 
 " ------- EDITOR CONFIG
 " be iMproved, required.
-cd ~/workspace
 set nocompatible
 set termguicolors
-filetype plugin indent on
 set encoding=utf-8
 set fileencoding=utf-8
 set cursorline
@@ -59,41 +58,44 @@ set showcmd
 set spell spelllang=en_us
 set equalalways
 set listchars=eol:¬,trail:·,tab:▸\
-
-" ------- COLOR
-syntax on
+set noshowmatch
+set foldmethod=syntax
+set completeopt=menuone,preview,noinsert
+set splitbelow
+set updatetime=500
+set hidden
+set pastetoggle=<f6>
+set mouse=a
 set background=dark
-colorscheme wombat256mod
-
-" ------- INDENTATION
 set ts=4 sts=4 sw=4 expandtab
-
-" ------- SEARCH
 set hlsearch
 set ignorecase
 set smartcase
 set incsearch
-
-" ------- MOVIMENT
-nnoremap j gj
-nnoremap k gk
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-let mapleader=","
+syntax on
+filetype plugin indent on
+colorscheme base16-ocean
+let base16colorspace=256
+cd ~/workspace
 
 " ------- ABBREVIATION
 cabbrev h vert h
 cabbrev sb vert sb
 
 " ------- BINDINGS
+nnoremap j gj
+nnoremap k gk
 nnoremap <Tab> :bn<CR>
 noremap <S-Tab> :bp<CR>
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+let mapleader=","
 
 " ------- Plugin Config
 " AIRLINE
@@ -218,16 +220,10 @@ if has("win32")
     let g:tagbar_ctags_bin = '~\AppData\Local\nvim\autoload\ctags58\ctags.exe'
 
 " OMNISHARP
-let g:Omnisharp_start_server = 0
+"let g:Omnisharp_start_server = 0
 let g:OmniSharp_selector_ui = 'ctrlp'
 "let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
 let g:OmniSharp_timeout = 1
-set noshowmatch
-set foldmethod=syntax
-set completeopt=menuone,preview
-set splitbelow
-set updatetime=500
-set hidden
 nnoremap <F2> :OmniSharpRename<cr>
 nnoremap <leader><space> :OmniSharpGetCodeActions<cr>
 augroup omnisharp_commands
