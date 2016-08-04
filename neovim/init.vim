@@ -72,11 +72,14 @@ set hlsearch
 set ignorecase
 set smartcase
 set incsearch
+
 syntax on
 filetype plugin indent on
 colorscheme base16-ocean
 let base16colorspace=256
 cd ~/workspace
+"highlight Search guibg=none guifg=#d70000 cterm=underline
+highlight Search ctermbg=none ctermfg=160 cterm=underline
 
 " ------- ABBREVIATION
 cabbrev h vert h
