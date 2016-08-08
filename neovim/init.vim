@@ -5,7 +5,9 @@
 "    / __ \|  |  / /_/  >  |  /\___ \  |  | (  <_> )   "
 "   (____  /____/\___  /|____//____  > |__|  \____/    "
 "        \/     /_____/            \/                  "
+"                                                      "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " --- vim-plug begin.
 call plug#begin()
 
@@ -20,8 +22,8 @@ Plug 'majutsushi/tagbar'
 Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'garbas/vim-snipmate'
 Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline-themes' | Plug 'bling/vim-airline'
+Plug 'godlygeek/tabular'
 "Plug 'xolox/vim-misc' | Plug 'xolox/vim-session'
-"Plug 'godlygeek/tabular'
 
 " ------- Web development.
 "Plug 'pangloss/vim-javascript'
@@ -44,8 +46,6 @@ call plug#end()
 " --- vim-plug end.
 
 " ------- EDITOR CONFIG
-" be iMproved, required.
-set nocompatible
 set termguicolors
 set encoding=utf-8
 set fileencoding=utf-8
@@ -99,15 +99,17 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 let mapleader=","
+nnoremap / /\v
+vnoremap / /\v
 
 " ------- Plugin Config
 " AIRLINE
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline_detect_spell=0
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#buffer_nr_show = 1
+"let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_mode_map = {
             \ '__' : '-',
             \ 'n'  : 'N',
@@ -155,11 +157,13 @@ let g:ctrlp_custom_ignore = {
             \ 'file': '\v\.(exe|so|dll|csproj|sln|suo)$',
             \ }
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_by_filename = 1
+let g:ctrlp_cmd = 'CtrlPMixed'
+
 
 " NEOMAKE
 "let g:neomake_verbose = 3
 let g:neomake_open_list = 2
+let g:neomake_list_height=4
 autocmd! BufWritePost * Neomake
 
 let g:neomake_error_sign = {
