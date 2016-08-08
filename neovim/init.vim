@@ -225,6 +225,7 @@ augroup END
 nmap <F8> :TagbarToggle<CR>
 if has("win32")
     let g:tagbar_ctags_bin = '~\AppData\Local\nvim\autoload\ctags58\ctags.exe'
+endif
 
 " OMNISHARP
 "let g:Omnisharp_start_server = 0
