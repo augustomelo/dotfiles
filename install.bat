@@ -20,6 +20,17 @@ goto case_%option%
     cd %localappdata%\nvim
     echo Done!
 
+    echo Creating autoload folder under nvim folder
+    mkdir autoload
+    echo Done!
+
+    echo Downloading vim-plug
+    ::Bitsadmin deprecated in favor of Start-BitsTransfer on Powershell.
+    bitsadmin /transfer "Vim-Plug"^
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim^
+    %localappdata%\nvim\autoload\plug.vim
+    echo Done!
+
     echo Creating a link to the file init.vim!
     mklink init.vim %userprofile%\workspace\dotfiles\neovim\init.vim
     echo Done!
@@ -31,6 +42,18 @@ goto case_%option%
     goto end_switch
 :case_2
     cd %userprofile%
+
+    echo Creating autoload folder under vimfiles folder
+    mkdir vimfiles\autoload
+    echo Done!
+
+    echo Downloading vim-plug
+    ::Bitsadmin deprecated in favor of Start-BitsTransfer on Powershell.
+    bitsadmin /transfer "Vim-Plug"^
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim^
+    %userprofile%\vimfiles\autoload\plug.vim
+    echo Done!
+
     echo Creating a link to the file .vimrc!
     mklink .vimrc %userprofile%\workspace\dotfiles\vim\.vimrc
     echo Done!
