@@ -142,7 +142,7 @@ map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinPos = "right"
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-let g:NERDTreeIgnore = ['\.csproj$', '\.suo$']
+let g:NERDTreeIgnore = ['\.csproj.user$', '\.suo$']
 " }}}
 
 " Supertab {{{
