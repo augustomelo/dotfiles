@@ -32,8 +32,8 @@ call plug#begin()
     " }}}
 
     " C# {{{
-    Plug 'tpope/vim-dispatch', {'for': 'cs'}
-    Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
+    "Plug 'tpope/vim-dispatch', {'for': 'cs'}
+    "Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
     "Plug 'oranget/vim-csharp', {'for': 'cs'}
     "Plug 'scrooloose/syntastic', {'for': 'cs'}
     " }}}
@@ -69,6 +69,7 @@ set listchars=eol:¬,trail:·,tab:▸\
 set noshowmatch
 set foldmethod=syntax
 set completeopt=menuone,preview,noinsert
+set splitright
 set splitbelow
 set updatetime=500
 set hidden
@@ -84,9 +85,10 @@ set incsearch
 
 " Color {{{
 syntax on
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 colorscheme base16-ocean
 let base16colorspace=256
-highlight Search ctermbg=none ctermfg=160 cterm=underline
+highlight Search guibg=none guifg=#d70000 gui=underline
 " }}}
 
 " Abbreviation {{{
@@ -95,21 +97,23 @@ cabbrev sb vert sb
 " }}}
 
 " Bindings {{{
+let mapleader=","
+
 nnoremap j gj
 nnoremap k gk
-nnoremap <Tab> :bn<CR>
-noremap <S-Tab> :bp<CR>
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-let mapleader=","
 nnoremap / /\v
+nnoremap <leader>n :nohlsearch<CR>
+
 vnoremap / /\v
+
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 " }}}
 
 " Plugin Config {{{
