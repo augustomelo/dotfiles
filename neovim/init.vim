@@ -104,6 +104,7 @@ nnoremap k gk
 nnoremap / /\v
 nnoremap <leader>n :nohlsearch<CR>
 nnoremap Q <nop>
+nnoremap <Enter> @@
 
 vnoremap / /\v
 
