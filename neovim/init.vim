@@ -103,9 +103,11 @@ nnoremap j gj
 nnoremap k gk
 nnoremap / /\v
 nnoremap <leader>n :nohlsearch<CR>
+nnoremap Q <nop>
 
 vnoremap / /\v
 
+map q: <Nop>
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
