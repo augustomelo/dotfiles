@@ -97,8 +97,6 @@ cabbrev sb vert sb
 " }}}
 
 " Bindings {{{
-let mapleader=","
-
 nnoremap j gj
 nnoremap k gk
 nnoremap / /\v
@@ -108,6 +106,7 @@ nnoremap <Enter> @@
 
 vnoremap / /\v
 
+map <space> <leader>
 map q: <Nop>
 map <C-h> <C-w>h
 map <C-j> <C-w>j
