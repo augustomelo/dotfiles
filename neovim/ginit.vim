@@ -7,4 +7,3 @@ highlight String gui=none
 highlight StatusLine gui=none
 highlight Todo gui=none
 highlight StatusLine gui=none
-highlight Search guibg=none guifg=#d70000 gui=underline
