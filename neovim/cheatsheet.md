@@ -35,6 +35,7 @@
 `Y` Yank the whole line .  
 `{1}z=` First suggest correction misspelling.  
 `nvim -u NONE` Start Neovim without config.  
+`%:p:h` Expand to full path to the current location.
 
 ### Mark
 `m(character)` Set a mark to a specific character.  
