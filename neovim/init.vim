@@ -32,8 +32,8 @@ call plug#begin()
     " }}}
 
     " C# {{{
-    "Plug 'tpope/vim-dispatch', {'for': 'cs'}
-    "Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
+    Plug 'tpope/vim-dispatch', {'for': 'cs'}
+    Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
     "Plug 'oranget/vim-csharp', {'for': 'cs'}
     "Plug 'scrooloose/syntastic', {'for': 'cs'}
     " }}}
@@ -97,17 +97,17 @@ cabbrev sb vert sb
 " }}}
 
 " Bindings {{{
+let mapleader=","
 nnoremap j gj
 nnoremap k gk
 nnoremap / /\v
 nnoremap <leader>n :nohlsearch<CR>
 nnoremap Q <nop>
-nnoremap <Enter> @@
+nnoremap <space> za
 
 vnoremap / /\v
 
-map <space> <leader>
-map q: <Nop>
+map q: <nop>
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
