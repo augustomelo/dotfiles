@@ -10,7 +10,7 @@
 `Ctrl + e` Go to the end of the line.  
 `Ctrl + p` Previous command.  
 `Ctrl + n` Next command.  
-`Alt + Del` Delete the Word before the cursor.  
+`Ctrl + w` Delete the Word before the cursor.  
 `Alt + d` Delete the Word after the cursor.  
 `Alt + b` Back (left) one word.  
 `Alt + f` Forward (right) one word.  
