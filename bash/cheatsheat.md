@@ -6,12 +6,12 @@
 `optirun -b none nvidia-settings -c :8 run nvidia-settings` Run Nvidia settings.  
 
 #Terminal 
-`Ctrl + a` Go to the beginning of the line.
-`Ctrl + e` Go to the end of the line.
-`Ctrl + p` Previous command.
-`Ctrl + n` Next command.
-`Alt + Del` Delete the Word before the cursor.
-`Alt + d` Delete the Word after the cursor.
-`Alt + b` Back (left) one word.
-`Alt + f` Forward (right) one word.
+`Ctrl + a` Go to the beginning of the line.  
+`Ctrl + e` Go to the end of the line.  
+`Ctrl + p` Previous command.  
+`Ctrl + n` Next command.  
+`Alt + Del` Delete the Word before the cursor.  
+`Alt + d` Delete the Word after the cursor.  
+`Alt + b` Back (left) one word.  
+`Alt + f` Forward (right) one word.  
 
