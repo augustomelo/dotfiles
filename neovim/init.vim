@@ -20,6 +20,7 @@ call plug#begin()
     Plug 'Raimondi/delimitMate'
     Plug 'scrooloose/nerdcommenter'
     Plug 'majutsushi/tagbar'
+    Plug 'Yggdroot/indentLine'
     Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'garbas/vim-snipmate'
     Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
     Plug 'vim-airline/vim-airline-themes' | Plug 'bling/vim-airline'
@@ -107,15 +108,15 @@ nnoremap <space> za
 
 vnoremap / /\v
 
-map q: <nop>
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
+noremap q: <nop>
+xnoremap <C-h> <C-w>h
+xnoremap <C-j> <C-w>j
+xnoremap <C-k> <C-w>k
+xnoremap <C-l> <C-w>l
+xnoremap <C-h> <C-w>h
+xnoremap <C-j> <C-w>j
+xnoremap <C-k> <C-w>k
+xnoremap <C-l> <C-w>l
 " }}}
 
 " Plugin Config {{{
