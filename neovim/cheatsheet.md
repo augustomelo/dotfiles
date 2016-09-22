@@ -106,13 +106,13 @@
 `[count]<leader>cs` Comments out the selected lines with a pretty block formatted layout.  
 
 ### TagBar
-`<CR>` Jump to tag definition
-`<Space>` Display tag prototype
-`p` As above, but stay in Tagbar window
-`P` Show tag in preview window
-`s` Toggle sort
-`x` Zoom window in/out
-`q` Close window
+`<CR>` Jump to tag definition  
+`<Space>` Display tag prototype  
+`p` As above, but stay in Tagbar window  
+`P` Show tag in preview window  
+`s` Toggle sort  
+`x` Zoom window in/out  
+`q` Close window  
 
 ### OmniSharp
 `<S-A-F10>`  Fix issues and imports.  
