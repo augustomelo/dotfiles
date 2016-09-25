@@ -41,7 +41,7 @@ call plug#begin()
     " }}}
 
     " Typescript {{{
-    "Plug 'leafgarland/typescript-vim'
+    Plug 'leafgarland/typescript-vim'
     " }}}
 
     " Cosmetic {{{
@@ -112,7 +112,6 @@ nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader><Leader> <C-^>
 nnoremap <Leader>q :quit<CR>
 nnoremap <Leader>w :write<CR>
-nnoremap <Leader>x :exit<CR>
 " }}}
 
 " Normal {{{
