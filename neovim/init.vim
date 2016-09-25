@@ -9,8 +9,7 @@
 "        \/     /_____/            \/                  "
 "                                                      "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" vim-plug {{{
+" Vim-plug {{{
 call plug#begin()
     " Global {{{
     Plug 'scrooloose/nerdtree'
@@ -25,6 +24,8 @@ call plug#begin()
     Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
     Plug 'vim-airline/vim-airline-themes' | Plug 'bling/vim-airline'
     Plug 'godlygeek/tabular'
+    Plug 'alvan/vim-closetag'
+    Plug 'Valloric/MatchTagAlways'
     " }}}
 
     " Web development {{{
@@ -33,10 +34,14 @@ call plug#begin()
     " }}}
 
     " C# {{{
-    Plug 'tpope/vim-dispatch', {'for': 'cs'}
-    Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
+    "Plug 'tpope/vim-dispatch', {'for': 'cs'}
+    "Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
     "Plug 'oranget/vim-csharp', {'for': 'cs'}
     "Plug 'scrooloose/syntastic', {'for': 'cs'}
+    " }}}
+
+    " Typescript {{{
+    "Plug 'leafgarland/typescript-vim'
     " }}}
 
     " Cosmetic {{{
@@ -95,28 +100,50 @@ highlight Search guibg=none guifg=#d70000 gui=underline
 " Abbreviation {{{
 cabbrev h vert h
 cabbrev sb vert sb
+cabbrev %s %s/\v
 " }}}
 
 " Bindings {{{
+
+" Leader {{{
 let mapleader=","
+
+nnoremap <Leader>n :nohlsearch<CR>
+nnoremap <Leader><Leader> <C-^>
+nnoremap <Leader>q :quit<CR>
+nnoremap <Leader>w :write<CR>
+nnoremap <Leader>x :exit<CR>
+" }}}
+
+" Normal {{{
 nnoremap j gj
 nnoremap k gk
 nnoremap / /\v
-nnoremap <leader>n :nohlsearch<CR>
-nnoremap Q <nop>
 nnoremap <space> za
+nnoremap Y y$
+nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
+nnoremap Q <nop>
+nnoremap q: <nop>
+nnoremap K <nop>
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+" }}}
 
+" Visual {{{
 vnoremap / /\v
+" }}}
 
-noremap q: <nop>
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" Command {{{
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+" }}}
+
 " }}}
 
 " Plugin Config {{{
@@ -166,7 +193,7 @@ autocmd FileType *
 
 " Ctrl-P {{{
 let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\v[\/][\._]?(bin|obj|references|svn|git)',
+            \ 'dir':  '\v[\/][\._]?(bin|obj|references|svn|git|node_modules|typings)',
             \ 'file': '\v\.(exe|so|dll|csproj|sln|suo)$',
             \ }
 let g:ctrlp_working_path_mode = 0
@@ -226,6 +253,10 @@ augroup neomake_cs_maker
 augroup END
 " }}}
 
+" Closetag {{{
+let g:closetag_filenames = "*.html,*.xml,*.ts"
+" }}}
+
 " Tagbar {{{
 nmap <F8> :TagbarToggle<CR>
 if has("win32")
@@ -239,7 +270,7 @@ endif
 let g:OmniSharp_selector_ui = 'ctrlp'
 let g:OmniSharp_timeout = 1
 nnoremap <F2> :OmniSharpRename<cr>
-nnoremap <leader><space> :OmniSharpGetCodeActions<cr>
+nnoremap <Leader><space> :OmniSharpGetCodeActions<cr>
 augroup omnisharp_commands
     autocmd!
 
@@ -249,11 +280,10 @@ augroup omnisharp_commands
 
     autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
     autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr> :OmniSharpFixUsings<cr>
-    autocmd FileType cs nnoremap <leader>dc :OmniSharpDocumentation<cr>
+    autocmd FileType cs nnoremap <Leader>dc :OmniSharpDocumentation<cr>
     "navigate up/down by method/property/field
     "autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
     "autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
 augroup END
 " }}}
-
 " }}}
