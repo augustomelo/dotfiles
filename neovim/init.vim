@@ -34,8 +34,8 @@ call plug#begin()
     " }}}
 
     " C# {{{
-    "Plug 'tpope/vim-dispatch', {'for': 'cs'}
     "Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
+    "Plug 'tpope/vim-dispatch', {'for': 'cs'}
     "Plug 'oranget/vim-csharp', {'for': 'cs'}
     "Plug 'scrooloose/syntastic', {'for': 'cs'}
     " }}}
@@ -79,7 +79,6 @@ set splitright
 set splitbelow
 set updatetime=500
 set hidden
-set pastetoggle=<f6>
 set mouse=a
 set background=dark
 set ts=4 sts=4 sw=4 expandtab
@@ -114,6 +113,19 @@ nnoremap <Leader>q :quit<CR>
 nnoremap <Leader>w :write<CR>
 " }}}
 
+" Command {{{
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+" }}}
+
+" Insert {{{
+if has("win32")
+    inoremap <S-Insert> <Esc>:set paste<CR>"*P:set nopaste<CR>:echo <CR>
+else
+    inoremap <S-Insert> <Esc>:set paste<CR>"+P:set nopaste<CR>:echo <CR>
+endif
+" }}}
+
 " Normal {{{
 nnoremap j gj
 nnoremap k gk
@@ -132,16 +144,22 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+if has("win32")
+    nnoremap <S-Insert> :set paste<CR>"*P:set nopaste<CR>
+else
+    nnoremap <S-Insert> :set paste<CR>"+P:set nopaste<CR>
+endif
 " }}}
 
 " Visual {{{
 vnoremap / /\v
+if has("win32")
+    vnoremap <C-Insert> "*y
+else
+    vnoremap <C-Insert> "+y
+endif
 " }}}
 
-" Command {{{
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
-" }}}
 
 " }}}
 
