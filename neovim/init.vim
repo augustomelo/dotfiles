@@ -41,7 +41,7 @@ call plug#begin()
     " }}}
 
     " Typescript {{{
-    Plug 'leafgarland/typescript-vim'
+    "Plug 'leafgarland/typescript-vim'
     " }}}
 
     " Cosmetic {{{
