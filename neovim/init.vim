@@ -130,6 +130,7 @@ endif
 nnoremap j gj
 nnoremap k gk
 nnoremap / /\v
+nnoremap ? ?\v
 nnoremap <space> za
 nnoremap Y y$
 nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
