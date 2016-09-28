@@ -41,7 +41,7 @@ call plug#begin()
     " }}}
 
     " Typescript {{{
-    "Plug 'leafgarland/typescript-vim'
+    Plug 'leafgarland/typescript-vim'
     " }}}
 
     " Cosmetic {{{
@@ -146,18 +146,20 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 if has("win32")
-    nnoremap <S-Insert> :set paste<CR>"*P:set nopaste<CR>
+    nnoremap <C-v> :set paste<CR>"*P:set nopaste<CR>
 else
-    nnoremap <S-Insert> :set paste<CR>"+P:set nopaste<CR>
+    nnoremap <C-v> :set paste<CR>"+P:set nopaste<CR>
 endif
 " }}}
 
 " Visual {{{
 vnoremap / /\v
 if has("win32")
-    vnoremap <C-Insert> "*y
+    vnoremap <C-c> "*y
+    vnoremap <C-x> "*d
 else
-    vnoremap <C-Insert> "+y
+    vnoremap <C-c> "+y
+    vnoremap <C-x> "+d
 endif
 " }}}
 
