@@ -60,6 +60,7 @@ call plug#end()
 filetype plugin indent on
 cd ~/workspace
 
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " makes the cursor a pipe in insert mode, and a block in normal-mode. Temporary measure.
 set termguicolors
 set encoding=utf-8
 set fileencoding=utf-8
@@ -71,7 +72,8 @@ set linebreak
 set showcmd
 set spell spelllang=en_us
 set equalalways
-set listchars=eol:¬,trail:·,tab:▸\
+set list
+set listchars=nbsp:⦸,eol:¬,trail:•,tab:▸\
 set noshowmatch
 set foldmethod=syntax
 set completeopt=menuone,preview,noinsert
@@ -86,11 +88,12 @@ set hlsearch
 set ignorecase
 set smartcase
 set incsearch
+set laststatus=2 " always show status line
+set lazyredraw   " make the macro go faster
 " }}}
 
 " Color {{{
 syntax on
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 colorscheme base16-ocean
 let base16colorspace=256
 highlight Search guibg=none guifg=#d70000 gui=underline
@@ -99,7 +102,6 @@ highlight Search guibg=none guifg=#d70000 gui=underline
 " Abbreviation {{{
 cabbrev h vert h
 cabbrev sb vert sb
-cabbrev %s %s/\v
 " }}}
 
 " Bindings {{{
@@ -116,14 +118,6 @@ nnoremap <Leader>w :write<CR>
 " Command {{{
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-" }}}
-
-" Insert {{{
-if has("win32")
-    inoremap <S-Insert> <Esc>:set paste<CR>"*P:set nopaste<CR>:echo <CR>
-else
-    inoremap <S-Insert> <Esc>:set paste<CR>"+P:set nopaste<CR>:echo <CR>
-endif
 " }}}
 
 " Normal {{{
@@ -168,7 +162,6 @@ endif
 
 " Plugin Config {{{
 " Airline {{{
-set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline_detect_spell=0
 "let g:airline#extensions#tabline#enabled = 1
