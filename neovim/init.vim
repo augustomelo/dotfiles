@@ -34,8 +34,8 @@ call plug#begin()
     " }}}
 
     " C# {{{
-    "Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
-    "Plug 'tpope/vim-dispatch', {'for': 'cs'}
+    Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
+    Plug 'tpope/vim-dispatch', {'for': 'cs'}
     "Plug 'oranget/vim-csharp', {'for': 'cs'}
     "Plug 'scrooloose/syntastic', {'for': 'cs'}
     " }}}
@@ -113,6 +113,20 @@ nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader><Leader> <C-^>
 nnoremap <Leader>q :quit<CR>
 nnoremap <Leader>w :write<CR>
+
+if has("win32")
+    nnoremap <Leader>v :set paste<CR>"*P:set nopaste<CR>
+else
+    nnoremap <Leader>v :set paste<CR>"+P:set nopaste<CR>
+endif
+
+if has("win32")
+    vnoremap <Leader>c "*y
+    vnoremap <Leader>x "*d
+else
+    vnoremap <Leader>c "+y
+    vnoremap <Leader>x "+d
+endif
 " }}}
 
 " Command {{{
@@ -138,22 +152,10 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-if has("win32")
-    nnoremap <C-v> :set paste<CR>"*P:set nopaste<CR>
-else
-    nnoremap <C-v> :set paste<CR>"+P:set nopaste<CR>
-endif
 " }}}
 
 " Visual {{{
 vnoremap / /\v
-if has("win32")
-    vnoremap <C-c> "*y
-    vnoremap <C-x> "*d
-else
-    vnoremap <C-c> "+y
-    vnoremap <C-x> "+d
-endif
 " }}}
 
 
