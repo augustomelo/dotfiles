@@ -11,6 +11,13 @@
 `:.+,$bwipeout` Wipe all buffers except the current one.  
 `c-^` Previous buffer (cycle between 2).  
 
+## Command
+`q:` Command window history.
+`q\` Search window history.  
+`c-f` Bring a history of every command.  
+`c-p` Previous command.  
+`c-n` Next command.  
+
 ### Diff
 `:diffsplit (filename)` Diff current and the newly opened filename.  
 `:diffthis` Diff current window.  

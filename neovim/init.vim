@@ -129,7 +129,6 @@ nnoremap <space> za
 nnoremap Y y$
 nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
 nnoremap Q <nop>
-nnoremap q: <nop>
 nnoremap K <nop>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
