@@ -34,8 +34,8 @@ call plug#begin()
     " }}}
 
     " C# {{{
-    Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
-    Plug 'tpope/vim-dispatch', {'for': 'cs'}
+    "Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
+    "Plug 'tpope/vim-dispatch', {'for': 'cs'}
     "Plug 'oranget/vim-csharp', {'for': 'cs'}
     "Plug 'scrooloose/syntastic', {'for': 'cs'}
     " }}}
