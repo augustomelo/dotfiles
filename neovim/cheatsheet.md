@@ -12,7 +12,7 @@
 `c-^` Previous buffer (cycle between 2).  
 
 ## Command
-`q:` Command window history.
+`q:` Command window history.  
 `q\` Search window history.  
 `c-f` Bring a history of every command.  
 `c-p` Previous command.  
