@@ -31,6 +31,12 @@ call plug#begin()
     " Web development {{{
     "Plug 'pangloss/vim-javascript'
     "Plug 'alvan/vim-closetag'
+    "Plug 'othree/html5.vim'
+
+    " Typescript {{{
+    "Plug 'leafgarland/typescript-vim'
+    " }}}
+
     " }}}
 
     " C# {{{
@@ -38,10 +44,6 @@ call plug#begin()
     "Plug 'tpope/vim-dispatch', {'for': 'cs'}
     "Plug 'oranget/vim-csharp', {'for': 'cs'}
     "Plug 'scrooloose/syntastic', {'for': 'cs'}
-    " }}}
-
-    " Typescript {{{
-    Plug 'leafgarland/typescript-vim'
     " }}}
 
     " Cosmetic {{{
@@ -207,7 +209,7 @@ autocmd FileType *
 
 " Ctrl-P {{{
 let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\v[\/][\._]?(bin|obj|references|svn|git|node_modules|typings)',
+            \ 'dir':  '\v[\/][\._]?(bin|obj|references|svn|git|node_modules|typings|bower_components)',
             \ 'file': '\v\.(exe|so|dll|csproj|sln|suo)$',
             \ }
 let g:ctrlp_working_path_mode = 0
