@@ -29,14 +29,9 @@ call plug#begin()
     " }}}
 
     " Web development {{{
-    "Plug 'pangloss/vim-javascript'
-    "Plug 'alvan/vim-closetag'
-    "Plug 'othree/html5.vim'
-
-    " Typescript {{{
     "Plug 'leafgarland/typescript-vim'
-    " }}}
-
+    "Plug 'pangloss/vim-javascript'
+    "Plug 'othree/html5.vim'
     " }}}
 
     " C# {{{
@@ -154,12 +149,14 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+nnoremap gce :lnext<CR>  " go to current error/warning.
+nnoremap gne :lnext<CR>  " go to next error/warning.
+nnoremap gpe :lnext<CR>  " go to previous error/warning.
 " }}}
 
 " Visual {{{
 vnoremap / /\v
 " }}}
-
 
 " }}}
 
@@ -218,9 +215,8 @@ let g:ctrlp_working_path_mode = 0
 " Neomake {{{
 "let g:neomake_verbose = 3
 let g:neomake_open_list = 2
-let g:neomake_list_height=4
-autocmd! BufWritePost * Neomake
-
+let g:neomake_list_height  = 4
+let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_error_sign = {
             \ 'text': '✗',
             \ 'texthl': 'ErrorMsg',
@@ -229,6 +225,8 @@ let g:neomake_warning_sign = {
             \ 'text': '!',
             \ 'texthl': 'WarningMsg',
             \ }
+
+autocmd! BufWritePost * Neomake
 
 " FUNCTION find *.sln file going up directory
 function! FindSLN()
