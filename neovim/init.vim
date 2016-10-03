@@ -149,9 +149,9 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-nnoremap gce :lnext<CR>  " go to current error/warning.
+nnoremap gce :ll<CR>  " go to current error/warning.
 nnoremap gne :lnext<CR>  " go to next error/warning.
-nnoremap gpe :lnext<CR>  " go to previous error/warning.
+nnoremap gpe :lprev<CR>  " go to previous error/warning.
 " }}}
 
 " Visual {{{
