@@ -57,7 +57,7 @@ call plug#end()
 filetype plugin indent on
 cd ~/workspace
 
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " makes the cursor a pipe in insert mode, and a block in normal-mode. Temporary measure.
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1       " makes the cursor a pipe in insert mode, and a block in normal-mode. Temporary measure.
 set termguicolors
 set encoding=utf-8
 set fileencoding=utf-8
@@ -66,6 +66,9 @@ set noswapfile
 set number
 set relativenumber
 set linebreak
+set breakindent                           " indent wrapped lines to match start.
+set breakindentopt=shift:2                " emphasize broken lines by indenting them
+let &showbreak='⤷ '
 set showcmd
 set spell spelllang=en_us
 set equalalways
@@ -85,8 +88,9 @@ set hlsearch
 set ignorecase
 set smartcase
 set incsearch
-set laststatus=2 " always show status line
-set lazyredraw   " make the macro go faster
+set laststatus=2                          " always show status line.
+set lazyredraw                            " make the macro go faster.
+set scrolloff=3                           " start scrolling 3 lines before edge of view port.
 " }}}
 
 " Color {{{
@@ -141,17 +145,17 @@ nnoremap Y y$
 nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
 nnoremap Q <nop>
 nnoremap K <nop>
-nnoremap <C-h> <C-w>h
+if has("win32")
+    nnoremap <C-h> <C-w>h
+else
+    nnoremap <BS> <C-w>h " workaround issues=2048 
+endif
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap gce :ll<CR>  " go to current error/warning.
-nnoremap gne :lnext<CR>  " go to next error/warning.
-nnoremap gpe :lprev<CR>  " go to previous error/warning.
+nnoremap gce :ll<CR>    " go to current error/warning.
+nnoremap gne :lnext<CR> " go to next error/warning.
+nnoremap gpe :lprev<CR> " go to previous error/warning.
 " }}}
 
 " Visual {{{
