@@ -32,6 +32,7 @@ call plug#begin()
     "Plug 'leafgarland/typescript-vim'
     "Plug 'pangloss/vim-javascript'
     "Plug 'othree/html5.vim'
+    "Plug 'posva/vim-vue'
     " }}}
 
     " C# {{{
