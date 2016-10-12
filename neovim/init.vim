@@ -9,52 +9,127 @@
 "        \/     /_____/            \/                  "
 "                                                      "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vim-plug {{{
+" Plugins {{{
 call plug#begin()
-    " Global {{{
-    Plug 'scrooloose/nerdtree'
-    Plug 'neomake/neomake'
-    Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'ervandew/supertab'
-    Plug 'Raimondi/delimitMate'
-    Plug 'scrooloose/nerdcommenter'
-    Plug 'majutsushi/tagbar'
-    Plug 'Yggdroot/indentLine'
-    Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'garbas/vim-snipmate'
-    Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
-    Plug 'vim-airline/vim-airline-themes' | Plug 'bling/vim-airline'
-    Plug 'godlygeek/tabular'
-    Plug 'alvan/vim-closetag'
-    Plug 'Valloric/MatchTagAlways'
-    " }}}
+" C# {{{
+"Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
+"Plug 'tpope/vim-dispatch', {'for': 'cs'}
+"Plug 'oranget/vim-csharp', {'for': 'cs'}
+"Plug 'scrooloose/syntastic', {'for': 'cs'}
+" }}}
 
-    " Web development {{{
-    "Plug 'leafgarland/typescript-vim'
-    "Plug 'pangloss/vim-javascript'
-    "Plug 'othree/html5.vim'
-    "Plug 'posva/vim-vue'
-    " }}}
+" Cosmetic {{{
+"Plug 'flazz/vim-colorschemes'
+Plug 'chriskempson/base16-vim'
+Plug 'equalsraf/neovim-gui-shim'
+Plug 'ryanoasis/vim-devicons'
+" }}}
 
-    " C# {{{
-    "Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
-    "Plug 'tpope/vim-dispatch', {'for': 'cs'}
-    "Plug 'oranget/vim-csharp', {'for': 'cs'}
-    "Plug 'scrooloose/syntastic', {'for': 'cs'}
-    " }}}
+" Global {{{
+Plug 'scrooloose/nerdtree'
+Plug 'neomake/neomake'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ervandew/supertab'
+Plug 'Raimondi/delimitMate'
+Plug 'scrooloose/nerdcommenter'
+Plug 'majutsushi/tagbar'
+Plug 'Yggdroot/indentLine'
+Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'garbas/vim-snipmate'
+Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline-themes' | Plug 'bling/vim-airline'
+Plug 'godlygeek/tabular'
+Plug 'alvan/vim-closetag'
+Plug 'Valloric/MatchTagAlways'
+" }}}
 
-    " Cosmetic {{{
-    "Plug 'flazz/vim-colorschemes'
-    Plug 'chriskempson/base16-vim'
-    Plug 'equalsraf/neovim-gui-shim'
-    Plug 'ryanoasis/vim-devicons'
-    " }}}
+" University {{{
+" }}}
 
-    " University {{{
-    " }}}
+" Web development {{{
+"Plug 'leafgarland/typescript-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'othree/html5.vim'
+Plug 'posva/vim-vue'
+" }}}
+
 call plug#end()
 " }}}
 
-" Editor {{{
+" Neovim Config {{{
+
+" Abbreviation {{{
+cabbrev h vert h
+cabbrev sb vert sb
+" }}}
+
+" Bindings {{{
+
+" Command {{{
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+" }}}
+
+" Leader {{{
+let mapleader=","
+
+nnoremap <Leader>n :nohlsearch<CR>
+nnoremap <Leader><Leader> <C-^>
+nnoremap <Leader>q :quit<CR>
+nnoremap <Leader>w :write<CR>
+
+if has("win32")
+    nnoremap <Leader>v :set paste<CR>"*P:set nopaste<CR>
+else
+    nnoremap <Leader>v :set paste<CR>"+P:set nopaste<CR>
+endif
+
+if has("win32")
+    vnoremap <Leader>c "*y
+    vnoremap <Leader>x "*d
+else
+    vnoremap <Leader>c "+y
+    vnoremap <Leader>x "+d
+endif
+" }}}
+
+" Normal {{{
+nnoremap j gj
+nnoremap k gk
+nnoremap / /\v
+nnoremap ? ?\v
+nnoremap <space> za
+nnoremap Y y$
+nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
+nnoremap Q <nop>
+nnoremap K <nop>
+if has("win32")
+    nnoremap <C-h> <C-w>h
+else
+    nnoremap <BS> <C-w>h " workaround issues=2048
+endif
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap gce :ll<CR>    " go to current error/warning.
+nnoremap gne :lnext<CR> " go to next error/warning.
+nnoremap gpe :lprev<CR> " go to previous error/warning.
+nnoremap <F4> :e $MYVIMRC<CR>
+" }}}
+
+" Visual {{{
+vnoremap / /\v
+" }}}
+
+" }}}
+
+" Color {{{
+syntax on
+colorscheme base16-ocean
+let base16colorspace=256
+highlight Search guibg=none guifg=#d70000 gui=underline
+" }}}
+
+" Settings {{{
 filetype plugin indent on
 cd ~/workspace
 
@@ -94,76 +169,7 @@ set lazyredraw                            " make the macro go faster.
 set scrolloff=3                           " start scrolling 3 lines before edge of view port.
 " }}}
 
-" Color {{{
-syntax on
-colorscheme base16-ocean
-let base16colorspace=256
-highlight Search guibg=none guifg=#d70000 gui=underline
-" }}}
-
-" Abbreviation {{{
-cabbrev h vert h
-cabbrev sb vert sb
-" }}}
-
-" Bindings {{{
-
-" Leader {{{
-let mapleader=","
-
-nnoremap <Leader>n :nohlsearch<CR>
-nnoremap <Leader><Leader> <C-^>
-nnoremap <Leader>q :quit<CR>
-nnoremap <Leader>w :write<CR>
-
-if has("win32")
-    nnoremap <Leader>v :set paste<CR>"*P:set nopaste<CR>
-else
-    nnoremap <Leader>v :set paste<CR>"+P:set nopaste<CR>
-endif
-
-if has("win32")
-    vnoremap <Leader>c "*y
-    vnoremap <Leader>x "*d
-else
-    vnoremap <Leader>c "+y
-    vnoremap <Leader>x "+d
-endif
-" }}}
-
-" Command {{{
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
-" }}}
-
-" Normal {{{
-nnoremap j gj
-nnoremap k gk
-nnoremap / /\v
-nnoremap ? ?\v
-nnoremap <space> za
-nnoremap Y y$
-nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
-nnoremap Q <nop>
-nnoremap K <nop>
-if has("win32")
-    nnoremap <C-h> <C-w>h
-else
-    nnoremap <BS> <C-w>h " workaround issues=2048 
-endif
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap gce :ll<CR>    " go to current error/warning.
-nnoremap gne :lnext<CR> " go to next error/warning.
-nnoremap gpe :lprev<CR> " go to previous error/warning.
-" }}}
-
-" Visual {{{
-vnoremap / /\v
-" }}}
-
-" }}}
+"}}}
 
 " Plugin Config {{{
 " Airline {{{
@@ -189,24 +195,8 @@ let g:airline_mode_map = {
 "let g:airline_right_sep=''
 " }}}
 
-" NERDtree {{{
-map <C-n> :NERDTreeToggle<CR>
-let g:NERDTreeWinPos = "right"
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-let g:NERDTreeIgnore = ['\.csproj.user$', '\.suo$']
-" }}}
-
-" Supertab {{{
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>"]
-let g:SuperTabClosePreviewOnPopupClose = 1
-let g:SuperTabCrMapping=1
-autocmd FileType *
-            \ if &omnifunc != '' |
-            \   call SuperTabChain(&omnifunc, "<c-p>") |
-            \ 	call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
-            \ endif
+" Closetag {{{
+let g:closetag_filenames = "*.html,*.xml,*.ts"
 " }}}
 
 " Ctrl-P {{{
@@ -272,15 +262,12 @@ augroup neomake_cs_maker
 augroup END
 " }}}
 
-" Closetag {{{
-let g:closetag_filenames = "*.html,*.xml,*.ts"
-" }}}
-
-" Tagbar {{{
-nmap <F8> :TagbarToggle<CR>
-if has("win32")
-    let g:tagbar_ctags_bin = '~\AppData\Local\nvim\autoload\ctags58\ctags.exe'
-endif
+" NERDtree {{{
+map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeWinPos = "right"
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeIgnore = ['\.csproj.user$', '\.suo$']
 " }}}
 
 " Omnisharp {{{
@@ -305,4 +292,30 @@ augroup omnisharp_commands
     "autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
 augroup END
 " }}}
+
+" Supertab {{{
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>"]
+let g:SuperTabClosePreviewOnPopupClose = 1
+let g:SuperTabCrMapping=1
+autocmd FileType *
+            \ if &omnifunc != '' |
+            \   call SuperTabChain(&omnifunc, "<c-p>") |
+            \ 	call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
+            \ endif
+" }}}
+
+" SnipMate {{{
+let g:snipMate = get(g:, 'snipMate', {}) " Allow for vimrc re-sourcing
+let g:snipMate.scope_aliases = {}
+let g:snipMate.scope_aliases['vue'] = 'html,javascript,scss'
+" }}}
+
+" Tagbar {{{
+nmap <F8> :TagbarToggle<CR>
+if has("win32")
+    let g:tagbar_ctags_bin = '~\AppData\Local\nvim\autoload\ctags58\ctags.exe'
+endif
+" }}}
+
 " }}}
