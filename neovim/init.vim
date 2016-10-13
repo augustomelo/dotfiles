@@ -11,6 +11,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins {{{
 call plug#begin()
+
 " C# {{{
 "Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
 "Plug 'tpope/vim-dispatch', {'for': 'cs'}
@@ -47,9 +48,9 @@ Plug 'Valloric/MatchTagAlways'
 
 " Web development {{{
 "Plug 'leafgarland/typescript-vim'
-Plug 'pangloss/vim-javascript'
-Plug 'othree/html5.vim'
-Plug 'posva/vim-vue'
+"Plug 'pangloss/vim-javascript'
+"Plug 'othree/html5.vim'
+"Plug 'posva/vim-vue'
 " }}}
 
 call plug#end()
@@ -122,14 +123,8 @@ vnoremap / /\v
 
 " }}}
 
-" Color {{{
-syntax on
-colorscheme base16-ocean
-let base16colorspace=256
-highlight Search guibg=none guifg=#d70000 gui=underline
-" }}}
-
 " Settings {{{
+syntax on
 filetype plugin indent on
 cd ~/workspace
 
@@ -167,6 +162,10 @@ set incsearch
 set laststatus=2                          " always show status line.
 set lazyredraw                            " make the macro go faster.
 set scrolloff=3                           " start scrolling 3 lines before edge of view port.
+
+colorscheme base16-ocean
+let base16colorspace=256
+highlight Search guibg=none guifg=#d70000 gui=underline
 " }}}
 
 "}}}
