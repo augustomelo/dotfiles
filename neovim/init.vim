@@ -46,7 +46,7 @@ Plug 'Valloric/MatchTagAlways'
 " University {{{
 " }}}
 
-" Web development {{{
+" Web {{{
 "Plug 'leafgarland/typescript-vim'
 "Plug 'pangloss/vim-javascript'
 "Plug 'othree/html5.vim'
@@ -204,6 +204,16 @@ let g:ctrlp_custom_ignore = {
             \ 'file': '\v\.(exe|so|dll|csproj|sln|suo)$',
             \ }
 let g:ctrlp_working_path_mode = 0
+" }}}
+
+" MatchTagAlways  {{{
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'vue': 1,
+    \}
 " }}}
 
 " Neomake {{{
