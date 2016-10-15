@@ -196,7 +196,7 @@ let g:airline_mode_map = {
 " }}}
 
 " Closetag {{{
-let g:closetag_filenames = "*.html,*.xml,*.ts"
+let g:closetag_filenames = "*.html,*.xml,*.ts,*.vue"
 " }}}
 
 " Ctrl-P {{{
@@ -308,7 +308,7 @@ autocmd FileType *
 " SnipMate {{{
 let g:snipMate = get(g:, 'snipMate', {}) " Allow for vimrc re-sourcing
 let g:snipMate.scope_aliases = {}
-let g:snipMate.scope_aliases['vue'] = 'html,javascript,scss'
+let g:snipMate.scope_aliases['vue'] = 'html,javascript,sass'
 " }}}
 
 " Tagbar {{{
