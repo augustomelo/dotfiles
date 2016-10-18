@@ -98,7 +98,7 @@ nnoremap j gj
 nnoremap k gk
 nnoremap / /\v
 nnoremap ? ?\v
-nnoremap <space> za
+nnoremap <Space> za
 nnoremap Y y$
 nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
 nnoremap Q <nop>
@@ -277,6 +277,7 @@ let g:NERDTreeWinPos = "right"
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDTreeIgnore = ['\.csproj.user$', '\.suo$']
+let g:NERDTreeMapActivateNode = '<Space>'
 " }}}
 
 " Omnisharp {{{
@@ -285,7 +286,7 @@ let g:NERDTreeIgnore = ['\.csproj.user$', '\.suo$']
 let g:OmniSharp_selector_ui = 'ctrlp'
 let g:OmniSharp_timeout = 1
 nnoremap <F2> :OmniSharpRename<cr>
-nnoremap <Leader><space> :OmniSharpGetCodeActions<cr>
+nnoremap <Leader><Space> :OmniSharpGetCodeActions<cr>
 augroup omnisharp_commands
     autocmd!
 
