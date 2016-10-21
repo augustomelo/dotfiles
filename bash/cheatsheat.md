@@ -21,4 +21,8 @@
 `git diff --(staged|cached)` Difference between staged area and HEAD.  
 `git checkout <file>` Rollback a file.  
 `git reset HEAD <file>` Undo a file git add.  
+`git stash` Stash the current state.  
+`git stash list` List the stash.  
+`git stash (pop|apply)` Pop remove a single stashed state from the stash list and apply it on top of the current working tree state. Apply do not remove the state.  
+`git stash (drop|clear)` Drop remove a single state from the stash. Clear remove all states.  
 
