@@ -141,6 +141,7 @@ set breakindent                           " indent wrapped lines to match start.
 set breakindentopt=shift:2                " emphasize broken lines by indenting them
 let &showbreak='⤷ '
 set showcmd
+set noshowmode
 set spell spelllang=en_us
 set equalalways
 set list
