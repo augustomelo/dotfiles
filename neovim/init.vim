@@ -167,6 +167,8 @@ set scrolloff=3                           " start scrolling 3 lines before edge 
 colorscheme base16-ocean
 let base16colorspace=256
 highlight Search guibg=none guifg=#d70000 gui=underline
+
+autocmd Filetype gitcommit setlocal spell textwidth=72
 " }}}
 
 "}}}
