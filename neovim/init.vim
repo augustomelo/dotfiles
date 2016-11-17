@@ -21,6 +21,8 @@ call plug#begin()
 
 " Cosmetic {{{
 "Plug 'flazz/vim-colorschemes'
+Plug 'sotte/presenting.vim'
+Plug 'tpope/vim-markdown'
 Plug 'chriskempson/base16-vim'
 Plug 'equalsraf/neovim-gui-shim'
 Plug 'ryanoasis/vim-devicons'
@@ -105,6 +107,8 @@ nnoremap Q <nop>
 nnoremap K <nop>
 if has("win32")
     nnoremap <C-h> <C-w>h
+    nnoremap <C-=> :Guifont DejaVuSansMonoForPowerline NF:h17<CR>
+    nnoremap <C--> :Guifont DejaVuSansMonoForPowerline NF:h9<CR>
 else
     nnoremap <BS> <C-w>h " workaround issues=2048
 endif
@@ -207,6 +211,10 @@ let g:ctrlp_custom_ignore = {
             \ 'file': '\v\.(exe|so|dll|csproj|sln|suo)$',
             \ }
 let g:ctrlp_working_path_mode = 0
+" }}}
+
+" Vim-Markdown  {{{
+let g:markdown_fenced_languages = ['cs']
 " }}}
 
 " MatchTagAlways  {{{
