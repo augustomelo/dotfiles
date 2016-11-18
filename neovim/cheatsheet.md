@@ -66,6 +66,7 @@
 
 ### Search
 `$` End of the line.  
+`@!` Negative assertion.  
 `\0` Reuse part of the search at the replace.  
 `\z(s|e)` Starts/end match.  
 `\(C|c)` Force case sensitive/insensitive.  
