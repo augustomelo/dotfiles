@@ -25,4 +25,5 @@
 `git stash list` List the stash.  
 `git stash (pop|apply)` Pop remove a single stashed state from the stash list and apply it on top of the current working tree state. Apply do not remove the state.  
 `git stash (drop|clear)` Drop remove a single state from the stash. Clear remove all states.  
+`git log -p -1 <path>` Get the diff between the file now and existed before.  
 
