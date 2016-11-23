@@ -163,12 +163,16 @@ set incsearch
 set laststatus=2                          " always show status line.
 set lazyredraw                            " make the macro go faster.
 set scrolloff=3                           " start scrolling 3 lines before edge of view port.
+set visualbell                            " set the visual bell so it can be assign a sound>
+set t_vb=                                 " assign no sound (disable bell).
+set concealcursor=n                       " conceal the only on normal mode
 
 colorscheme base16-ocean
 let base16colorspace=256
 highlight Search guibg=none guifg=#d70000 gui=underline
 
 autocmd Filetype gitcommit setlocal spell textwidth=72
+autocmd Filetype tex setlocal textwidth=120
 " }}}
 
 "}}}
@@ -321,7 +325,7 @@ autocmd FileType *
 " SnipMate {{{
 let g:snipMate = get(g:, 'snipMate', {}) " Allow for vimrc re-sourcing
 let g:snipMate.scope_aliases = {}
-let g:snipMate.scope_aliases['vue'] = 'html,javascript,sass'
+let g:snipMate.scope_aliases['vue'] = 'html,javascript,sass,css'
 " }}}
 
 " Tagbar {{{
