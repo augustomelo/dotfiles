@@ -63,6 +63,7 @@
 `c-i` Jump to newer location.  
 `g;` Move back the change list.  
 `g,` Move forwards the change list.  
+`[m` Go to previous start of method.  
 
 ### Search
 `$` End of the line.  

@@ -4,6 +4,8 @@
 `grep` Find a pattern in data Ex.: `grep -r --include=\*.{cpp,h} 'string'`.  
 `du -sh <place>` Give the size of that place.  
 `optirun -b none nvidia-settings -c :8 run nvidia-settings` Run Nvidia settings.  
+`ntfsfix -bd /dev/sdXX` Fix common errors and forces windows to check NTFS.  
+`fsck /dev/sdXX` Check and repair for a linux file system.  
 
 #Terminal 
 `Ctrl + a` Go to the beginning of the line.  
