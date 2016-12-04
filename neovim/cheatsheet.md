@@ -50,7 +50,7 @@
 `lN` Next occurrence in location list.  
 `lp` Previous occurrence in location list.  
 `g+` Go to newer text state on history tree.  
-`g-` Go to older text state on history tree.
+`g-` Go to older text state on history tree.  
 `:erlier {N}s` Go to the older text state about {N} seconds before.  
 
 ### Mark
