@@ -134,8 +134,6 @@ cd ~/workspace
 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1       " makes the cursor a pipe in insert mode, and a block in normal-mode. Temporary measure.
 set termguicolors
-set encoding=utf-8
-set fileencoding=utf-8
 set cursorline
 set noswapfile
 set number
