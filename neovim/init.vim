@@ -13,31 +13,32 @@
 call plug#begin()
 
 " C# {{{
-"Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
-" Omnisharp {{{
-"let g:Omnisharp_start_server = 0
-"let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-let g:OmniSharp_selector_ui = 'ctrlp'
-let g:OmniSharp_timeout = 1
-augroup omnisharp_commands
-    autocmd!
-
-    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-    "autocmd TextChanged,InsertLeave *.cs SyntasticCheck
-    "autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-
-    autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
-    autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr> :OmniSharpFixUsings<cr>
-    autocmd FileType cs nnoremap <Leader>dc :OmniSharpDocumentation<cr>
-    autocmd FileType cs nnoremap <F2> :OmniSharpRename<cr>
-    autocmd FileType cs nnoremap <Leader><Space> :OmniSharpGetCodeActions<cr>
-    "navigate up/down by method/property/field
-    "autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
-    "autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
-augroup END
-" }}}
 "Plug 'oranget/vim-csharp', {'for': 'cs'}
 "Plug 'tpope/vim-dispatch', {'for': 'cs'}
+
+"Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
+    " Omnisharp {{{
+    "let g:Omnisharp_start_server = 0
+    "let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+    let g:OmniSharp_selector_ui = 'ctrlp'
+    let g:OmniSharp_timeout = 1
+    augroup omnisharp_commands
+        autocmd!
+
+        autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+        "autocmd TextChanged,InsertLeave *.cs SyntasticCheck
+        "autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+
+        autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
+        autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr> :OmniSharpFixUsings<cr>
+        autocmd FileType cs nnoremap <Leader>dc :OmniSharpDocumentation<cr>
+        autocmd FileType cs nnoremap <F2> :OmniSharpRename<cr>
+        autocmd FileType cs nnoremap <Leader><Space> :OmniSharpGetCodeActions<cr>
+        "navigate up/down by method/property/field
+        "autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
+        "autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
+    augroup END
+    " }}}
 " }}}
 
 " Cosmetic {{{
@@ -46,6 +47,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'equalsraf/neovim-gui-shim'
 Plug 'sotte/presenting.vim'
 Plug 'ryanoasis/vim-devicons'
+
 Plug 'tpope/vim-markdown'
     " Vim-Markdown Config  {{{
     let g:markdown_fenced_languages = ['cs']
@@ -134,7 +136,6 @@ Plug 'neomake/neomake'
     " }}}
 Plug 'scrooloose/nerdtree'
     " NERDtree Config {{{
-    map <C-n> :NERDTreeToggle<CR>
     let g:NERDTreeWinPos = "right"
     let g:NERDTreeDirArrowExpandable = '▸'
     let g:NERDTreeDirArrowCollapsible = '▾'
@@ -155,7 +156,6 @@ Plug 'ervandew/supertab'
     " }}}
 Plug 'majutsushi/tagbar'
     " Tagbar Config {{{
-    nmap <F8> :TagbarToggle<CR>
     if has("win32")
         let g:tagbar_ctags_bin = '~\AppData\Local\nvim\autoload\ctags58\ctags.exe'
     endif
@@ -243,6 +243,9 @@ endif
 " }}}
 
 " Normal {{{
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <F8> :TagbarToggle<CR>
+
 nnoremap j gj
 nnoremap k gk
 nnoremap / /\v
@@ -266,6 +269,10 @@ nnoremap gce :ll<CR>    " go to current error/warning.
 nnoremap gne :lnext<CR> " go to next error/warning.
 nnoremap gpe :lprev<CR> " go to previous error/warning.
 nnoremap <F4> :e $MYVIMRC<CR>
+
+" Remove all trailing whitespace
+nnoremap <F5> :let _s=@/<Bar>:%s/\v\s+$//e<Bar>:let @/=_s<Bar><CR>
+
 " }}}
 
 " Visual {{{
