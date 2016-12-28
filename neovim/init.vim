@@ -14,44 +14,191 @@ call plug#begin()
 
 " C# {{{
 "Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
-"Plug 'tpope/vim-dispatch', {'for': 'cs'}
+" Omnisharp {{{
+"let g:Omnisharp_start_server = 0
+"let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+let g:OmniSharp_selector_ui = 'ctrlp'
+let g:OmniSharp_timeout = 1
+augroup omnisharp_commands
+    autocmd!
+
+    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+    "autocmd TextChanged,InsertLeave *.cs SyntasticCheck
+    "autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+
+    autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
+    autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr> :OmniSharpFixUsings<cr>
+    autocmd FileType cs nnoremap <Leader>dc :OmniSharpDocumentation<cr>
+    autocmd FileType cs nnoremap <F2> :OmniSharpRename<cr>
+    autocmd FileType cs nnoremap <Leader><Space> :OmniSharpGetCodeActions<cr>
+    "navigate up/down by method/property/field
+    "autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
+    "autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
+augroup END
+" }}}
 "Plug 'oranget/vim-csharp', {'for': 'cs'}
-"Plug 'scrooloose/syntastic', {'for': 'cs'}
+"Plug 'tpope/vim-dispatch', {'for': 'cs'}
 " }}}
 
 " Cosmetic {{{
 "Plug 'flazz/vim-colorschemes'
-Plug 'sotte/presenting.vim'
-Plug 'tpope/vim-markdown'
 Plug 'chriskempson/base16-vim'
 Plug 'equalsraf/neovim-gui-shim'
+Plug 'sotte/presenting.vim'
 Plug 'ryanoasis/vim-devicons'
+Plug 'tpope/vim-markdown'
+    " Vim-Markdown Config  {{{
+    let g:markdown_fenced_languages = ['cs']
+    " }}}
 " }}}
 
 " Global {{{
-Plug 'scrooloose/nerdtree'
-Plug 'neomake/neomake'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'ervandew/supertab'
 Plug 'Raimondi/delimitMate'
-Plug 'scrooloose/nerdcommenter'
-Plug 'majutsushi/tagbar'
 Plug 'Yggdroot/indentLine'
-Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'garbas/vim-snipmate'
-Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline-themes' | Plug 'bling/vim-airline'
 Plug 'godlygeek/tabular'
-Plug 'alvan/vim-closetag'
-Plug 'Valloric/MatchTagAlways'
-" }}}
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 
-" University {{{
+Plug 'ctrlpvim/ctrlp.vim'
+    " Ctrl-P Config {{{
+    let g:ctrlp_custom_ignore = {
+                \ 'dir':  '\v[\/][\._]?(bin|obj|references|svn|git|node_modules|typings|bower_components)',
+                \ 'file': '\v\.(exe|so|dll|csproj|sln|suo)$',
+                \ }
+    let g:ctrlp_working_path_mode = 0
+    " }}}
+Plug 'Valloric/MatchTagAlways'
+    " MatchTagAlways Config {{{
+    let g:mta_filetypes = {
+        \ 'html' : 1,
+        \ 'xhtml' : 1,
+        \ 'xml' : 1,
+        \ 'jinja' : 1,
+        \ 'vue': 1,
+        \}
+    " }}}
+Plug 'neomake/neomake'
+    " Neomake Config {{{
+    "let g:neomake_verbose = 3
+    let g:neomake_open_list = 2
+    let g:neomake_list_height  = 4
+    let g:neomake_javascript_enabled_makers = ['eslint']
+    let g:neomake_error_sign = {
+                \ 'text': '✗',
+                \ 'texthl': 'ErrorMsg',
+                \ }
+    let g:neomake_warning_sign = {
+                \ 'text': '!',
+                \ 'texthl': 'WarningMsg',
+                \ }
+
+    autocmd! BufWritePost * Neomake
+
+    " FUNCTION find *.sln file going up directory
+    function! FindSLN()
+        let dir = expand('%:p:h')
+        let solution_files = ""
+
+        while empty(solution_files)
+            let solution_files = globpath(dir , '*.sln')
+            let lastfolder = dir
+            let dir = fnamemodify(dir, ':h')
+
+            if dir ==# lastfolder
+                break
+            endif
+        endwhile
+
+        if empty(solution_files)
+            let solution_files = ''
+        endif
+
+        let solution_files = lastfolder
+        return solution_files
+    endfunction
+
+    "autocmd FileType cs let &l:makeprg="msbuild " . FindSLN() . " -nologo -v:q -property:GenerateFullPaths=true"
+    "autocmd FileType cs setlocal errorformat=\ %#%f(%l\\\,%c):\ %m
+    "let g:neomake_cs_enabled_makers = []
+
+    augroup neomake_cs_maker
+        au!
+        au FileType cs let g:neomake_cs_msbuild_maker = {
+                    \ 'args': [ '-nologo', '-v:q', '-property:GenerateFullPaths=true' ],
+                    \ 'cwd' : FindSLN(),
+                    \ 'errorformat': '\ %#%f(%l\\\,%c):\ %m',
+                    \ 'append_file' : 0,
+                    \ }
+        au FileType cs let g:neomake_cs_enabled_makers = ['msbuild']
+    augroup END
+    " }}}
+Plug 'scrooloose/nerdtree'
+    " NERDtree Config {{{
+    map <C-n> :NERDTreeToggle<CR>
+    let g:NERDTreeWinPos = "right"
+    let g:NERDTreeDirArrowExpandable = '▸'
+    let g:NERDTreeDirArrowCollapsible = '▾'
+    let g:NERDTreeIgnore = ['\.csproj.user$', '\.suo$']
+    let g:NERDTreeMapActivateNode = '<Space>'
+    " }}}
+Plug 'ervandew/supertab'
+    " Supertab Config {{{
+    let g:SuperTabDefaultCompletionType = 'context'
+    let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>"]
+    let g:SuperTabClosePreviewOnPopupClose = 1
+    let g:SuperTabCrMapping=1
+    autocmd FileType *
+                \ if &omnifunc != '' |
+                \   call SuperTabChain(&omnifunc, "<c-p>") |
+                \ 	call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
+                \ endif
+    " }}}
+Plug 'majutsushi/tagbar'
+    " Tagbar Config {{{
+    nmap <F8> :TagbarToggle<CR>
+    if has("win32")
+        let g:tagbar_ctags_bin = '~\AppData\Local\nvim\autoload\ctags58\ctags.exe'
+    endif
+    " }}}
+Plug 'alvan/vim-closetag'
+    " Closetag Config {{{
+    let g:closetag_filenames = "*.html,*.xml,*.ts,*.vue"
+    " }}}
+Plug 'vim-airline/vim-airline-themes' | Plug 'bling/vim-airline'
+    " Vim-Airline Config {{{
+    let g:airline_powerline_fonts = 1
+    let g:airline_detect_spell=0
+    "let g:airline#extensions#tabline#enabled = 1
+    "let g:airline#extensions#tabline#buffer_nr_show = 1
+    "let g:airline#extensions#tabline#fnamemod = ':t'
+    let g:airline_mode_map = {
+                \ '__' : '-',
+                \ 'n'  : 'N',
+                \ 'i'  : 'I',
+                \ 'R'  : 'R',
+                \ 'c'  : 'C',
+                \ 'v'  : 'V',
+                \ 'V'  : 'VL',
+                \ '' : 'VC',
+                \ 's'  : 'S',
+                \ 'S'  : 'S',
+                \ '' : 'S',
+                \ }
+    "let g:airline_left_sep=''
+    "let g:airline_right_sep=''
+    " }}}
+Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'garbas/vim-snipmate'
+    " SnipMate Config {{{
+    let g:snipMate = get(g:, 'snipMate', {}) " Allow for vimrc re-sourcing
+    let g:snipMate.scope_aliases = {}
+    let g:snipMate.scope_aliases['vue'] = 'html,javascript,sass,css'
+    " }}}
 " }}}
 
 " Web {{{
 "Plug 'leafgarland/typescript-vim'
-"Plug 'pangloss/vim-javascript'
 "Plug 'othree/html5.vim'
+"Plug 'pangloss/vim-javascript'
 "Plug 'posva/vim-vue'
 " }}}
 
@@ -180,167 +327,3 @@ autocmd Filetype tex setlocal textwidth=120
 " }}}
 
 "}}}
-
-" Plugin Config {{{
-" Airline {{{
-let g:airline_powerline_fonts = 1
-let g:airline_detect_spell=0
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#buffer_nr_show = 1
-"let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline_mode_map = {
-            \ '__' : '-',
-            \ 'n'  : 'N',
-            \ 'i'  : 'I',
-            \ 'R'  : 'R',
-            \ 'c'  : 'C',
-            \ 'v'  : 'V',
-            \ 'V'  : 'VL',
-            \ '' : 'VC',
-            \ 's'  : 'S',
-            \ 'S'  : 'S',
-            \ '' : 'S',
-            \ }
-"let g:airline_left_sep=''
-"let g:airline_right_sep=''
-" }}}
-
-" Closetag {{{
-let g:closetag_filenames = "*.html,*.xml,*.ts,*.vue"
-" }}}
-
-" Ctrl-P {{{
-let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\v[\/][\._]?(bin|obj|references|svn|git|node_modules|typings|bower_components)',
-            \ 'file': '\v\.(exe|so|dll|csproj|sln|suo)$',
-            \ }
-let g:ctrlp_working_path_mode = 0
-" }}}
-
-" Vim-Markdown  {{{
-let g:markdown_fenced_languages = ['cs']
-" }}}
-
-" MatchTagAlways  {{{
-let g:mta_filetypes = {
-    \ 'html' : 1,
-    \ 'xhtml' : 1,
-    \ 'xml' : 1,
-    \ 'jinja' : 1,
-    \ 'vue': 1,
-    \}
-" }}}
-
-" Neomake {{{
-"let g:neomake_verbose = 3
-let g:neomake_open_list = 2
-let g:neomake_list_height  = 4
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_error_sign = {
-            \ 'text': '✗',
-            \ 'texthl': 'ErrorMsg',
-            \ }
-let g:neomake_warning_sign = {
-            \ 'text': '!',
-            \ 'texthl': 'WarningMsg',
-            \ }
-
-autocmd! BufWritePost * Neomake
-
-" FUNCTION find *.sln file going up directory
-function! FindSLN()
-    let dir = expand('%:p:h')
-    let solution_files = ""
-
-    while empty(solution_files)
-        let solution_files = globpath(dir , '*.sln')
-        let lastfolder = dir
-        let dir = fnamemodify(dir, ':h')
-
-        if dir ==# lastfolder
-            break
-        endif
-    endwhile
-
-    if empty(solution_files)
-        let solution_files = ''
-    endif
-
-    let solution_files = lastfolder
-    return solution_files
-endfunction
-
-"autocmd FileType cs let &l:makeprg="msbuild " . FindSLN() . " -nologo -v:q -property:GenerateFullPaths=true"
-"autocmd FileType cs setlocal errorformat=\ %#%f(%l\\\,%c):\ %m
-"let g:neomake_cs_enabled_makers = []
-
-augroup neomake_cs_maker
-    au!
-    au FileType cs let g:neomake_cs_msbuild_maker = {
-                \ 'args': [ '-nologo', '-v:q', '-property:GenerateFullPaths=true' ],
-                \ 'cwd' : FindSLN(),
-                \ 'errorformat': '\ %#%f(%l\\\,%c):\ %m',
-                \ 'append_file' : 0,
-                \ }
-    au FileType cs let g:neomake_cs_enabled_makers = ['msbuild']
-augroup END
-" }}}
-
-" NERDtree {{{
-map <C-n> :NERDTreeToggle<CR>
-let g:NERDTreeWinPos = "right"
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-let g:NERDTreeIgnore = ['\.csproj.user$', '\.suo$']
-let g:NERDTreeMapActivateNode = '<Space>'
-" }}}
-
-" Omnisharp {{{
-"let g:Omnisharp_start_server = 0
-"let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-let g:OmniSharp_selector_ui = 'ctrlp'
-let g:OmniSharp_timeout = 1
-nnoremap <F2> :OmniSharpRename<cr>
-nnoremap <Leader><Space> :OmniSharpGetCodeActions<cr>
-augroup omnisharp_commands
-    autocmd!
-
-    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-    "autocmd TextChanged,InsertLeave *.cs SyntasticCheck
-    "autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-
-    autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
-    autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr> :OmniSharpFixUsings<cr>
-    autocmd FileType cs nnoremap <Leader>dc :OmniSharpDocumentation<cr>
-    "navigate up/down by method/property/field
-    "autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
-    "autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
-augroup END
-" }}}
-
-" Supertab {{{
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>"]
-let g:SuperTabClosePreviewOnPopupClose = 1
-let g:SuperTabCrMapping=1
-autocmd FileType *
-            \ if &omnifunc != '' |
-            \   call SuperTabChain(&omnifunc, "<c-p>") |
-            \ 	call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
-            \ endif
-" }}}
-
-" SnipMate {{{
-let g:snipMate = get(g:, 'snipMate', {}) " Allow for vimrc re-sourcing
-let g:snipMate.scope_aliases = {}
-let g:snipMate.scope_aliases['vue'] = 'html,javascript,sass,css'
-" }}}
-
-" Tagbar {{{
-nmap <F8> :TagbarToggle<CR>
-if has("win32")
-    let g:tagbar_ctags_bin = '~\AppData\Local\nvim\autoload\ctags58\ctags.exe'
-endif
-" }}}
-
-" }}}
