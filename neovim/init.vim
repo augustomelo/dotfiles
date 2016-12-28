@@ -173,8 +173,9 @@ set concealcursor=n                       " conceal the only on normal mode
 
 colorscheme base16-ocean
 let base16colorspace=256
-highlight Search guibg=background guifg=#c20000 gui=underline
+highlight Search guibg=background guifg=#2abcdf gui=underline
 highlight MatchParen guibg=background guifg=#00b400 gui=underline
+highlight Error guibg=background guifg=#c20000
 
 autocmd Filetype gitcommit setlocal spell textwidth=72
 autocmd Filetype tex setlocal textwidth=120
