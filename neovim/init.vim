@@ -222,29 +222,26 @@ cnoremap <C-e> <End>
 " Leader {{{
 let mapleader=","
 
-nnoremap <Leader>n :nohlsearch<CR>
 nnoremap <Leader><Leader> <C-^>
-nnoremap <Leader>q :quit<CR>
-nnoremap <Leader>w :write<CR>
+nnoremap <silent> <Leader>n :nohlsearch<CR>
+nnoremap <silent> <Leader>q :quit<CR>
+nnoremap <silent> <Leader>w :write<CR>
 
 if has("win32")
-    nnoremap <Leader>v :set paste<CR>"*P:set nopaste<CR>
-else
-    nnoremap <Leader>v :set paste<CR>"+P:set nopaste<CR>
-endif
-
-if has("win32")
+    nnoremap <silent> <Leader>v :set paste<CR>"*P:set nopaste<CR>
     vnoremap <Leader>c "*y
     vnoremap <Leader>x "*d
 else
+    nnoremap <silent> <Leader>v :set paste<CR>"+P:set nopaste<CR>
     vnoremap <Leader>c "+y
     vnoremap <Leader>x "+d
 endif
+
 " }}}
 
 " Normal {{{
-nnoremap <C-n> :NERDTreeToggle<CR>
-nnoremap <F8> :TagbarToggle<CR>
+nnoremap <silent> <C-n> :NERDTreeToggle<CR>
+nnoremap <silent> <F8> :TagbarToggle<CR>
 
 nnoremap j gj
 nnoremap k gk
@@ -255,23 +252,22 @@ nnoremap Y y$
 nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
 nnoremap Q <nop>
 nnoremap K <nop>
-if has("win32")
-    nnoremap <C-h> <C-w>h
-    nnoremap <C-=> :Guifont DejaVuSansMonoForPowerline NF:h17<CR>
-    nnoremap <C--> :Guifont DejaVuSansMonoForPowerline NF:h9<CR>
-else
-    nnoremap <BS> <C-w>h " workaround issues=2048
-endif
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-nnoremap gce :ll<CR>    " go to current error/warning.
-nnoremap gne :lnext<CR> " go to next error/warning.
-nnoremap gpe :lprev<CR> " go to previous error/warning.
-nnoremap <F4> :e $MYVIMRC<CR>
+nnoremap <silent> gce :ll<CR>                                          " go to current error/warning.
+nnoremap <silent> gne :lnext<CR>                                       " go to next error/warning.
+nnoremap <silent> gpe :lprev<CR>                                       " go to previous error/warning.
+nnoremap <silent> <F4> :e $MYVIMRC<CR>
+nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\v\s+$//e<Bar>:let @/=_s<CR> " Remove all trailing whitespace
 
-" Remove all trailing whitespace
-nnoremap <F5> :let _s=@/<Bar>:%s/\v\s+$//e<Bar>:let @/=_s<Bar><CR>
+if has("win32")
+    nnoremap <C-h> <C-w>h
+    nnoremap <silent> <C-=> :Guifont DejaVuSansMonoForPowerline NF:h17<CR>
+    nnoremap <silent> <C--> :Guifont DejaVuSansMonoForPowerline NF:h9<CR>
+else
+    nnoremap <BS> <C-w>h " workaround issues=2048
+endif
 
 " }}}
 
@@ -296,7 +292,7 @@ set linebreak
 set breakindent                           " indent wrapped lines to match start.
 set breakindentopt=shift:2                " emphasize broken lines by indenting them
 let &showbreak='⤷ '
-set showcmd
+set noshowcmd
 set noshowmode
 set spell spelllang=en_us
 set equalalways
