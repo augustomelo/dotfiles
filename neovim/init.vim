@@ -64,7 +64,7 @@ Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 Plug 'ctrlpvim/ctrlp.vim'
     " Ctrl-P Config {{{
     let g:ctrlp_custom_ignore = {
-                \ 'dir':  '\v[\/][\._]?(bin|obj|references|svn|git|node_modules|typings|bower_components)',
+                \ 'dir':  '\v\/(bin|obj|_references|.svn|.git|node_modules|typings|bower_components)',
                 \ 'file': '\v\.(exe|so|dll|csproj|sln|suo)$',
                 \ }
     let g:ctrlp_working_path_mode = 0
@@ -255,9 +255,9 @@ nnoremap K <nop>
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-nnoremap <silent> gce :ll<CR>                                          " go to current error/warning.
-nnoremap <silent> gne :lnext<CR>                                       " go to next error/warning.
-nnoremap <silent> gpe :lprev<CR>                                       " go to previous error/warning.
+nnoremap <silent> gce :ll<CR>                                          " go to current error/warning
+nnoremap <silent> gne :lnext<CR>                                       " go to next error/warning
+nnoremap <silent> gpe :lprev<CR>                                       " go to previous error/warning
 nnoremap <silent> <F4> :e $MYVIMRC<CR>
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\v\s+$//e<Bar>:let @/=_s<CR> " Remove all trailing whitespace
 
@@ -282,15 +282,15 @@ syntax on
 filetype plugin indent on
 cd ~/workspace
 
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1       " makes the cursor a pipe in insert mode, and a block in normal-mode. Temporary measure.
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1                               " makes the cursor a pipe in insert mode, and a block in normal-mode. Temporary measure
 set termguicolors
 set cursorline
 set noswapfile
 set number
 set relativenumber
 set linebreak
-set breakindent                           " indent wrapped lines to match start.
-set breakindentopt=shift:2                " emphasize broken lines by indenting them
+set breakindent                                                   " indent wrapped lines to match start
+set breakindentopt=shift:2                                        " emphasize broken lines by indenting them
 let &showbreak='⤷ '
 set noshowcmd
 set noshowmode
@@ -312,12 +312,15 @@ set hlsearch
 set ignorecase
 set smartcase
 set incsearch
-set laststatus=2                          " always show status line.
-set lazyredraw                            " make the macro go faster.
-set scrolloff=3                           " start scrolling 3 lines before edge of view port.
-set visualbell                            " set the visual bell so it can be assign a sound>
-set t_vb=                                 " assign no sound (disable bell).
-set concealcursor=n                       " conceal the only on normal mode
+set laststatus=2                                                  " always show status line
+set lazyredraw                                                    " make the macro go faster
+set scrolloff=3                                                   " start scrolling 3 lines before edge of view port
+set visualbell                                                    " set the visual bell so it can be assign a sound
+set t_vb=                                                         " assign no sound (disable bell)
+set concealcursor=n                                               " conceal the only on normal mode
+set wildignore+=*/bin/*,*/obj/*,*/_references/*,*/.svn/*,*/.git/* " ignore folders
+set wildignore+=*/node_modules/*,*/typings/*,*/bower_components/* " ignore folders
+set wildignore+=*.exe,*.so,*.dll,*.csproj,*.sln,*.suo             " ignore files
 
 colorscheme base16-ocean
 let base16colorspace=256
