@@ -63,11 +63,40 @@ Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 
 Plug 'ctrlpvim/ctrlp.vim'
     " Ctrl-P Config {{{
+    let g:ctrlp_status_func = {
+                \ 'main': 'CtrlPMainStatus',
+                \ 'prog': 'CtrlPProressStatus',
+                \ }
     let g:ctrlp_custom_ignore = {
                 \ 'dir':  '\v\/(bin|obj|_references|.svn|.git|node_modules|typings|bower_components)',
                 \ 'file': '\v\.(exe|so|dll|csproj|sln|suo)$',
                 \ }
     let g:ctrlp_working_path_mode = 0
+
+    function! CtrlPMainStatus(focus, byfname, regex, prev, item, next, marked)
+        let stLine=''
+        let stLine.=' '      " Separator
+        let stLine.=a:item   " The current search mode
+        let stLine.='%='     " Right side of status line
+        let stLine.='%<'     " Truncate
+
+        return stLine
+    endf
+
+    function! CtrlPProressStatus(str)
+        let stLine=''
+        let stLine.=' '      " Separator
+        let stLine.=a:str " Number of files scanned so for
+        let stLine.='%='     " Right side of status line
+        let stLine.='%<'     " Truncate
+        let stLine.=getcwd()
+        let stLine.=' '      " Separator
+
+        return stLine
+    endf
+
+
+
     " }}}
 Plug 'Valloric/MatchTagAlways'
     " MatchTagAlways Config {{{
@@ -164,29 +193,6 @@ Plug 'alvan/vim-closetag'
     " Closetag Config {{{
     let g:closetag_filenames = "*.html,*.xml,*.ts,*.vue"
     " }}}
-Plug 'vim-airline/vim-airline-themes' | Plug 'bling/vim-airline'
-    " Vim-Airline Config {{{
-    let g:airline_powerline_fonts = 1
-    let g:airline_detect_spell=0
-    "let g:airline#extensions#tabline#enabled = 1
-    "let g:airline#extensions#tabline#buffer_nr_show = 1
-    "let g:airline#extensions#tabline#fnamemod = ':t'
-    let g:airline_mode_map = {
-                \ '__' : '-',
-                \ 'n'  : 'N',
-                \ 'i'  : 'I',
-                \ 'R'  : 'R',
-                \ 'c'  : 'C',
-                \ 'v'  : 'V',
-                \ 'V'  : 'VL',
-                \ '' : 'VC',
-                \ 's'  : 'S',
-                \ 'S'  : 'S',
-                \ '' : 'S',
-                \ }
-    "let g:airline_left_sep=''
-    "let g:airline_right_sep=''
-    " }}}
 Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'garbas/vim-snipmate'
     " SnipMate Config {{{
     let g:snipMate = get(g:, 'snipMate', {}) " Allow for vimrc re-sourcing
@@ -207,129 +213,201 @@ call plug#end()
 
 " Neovim Config {{{
 
-" Abbreviation {{{
-cabbrev h vert h
-cabbrev sb vert sb
-" }}}
+    " Abbreviation {{{
+    cabbrev h vert h
+    cabbrev sb vert sb
+    " }}}
 
-" Bindings {{{
+    " Bindings {{{
 
-" Command {{{
-cnoremap <C-a> <Home>
-cnoremap <C-e> <End>
-" }}}
+        " Command {{{
+        cnoremap <C-a> <Home>
+        cnoremap <C-e> <End>
+        " }}}
 
-" Leader {{{
-let mapleader=","
+        " Leader {{{
+        let mapleader=","
 
-nnoremap <Leader><Leader> <C-^>
-nnoremap <silent> <Leader>n :nohlsearch<CR>
-nnoremap <silent> <Leader>q :quit<CR>
-nnoremap <silent> <Leader>w :write<CR>
+        nnoremap <Leader><Leader> <C-^>
+        nnoremap <silent> <Leader>n :nohlsearch<CR>
+        nnoremap <silent> <Leader>q :quit<CR>
+        nnoremap <silent> <Leader>w :write<CR>
 
-if has("win32")
-    nnoremap <silent> <Leader>v :set paste<CR>"*P:set nopaste<CR>
-    vnoremap <Leader>c "*y
-    vnoremap <Leader>x "*d
-else
-    nnoremap <silent> <Leader>v :set paste<CR>"+P:set nopaste<CR>
-    vnoremap <Leader>c "+y
-    vnoremap <Leader>x "+d
-endif
+        if has("win32")
+            nnoremap <silent> <Leader>v :set paste<CR>"*P:set nopaste<CR>
+            vnoremap <Leader>c "*y
+            vnoremap <Leader>x "*d
+        else
+            nnoremap <silent> <Leader>v :set paste<CR>"+P:set nopaste<CR>
+            vnoremap <Leader>c "+y
+            vnoremap <Leader>x "+d
+        endif
 
-" }}}
+        " }}}
 
-" Normal {{{
-nnoremap <silent> <C-n> :NERDTreeToggle<CR>
-nnoremap <silent> <F8> :TagbarToggle<CR>
+        " Normal {{{
+        nnoremap <silent> <C-n> :NERDTreeToggle<CR>
+        nnoremap <silent> <F8> :TagbarToggle<CR>
 
-nnoremap j gj
-nnoremap k gk
-nnoremap / /\v
-nnoremap ? ?\v
-nnoremap <Space> za
-nnoremap Y y$
-nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
-nnoremap Q <nop>
-nnoremap K <nop>
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <silent> gce :ll<CR>                                          " go to current error/warning
-nnoremap <silent> gne :lnext<CR>                                       " go to next error/warning
-nnoremap <silent> gpe :lprev<CR>                                       " go to previous error/warning
-nnoremap <silent> <F4> :e $MYVIMRC<CR>
-nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\v\s+$//e<Bar>:let @/=_s<CR> " Remove all trailing whitespace
+        nnoremap j gj
+        nnoremap k gk
+        nnoremap / /\v
+        nnoremap ? ?\v
+        nnoremap <Space> za
+        nnoremap Y y$
+        nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
+        nnoremap Q <nop>
+        nnoremap K <nop>
+        nnoremap <C-j> <C-w>j
+        nnoremap <C-k> <C-w>k
+        nnoremap <C-l> <C-w>l
+        nnoremap <silent> gce :ll<CR>                                          " go to current error/warning
+        nnoremap <silent> gne :lnext<CR>                                       " go to next error/warning
+        nnoremap <silent> gpe :lprev<CR>                                       " go to previous error/warning
+        nnoremap <silent> <F4> :e $MYVIMRC<CR>
+        nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\v\s+$//e<Bar>:let @/=_s<CR> " Remove all trailing whitespace
 
-if has("win32")
-    nnoremap <C-h> <C-w>h
-    nnoremap <silent> <C-=> :Guifont DejaVuSansMonoForPowerline NF:h17<CR>
-    nnoremap <silent> <C--> :Guifont DejaVuSansMonoForPowerline NF:h9<CR>
-else
-    nnoremap <BS> <C-w>h " workaround issues=2048
-endif
+        if has("win32")
+            nnoremap <C-h> <C-w>h
+            nnoremap <silent> <C-=> :Guifont DejaVuSansMonoForPowerline NF:h17<CR>
+            nnoremap <silent> <C--> :Guifont DejaVuSansMonoForPowerline NF:h9<CR>
+        else
+            nnoremap <BS> <C-w>h " workaround issues=2048
+        endif
 
-" }}}
+        " }}}
 
-" Visual {{{
-vnoremap / /\v
-" }}}
+        " Visual {{{
+        vnoremap / /\v
+        " }}}
 
-" }}}
+    " }}}
 
-" Settings {{{
-syntax on
-filetype plugin indent on
-cd ~/workspace
+    " Settings {{{
+    syntax on
+    filetype plugin indent on
+    cd ~/workspace
 
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1                               " makes the cursor a pipe in insert mode, and a block in normal-mode. Temporary measure
-set termguicolors
-set cursorline
-set noswapfile
-set number
-set relativenumber
-set linebreak
-set breakindent                                                   " indent wrapped lines to match start
-set breakindentopt=shift:2                                        " emphasize broken lines by indenting them
-let &showbreak='⤷ '
-set noshowcmd
-set noshowmode
-set spell spelllang=en_us
-set equalalways
-set list
-set listchars=nbsp:⦸,eol:¬,trail:•,tab:▸\
-set noshowmatch
-set foldmethod=syntax
-set completeopt=menuone,preview,noinsert
-set splitright
-set splitbelow
-set updatetime=500
-set hidden
-set mouse=a
-set background=dark
-set ts=4 sts=4 sw=4 expandtab
-set hlsearch
-set ignorecase
-set smartcase
-set incsearch
-set laststatus=2                                                  " always show status line
-set lazyredraw                                                    " make the macro go faster
-set scrolloff=3                                                   " start scrolling 3 lines before edge of view port
-set visualbell                                                    " set the visual bell so it can be assign a sound
-set t_vb=                                                         " assign no sound (disable bell)
-set concealcursor=n                                               " conceal the only on normal mode
-set wildignore+=*/bin/*,*/obj/*,*/_references/*,*/.svn/*,*/.git/* " ignore folders
-set wildignore+=*/node_modules/*,*/typings/*,*/bower_components/* " ignore folders
-set wildignore+=*.exe,*.so,*.dll,*.csproj,*.sln,*.suo             " ignore files
+    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1                               " makes the cursor a pipe in insert mode, and a block in normal-mode. Temporary measure
+    set termguicolors
+    set cursorline
+    set noswapfile
+    set number
+    set relativenumber
+    set linebreak
+    set breakindent                                                   " indent wrapped lines to match start
+    set breakindentopt=shift:2                                        " emphasize broken lines by indenting them
+    let &showbreak='⤷ '
+    set showcmd
+    set showmode
+    set spell spelllang=en_us
+    set equalalways
+    set list
+    set listchars=nbsp:⦸,eol:¬,trail:•,tab:▸\
+    set noshowmatch
+    set foldmethod=syntax
+    set completeopt=menuone,preview,noinsert
+    set splitright
+    set splitbelow
+    set updatetime=500
+    set hidden
+    set mouse=a
+    set background=dark
+    set ts=4 sts=4 sw=4 expandtab
+    set hlsearch
+    set ignorecase
+    set smartcase
+    set incsearch
+    set laststatus=2                                                  " always show status line
+    set lazyredraw                                                    " make the macro go faster
+    set scrolloff=3                                                   " start scrolling 3 lines before edge of view port
+    set visualbell                                                    " set the visual bell so it can be assign a sound
+    set t_vb=                                                         " assign no sound (disable bell)
+    set concealcursor=n                                               " conceal the only on normal mode
+    set wildignore+=*/bin/*,*/obj/*,*/_references/*,*/.svn/*,*/.git/* " ignore folders
+    set wildignore+=*/node_modules/*,*/typings/*,*/bower_components/* " ignore folders
+    set wildignore+=*.exe,*.so,*.dll,*.csproj,*.sln,*.suo             " ignore files
 
-colorscheme base16-ocean
-let base16colorspace=256
-highlight Search guibg=background guifg=#2abcdf gui=underline
-highlight MatchParen guibg=background guifg=#00b400 gui=underline
-highlight Error guibg=background guifg=#c20000
+    colorscheme base16-ocean
+    let base16colorspace=256
+    highlight Search guibg=background guifg=#2abcdf gui=underline
+    highlight MatchParen guibg=background guifg=#00b400 gui=underline
+    highlight Error guibg=background guifg=#c20000
 
-autocmd Filetype gitcommit setlocal spell textwidth=72
-autocmd Filetype tex setlocal textwidth=120
-" }}}
+    autocmd Filetype gitcommit setlocal spell textwidth=72
+    autocmd Filetype tex setlocal textwidth=120
+    " }}}
 
+    " Status Line {{{
+    function! GetStatusLine()
+        if !empty(&buftype)
+            if &buftype ==# 'help'
+                return ' Help'
+            elseif &buftype ==# 'nofile'
+                return ''
+            else
+                return ' %q'
+            endif
+        elseif &paste
+            return 'P'
+        endif
+
+        return ''
+    endfunction
+
+    function! GetModified()
+        if &modified
+            return '*'
+        else
+            return ''
+        endif
+    endfunction
+
+    function! ReadOnly()
+        if &readonly || !&modifiable
+            return ' '
+        else
+            return ''
+        endif
+    endfunction
+
+    function! GetEncoding()
+        if !empty(&fenc)
+            return &fenc
+        else
+            return &enc
+        endif
+    endfunction
+
+    function! GetCurrentFunction()
+        if exists(':Tagbar')
+            return tagbar#currenttag('%s', '')
+        endif
+
+        return ''
+    endfunction
+
+    let &statusline=''
+    let &statusline.='%{GetStatusLine()}'
+    let &statusline.=' '                       " Separator
+    let &statusline.='%<'                      " Truncate
+    let &statusline.='%f'                      " File tail
+    let &statusline.='%('                      " Start of item group
+    let &statusline.='%{GetModified()}'
+    let &statusline.='%{ReadOnly()}'
+    let &statusline.='%w'                      " Show if buffer is a preview item?
+    let &statusline.='%)'                      " End of item group
+
+    let &statusline.='%='                      " Right side of status line
+    let &statusline.=' '                       " Separator
+    let &statusline.='%<'                      " Truncate
+    let &statusline.='%{GetCurrentFunction()}'
+    let &statusline.=' '                       " Separator
+    let &statusline.='Col %-3v'                " Show the virtual column
+    let &statusline.=' '                       " Separator
+    let &statusline.='%0*Ln %-4L'              " Show total lines in the file
+    let &statusline.=' '                       " Separator
+
+    highlight StatusLine guifg=#efefef guibg=#4271ae
+    "}}}
 "}}}
