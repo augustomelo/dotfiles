@@ -1,5 +1,23 @@
 # Neovim
 
+## Index
+* [Editor](#editor)
+    * [Buffer](#buffer)
+    * [Command](#command)
+    * [Diff](#diff)
+    * [General](#general)
+    * [Mark](#mark)
+    * [Search](#search)
+    * [Tab](#tab)
+    * [Window](#windo)
+* [Plugins](#plugins)
+    * [NERDTree](#nerdtree)
+    * [CtrlP](#ctrlp)
+    * [Surround](#surround)
+    * [NERD Commenter](#nerd-commenter)
+    * [TagBard](#tagbar)
+    * [OmniSharp](#omnisharp)
+
 ## Editor
 ### Buffer
 `:b (name|number)` Go to buffer name/number.  
@@ -99,7 +117,7 @@
 `go` Preview.  
 `m` Modify.  
 
-### CTRLP
+### CtrlP
 `c-v` Open on vertical split.  
 `c-z` To mark/unmark multiple files and <c-o> to open them.  
 `c-d` To switch to file name only search instead of full path.  
