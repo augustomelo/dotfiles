@@ -1,6 +1,6 @@
 call GuiWindowMaximized(1)
 
-Guifont DejaVuSansMonoForPowerline NF:h9
+Guifont Consolas:b:h10
 
 highlight Comment gui=none
 highlight String gui=none

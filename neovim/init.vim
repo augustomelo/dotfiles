@@ -43,15 +43,14 @@ call plug#begin()
 
 " Cosmetic {{{
 "Plug 'flazz/vim-colorschemes'
+"Plug 'sotte/presenting.vim'
+"Plug 'tpope/vim-markdown'
+    "" Vim-Markdown Config  {{{
+    "let g:markdown_fenced_languages = ['cs']
+    "" }}}
+
 Plug 'chriskempson/base16-vim'
 Plug 'equalsraf/neovim-gui-shim'
-Plug 'sotte/presenting.vim'
-Plug 'ryanoasis/vim-devicons'
-
-Plug 'tpope/vim-markdown'
-    " Vim-Markdown Config  {{{
-    let g:markdown_fenced_languages = ['cs']
-    " }}}
 " }}}
 
 " Global {{{
@@ -68,7 +67,7 @@ Plug 'ctrlpvim/ctrlp.vim'
                 \ 'prog': 'CtrlPProressStatus',
                 \ }
     let g:ctrlp_custom_ignore = {
-                \ 'dir':  '\v\/(bin|obj|_references|.svn|.git|node_modules|typings|bower_components)',
+                \ 'dir':  '\v\/(bin|obj|Properties|_references|.svn|.git|node_modules|typings|bower_components)',
                 \ 'file': '\v\.(exe|so|dll|csproj|sln|suo)$',
                 \ }
     let g:ctrlp_working_path_mode = 0
@@ -168,8 +167,14 @@ Plug 'scrooloose/nerdtree'
     let g:NERDTreeWinPos = "right"
     let g:NERDTreeDirArrowExpandable = '▸'
     let g:NERDTreeDirArrowCollapsible = '▾'
-    let g:NERDTreeIgnore = ['\.csproj.user$', '\.suo$']
     let g:NERDTreeMapActivateNode = '<Space>'
+    let g:NERDTreeIgnore = [
+                \'\.csproj.user$[[file]]',
+                \'\.suo$[[file]]',
+                \'Properties[[dir]]',
+                \'obj[[dir]]',
+                \'bin[[dir]]'
+                \]
     " }}}
 Plug 'ervandew/supertab'
     " Supertab Config {{{
@@ -288,15 +293,15 @@ call plug#end()
     filetype plugin indent on
     cd ~/workspace
 
-    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1                               " makes the cursor a pipe in insert mode, and a block in normal-mode. Temporary measure
+    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1                   " makes the cursor a pipe in insert mode, and a block in normal-mode. Temporary measure
     set termguicolors
     set cursorline
     set noswapfile
     set number
     set relativenumber
     set linebreak
-    set breakindent                                                   " indent wrapped lines to match start
-    set breakindentopt=shift:2                                        " emphasize broken lines by indenting them
+    set breakindent                                       " indent wrapped lines to match start
+    set breakindentopt=shift:2                            " emphasize broken lines by indenting them
     let &showbreak='⤷ '
     set showcmd
     set showmode
@@ -318,15 +323,17 @@ call plug#end()
     set ignorecase
     set smartcase
     set incsearch
-    set laststatus=2                                                  " always show status line
-    set lazyredraw                                                    " make the macro go faster
-    set scrolloff=3                                                   " start scrolling 3 lines before edge of view port
-    set visualbell                                                    " set the visual bell so it can be assign a sound
-    set t_vb=                                                         " assign no sound (disable bell)
-    set concealcursor=n                                               " conceal the only on normal mode
-    set wildignore+=*/bin/*,*/obj/*,*/_references/*,*/.svn/*,*/.git/* " ignore folders
-    set wildignore+=*/node_modules/*,*/typings/*,*/bower_components/* " ignore folders
-    set wildignore+=*.exe,*.so,*.dll,*.csproj,*.sln,*.suo             " ignore files
+    set laststatus=2                                      " always show status line
+    set lazyredraw                                        " make the macro go faster
+    set scrolloff=3                                       " start scrolling 3 lines before edge of view port
+    set visualbell                                        " set the visual bell so it can be assign a sound
+    set t_vb=                                             " assign no sound (disable bell)
+    set concealcursor=n                                   " conceal the only on normal mode
+    set wildignore+=*/bin/*,*/obj/*                       " ignore files
+    set wildignore+=*/Properties/*,*/_references/*,       " ignore files
+    set wildignore+=*/.svn/*,*/.git/*,*/node_modules/*    " ignore files
+    set wildignore+=*/typings/*,*/bower_components/*      " ignore files
+    set wildignore+=*.exe,*.so,*.dll,*.csproj,*.sln,*.suo " ignore files
 
     colorscheme base16-ocean
     let base16colorspace=256
