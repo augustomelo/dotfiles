@@ -1,4 +1,11 @@
-#Linux Commands
+# Shell
+
+## Index
+* [Commands](#commands)
+* [Terminal](#terminal)
+* [Git](#git)
+
+##Commands
 `netstat -atunp` List all ports TCP/UDP and show numbers and program.  
 `find location comparison-criteria search-term` Find a file on a directory Ex.: `find . -name "test"`.  
 `grep` Find a pattern in data Ex.: `grep -r --include=\*.{cpp,h} 'string'`.  
@@ -7,7 +14,7 @@
 `ntfsfix -bd /dev/sdXX` Fix common errors and forces windows to check NTFS.  
 `fsck /dev/sdXX` Check and repair for a linux file system.  
 
-#Terminal 
+##Terminal
 `Ctrl + a` Go to the beginning of the line.  
 `Ctrl + e` Go to the end of the line.  
 `Ctrl + p` Previous command.  
@@ -19,7 +26,7 @@
 `Alt + b` Back (left) one word.  
 `Alt + f` Forward (right) one word.  
 
-#Git
+##Git
 `git diff --(staged|cached)` Difference between staged area and HEAD.  
 `git checkout <file>` Rollback a file.  
 `git reset HEAD <file>` Undo a file git add.  
