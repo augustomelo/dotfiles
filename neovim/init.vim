@@ -78,6 +78,8 @@ Plug 'ctrlpvim/ctrlp.vim'
         let stLine.=a:item   " The current search mode
         let stLine.='%='     " Right side of status line
         let stLine.='%<'     " Truncate
+        let stLine.=getcwd() " Get working directory
+        let stLine.=' '      " Separator
 
         return stLine
     endf
@@ -85,10 +87,10 @@ Plug 'ctrlpvim/ctrlp.vim'
     function! CtrlPProressStatus(str)
         let stLine=''
         let stLine.=' '      " Separator
-        let stLine.=a:str " Number of files scanned so for
+        let stLine.=a:str    " Number of files scanned so for
         let stLine.='%='     " Right side of status line
         let stLine.='%<'     " Truncate
-        let stLine.=getcwd()
+        let stLine.=getcwd() " Get working directory
         let stLine.=' '      " Separator
 
         return stLine
