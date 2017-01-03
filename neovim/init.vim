@@ -271,6 +271,8 @@ call plug#end()
         nnoremap <silent> gpe :lprev<CR>                                       " go to previous error/warning
         nnoremap <silent> <F4> :e $MYVIMRC<CR>
         nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\v\s+$//e<Bar>:let @/=_s<CR> " Remove all trailing whitespace
+        nnoremap <silent> n :norm! nzz<CR>                                     " Center next match
+        nnoremap <silent> N :norm! nzz<CR>                                     " Center previous match
 
         if has("win32")
             nnoremap <C-h> <C-w>h
