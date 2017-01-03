@@ -93,9 +93,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 
         return stLine
     endf
-
-
-
     " }}}
 Plug 'Valloric/MatchTagAlways'
     " MatchTagAlways Config {{{
@@ -400,7 +397,7 @@ call plug#end()
     let &statusline.='%{GetStatusLine()}'
     let &statusline.=' '                       " Separator
     let &statusline.='%<'                      " Truncate
-    let &statusline.='%f'                      " File tail
+    let &statusline.='%f'                      " Relative path to the file in buffer
     let &statusline.='%('                      " Start of item group
     let &statusline.='%{GetModified()}'
     let &statusline.='%{ReadOnly()}'
