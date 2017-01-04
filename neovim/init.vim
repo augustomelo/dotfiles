@@ -265,14 +265,15 @@ call plug#end()
         nnoremap <C-j> <C-w>j
         nnoremap <C-k> <C-w>k
         nnoremap <C-l> <C-w>l
+        nnoremap n nzz                                                         " center next search
+        nnoremap N Nzz                                                         " center previous search
+        nnoremap * *zz                                                         " center next searched word
+        nnoremap # #zz                                                         " center previous searched word
         nnoremap <silent> gce :ll<CR>                                          " go to current error/warning
         nnoremap <silent> gne :lnext<CR>                                       " go to next error/warning
         nnoremap <silent> gpe :lprev<CR>                                       " go to previous error/warning
         nnoremap <silent> <F4> :e $MYVIMRC<CR>
         nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\v\s+$//e<Bar>:let @/=_s<CR> " Remove all trailing whitespace
-        nnoremap <silent> n :norm! nzz<CR>                                     " Center next match
-        nnoremap <silent> N :norm! nzz<CR>                                     " Center previous match
-
         if has("win32")
             nnoremap <C-h> <C-w>h
             nnoremap <silent> <C-=> :Guifont DejaVuSansMonoForPowerline NF:h17<CR>
