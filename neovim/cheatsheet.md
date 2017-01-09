@@ -85,7 +85,8 @@
 
 ### Search
 `$` End of the line.  
-`@!` Negative assertion.  
+`@!` Negative assertion (lookahead).  
+`@<!` Negative assertion (lookbehind).  
 `\0` Reuse part of the search at the replace.  
 `\z(s|e)` Starts/end match.  
 `\(C|c)` Force case sensitive/insensitive.  
