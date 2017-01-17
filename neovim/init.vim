@@ -17,7 +17,7 @@ call plug#begin()
 "Plug 'tpope/vim-dispatch', {'for': 'cs'}
 
 "Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
-    " Omnisharp {{{
+    " Omnisharp Config {{{
     "let g:Omnisharp_start_server = 0
     "let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
     let g:OmniSharp_selector_ui = 'ctrlp'
@@ -62,6 +62,8 @@ Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 
 Plug 'ctrlpvim/ctrlp.vim'
     " Ctrl-P Config {{{
+    let g:ctrlp_working_path_mode=0
+
     let g:ctrlp_status_func = {
                 \ 'main': 'CtrlPMainStatus',
                 \ 'prog': 'CtrlPProressStatus',
@@ -70,7 +72,6 @@ Plug 'ctrlpvim/ctrlp.vim'
                 \ 'dir':  '\v\/(bin|obj|Properties|_references|.svn|.git|node_modules|typings|bower_components)',
                 \ 'file': '\v\.(exe|so|dll|csproj|sln|suo)$',
                 \ }
-    let g:ctrlp_working_path_mode = 0
 
     function! CtrlPMainStatus(focus, byfname, regex, prev, item, next, marked)
         let stLine=''
@@ -153,6 +154,7 @@ Plug 'neomake/neomake'
     augroup neomake_cs_maker
         au!
         au FileType cs let g:neomake_cs_msbuild_maker = {
+                    \ 'exe': 'C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe',
                     \ 'args': [ '-nologo', '-v:q', '-property:GenerateFullPaths=true' ],
                     \ 'cwd' : FindSLN(),
                     \ 'errorformat': '\ %#%f(%l\\\,%c):\ %m',
