@@ -1,6 +1,6 @@
 call GuiWindowMaximized(1)
 
-Guifont Consolas:b:h10
+Guifont Consolas:b:h9
 
 highlight Comment gui=none
 highlight String gui=none
