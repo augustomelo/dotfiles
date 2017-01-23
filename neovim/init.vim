@@ -276,10 +276,11 @@ call plug#end()
         nnoremap <silent> gpe :lprev<CR>                                       " go to previous error/warning
         nnoremap <silent> <F4> :e $MYVIMRC<CR>
         nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\v\s+$//e<Bar>:let @/=_s<CR> " Remove all trailing whitespace
+
         if has("win32")
             nnoremap <C-h> <C-w>h
-            nnoremap <silent> <C-=> :Guifont DejaVuSansMonoForPowerline NF:h17<CR>
-            nnoremap <silent> <C--> :Guifont DejaVuSansMonoForPowerline NF:h9<CR>
+            nnoremap <silent> <C-=> :Guifont Consolas:b:h17<CR>
+            nnoremap <silent> <C--> :Guifont Consolas:b:h9<CR>
         else
             nnoremap <BS> <C-w>h " workaround issues=2048
         endif
@@ -318,7 +319,6 @@ call plug#end()
     set completeopt=menuone,preview,noinsert
     set splitright
     set splitbelow
-    set updatetime=500
     set hidden
     set mouse=a
     set background=dark
@@ -333,10 +333,10 @@ call plug#end()
     set visualbell                                        " set the visual bell so it can be assign a sound
     set t_vb=                                             " assign no sound (disable bell)
     set concealcursor=n                                   " conceal the only on normal mode
-    set wildignore+=*/bin/*,*/obj/*                       " ignore files
-    set wildignore+=*/Properties/*,*/_references/*,       " ignore files
-    set wildignore+=*/.svn/*,*/.git/*,*/node_modules/*    " ignore files
-    set wildignore+=*/typings/*,*/bower_components/*      " ignore files
+    set wildignore+=*/bin/*,*/obj/*                       " ignore folders
+    set wildignore+=*/Properties/*,*/_references/*,       " ignore folders
+    set wildignore+=*/.svn/*,*/.git/*,*/node_modules/*    " ignore folders
+    set wildignore+=*/typings/*,*/bower_components/*      " ignore folders
     set wildignore+=*.exe,*.so,*.dll,*.csproj,*.sln,*.suo " ignore files
 
     colorscheme base16-ocean
