@@ -55,10 +55,10 @@ Plug 'equalsraf/neovim-gui-shim'
 
 " Global {{{
 Plug 'Raimondi/delimitMate'
-Plug 'Yggdroot/indentLine'
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
+
 
 Plug 'ctrlpvim/ctrlp.vim'
     " Ctrl-P Config {{{
@@ -96,6 +96,10 @@ Plug 'ctrlpvim/ctrlp.vim'
 
         return stLine
     endf
+    " }}}
+Plug 'Yggdroot/indentLine'
+    " indentLine Config {{{
+    "let g:indentLine_fileTypeExclude=['json']
     " }}}
 Plug 'Valloric/MatchTagAlways'
     " MatchTagAlways Config {{{
@@ -295,6 +299,7 @@ call plug#end()
 
     " Settings {{{
     syntax on
+    set synmaxcol=200                                     " do not highlight long lines
     filetype plugin indent on
     cd ~/workspace
 
@@ -332,7 +337,6 @@ call plug#end()
     set scrolloff=3                                       " start scrolling 3 lines before edge of view port
     set visualbell                                        " set the visual bell so it can be assign a sound
     set t_vb=                                             " assign no sound (disable bell)
-    set concealcursor=n                                   " conceal the only on normal mode
     set wildignore+=*/bin/*,*/obj/*                       " ignore folders
     set wildignore+=*/Properties/*,*/_references/*,       " ignore folders
     set wildignore+=*/.svn/*,*/.git/*,*/node_modules/*    " ignore folders

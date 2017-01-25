@@ -70,6 +70,7 @@
 `g+` Go to newer text state on history tree.  
 `g-` Go to older text state on history tree.  
 `:erlier {N}s` Go to the older text state about {N} seconds before.  
+`:syntime` Verify what is taking long to redraw on the syntax.  
 
 ### Mark
 `m(character)` Set a mark to a specific character.  
