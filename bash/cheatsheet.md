@@ -13,6 +13,7 @@
 `optirun -b none nvidia-settings -c :8 run nvidia-settings` Run Nvidia settings.  
 `ntfsfix -bd /dev/sdXX` Fix common errors and forces windows to check NTFS.  
 `fsck /dev/sdXX` Check and repair for a linux file system.  
+`dd if=source of=destination bs=size status=progress` Write the data from the source to the destination, Ex.: `dd if=/dev/zero of=/dev/sdXX bs=1M status=progress`  
 
 ##Terminal
 `Ctrl + a` Go to the beginning of the line.  
