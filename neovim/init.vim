@@ -99,7 +99,7 @@ Plug 'ctrlpvim/ctrlp.vim'
     " }}}
 Plug 'Yggdroot/indentLine'
     " indentLine Config {{{
-    "let g:indentLine_fileTypeExclude=['json']
+    let g:indentLine_fileTypeExclude=['json', 'tex']
     " }}}
 Plug 'Valloric/MatchTagAlways'
     " MatchTagAlways Config {{{
