@@ -8,6 +8,7 @@
     * [General](#general)
     * [Mark](#mark)
     * [Search](#search)
+    * [Spell Checking](#spell-checking)
     * [Tab](#tab)
     * [Window](#windo)
 * [Plugins](#plugins)
@@ -71,6 +72,7 @@
 `g-` Go to older text state on history tree.  
 `:erlier {N}s` Go to the older text state about {N} seconds before.  
 `:syntime` Verify what is taking long to redraw on the syntax.  
+`gqq` Format the current by the text width value.  
 
 ### Mark
 `m(character)` Set a mark to a specific character.  
@@ -95,6 +97,15 @@
 `\l` Lowercase next letter in replacement.  
 `\U` Uppercase replacement from here on (until \e or \E).  
 `\L` Lowercase replacement from here on (until \e or \E).  
+
+### Spell Checking
+`z=` Show a list of suggestions for the word under the cursor.  
+`1z=` Substitute the word under the cursor with the first suggested one.  
+`C-x` Same as z= but in insert mode (after a badly spelled word).
+`zg` Add word under the cursor as good.  
+`zw` Add word under the cursor as bad.  
+`zug` Undo `zg`.  
+`zuw` Undo `zw`.  
 
 ### Tab
 `Gt` Move to the next tab.  
