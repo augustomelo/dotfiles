@@ -6,6 +6,7 @@
     * [Command](#command)
     * [Diff](#diff)
     * [General](#general)
+    * [Macro](#macro)
     * [Mark](#mark)
     * [Search](#search)
     * [Spell Checking](#spell-checking)
@@ -73,6 +74,10 @@
 `:erlier {N}s` Go to the older text state about {N} seconds before.  
 `:syntime` Verify what is taking long to redraw on the syntax.  
 `gqq` Format the current by the text width value.  
+
+### Macro
+`"qp` Paste the contents of the register to the current cursor position.  
+`"qyy` Yank the contests of the line to the register, or can use `let @q='`.  
 
 ### Mark
 `m(character)` Set a mark to a specific character.  
