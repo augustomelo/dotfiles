@@ -58,17 +58,12 @@
 `e!` Restore original file.  
 `c-a` Increment a number.  
 `c-x` Decrement a number.  
-`ZZ` Save and quit.  
 `Y` Yank the whole line .  
-`{1}z=` First suggest correction misspelling.  
 `nvim -u NONE` Start Neovim without configuration.  
 `%:p:h` Expand to full path to the current location.  
 `cc` Display error no quick fix list.  
 `cn` Next occurrence in quick fix list.  
 `cp` Previous occurrence in quick fix list.  
-`ll` Display error on location list.  
-`lN` Next occurrence in location list.  
-`lp` Previous occurrence in location list.  
 `g+` Go to newer text state on history tree.  
 `g-` Go to older text state on history tree.  
 `:erlier {N}s` Go to the older text state about {N} seconds before.  
