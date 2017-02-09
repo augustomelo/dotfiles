@@ -13,10 +13,8 @@
 call plug#begin()
 
 " C# {{{
-"Plug 'oranget/vim-csharp', {'for': 'cs'}
-"Plug 'tpope/vim-dispatch', {'for': 'cs'}
 
-"Plug 'omnisharp/omnisharp-vim', {'for': 'cs'}
+"Plug 'aignas/omnisharp-vim', { 'branch': 'feature/jobstart', 'do': 'msbuild server\OmniSharp.sln', 'for': 'cs' } " Remove when merged
     " Omnisharp Config {{{
     "let g:Omnisharp_start_server = 0
     "let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
@@ -59,7 +57,6 @@ Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 
-
 Plug 'ctrlpvim/ctrlp.vim'
     " Ctrl-P Config {{{
     let g:ctrlp_working_path_mode=0
@@ -97,7 +94,7 @@ Plug 'ctrlpvim/ctrlp.vim'
         return stLine
     endf
     " }}}
-Plug 'Yggdroot/indentLine'
+Plug 'augustomelo/indentLine', { 'branch': 'fix_fileTypeExclude' } " Removed when merged
     " indentLine Config {{{
     let g:indentLine_fileTypeExclude=['json', 'tex']
     " }}}
@@ -111,12 +108,13 @@ Plug 'Valloric/MatchTagAlways'
         \ 'vue': 1,
         \}
     " }}}
-Plug 'neomake/neomake'
+Plug 'augustomelo/neomake', { 'branch': 'msbuild_maker' } " Removed when merged
     " Neomake Config {{{
     "let g:neomake_verbose = 3
     let g:neomake_open_list = 2
     let g:neomake_list_height  = 4
     let g:neomake_javascript_enabled_makers = ['eslint']
+    let g:neomake_cs_enabled_makers = ['msbuild']
     let g:neomake_error_sign = {
                 \ 'text': '✗',
                 \ 'texthl': 'ErrorMsg',
@@ -127,45 +125,6 @@ Plug 'neomake/neomake'
                 \ }
 
     autocmd! BufWritePost * Neomake
-
-    " FUNCTION find *.sln file going up directory
-    function! FindSLN()
-        let dir = expand('%:p:h')
-        let solution_files = ""
-
-        while empty(solution_files)
-            let solution_files = globpath(dir , '*.sln')
-            let lastfolder = dir
-            let dir = fnamemodify(dir, ':h')
-
-            if dir ==# lastfolder
-                break
-            endif
-        endwhile
-
-        if empty(solution_files)
-            let solution_files = ''
-        endif
-
-        let solution_files = lastfolder
-        return solution_files
-    endfunction
-
-    "autocmd FileType cs let &l:makeprg="msbuild " . FindSLN() . " -nologo -v:q -property:GenerateFullPaths=true"
-    "autocmd FileType cs setlocal errorformat=\ %#%f(%l\\\,%c):\ %m
-    "let g:neomake_cs_enabled_makers = []
-
-    augroup neomake_cs_maker
-        au!
-        au FileType cs let g:neomake_cs_msbuild_maker = {
-                    \ 'exe': 'C:\Program Files (x86)\MSBuild\12.0\Bin\MSBuild.exe',
-                    \ 'args': [ '-nologo', '-v:q', '-property:GenerateFullPaths=true' ],
-                    \ 'cwd' : FindSLN(),
-                    \ 'errorformat': '\ %#%f(%l\\\,%c):\ %m',
-                    \ 'append_file' : 0,
-                    \ }
-        au FileType cs let g:neomake_cs_enabled_makers = ['msbuild']
-    augroup END
     " }}}
 Plug 'scrooloose/nerdtree'
     " NERDtree Config {{{
@@ -190,7 +149,7 @@ Plug 'ervandew/supertab'
     autocmd FileType *
                 \ if &omnifunc != '' |
                 \   call SuperTabChain(&omnifunc, "<c-p>") |
-                \ 	call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
+                \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
                 \ endif
     " }}}
 Plug 'majutsushi/tagbar'
@@ -271,15 +230,11 @@ call plug#end()
         nnoremap <C-j> <C-w>j
         nnoremap <C-k> <C-w>k
         nnoremap <C-l> <C-w>l
-        nnoremap n nzz                                                         " center next search
-        nnoremap N Nzz                                                         " center previous search
-        nnoremap * *zz                                                         " center next searched word
-        nnoremap # #zz                                                         " center previous searched word
         nnoremap <silent> gce :ll<CR>                                          " go to current error/warning
         nnoremap <silent> gne :lnext<CR>                                       " go to next error/warning
         nnoremap <silent> gpe :lprev<CR>                                       " go to previous error/warning
         nnoremap <silent> <F4> :e $MYVIMRC<CR>
-        nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\v\s+$//e<Bar>:let @/=_s<CR> " Remove all trailing whitespace
+        nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\v\s+$//e<Bar>:let @/=_s<CR> " remove all trailing whitespace
 
         if has("win32")
             nnoremap <C-h> <C-w>h
