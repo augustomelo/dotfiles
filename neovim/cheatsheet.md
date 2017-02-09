@@ -69,6 +69,8 @@
 `:erlier {N}s` Go to the older text state about {N} seconds before.  
 `:syntime` Verify what is taking long to redraw on the syntax.  
 `gqq` Format the current by the text width value.  
+`redir @{a-Z}` Redirect a command to a register.  
+`redir END` Ends the redirect command.  
 
 ### Macro
 `"qp` Paste the contents of the register to the current cursor position.  
