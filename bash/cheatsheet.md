@@ -14,6 +14,7 @@
 `ntfsfix -bd /dev/sdXX` Fix common errors and forces windows to check NTFS.  
 `fsck /dev/sdXX` Check and repair for a linux file system.  
 `dd if=source of=destination bs=size status=progress` Write the data from the source to the destination, Ex.: `dd if=/dev/zero of=/dev/sdXX bs=1M status=progress`  
+`fuser /dev/sdb` Identify process using files or sockets, Ex.: `fuser -kim /dev/sdb`  
 
 ##Terminal
 `Ctrl + a` Go to the beginning of the line.  
