@@ -13,7 +13,8 @@
 call plug#begin()
 
 " C# {{{
-
+" Remove when merged
+"Plug 'tpope/vim-dispatch'
 "Plug 'aignas/omnisharp-vim', { 'branch': 'feature/jobstart', 'do': 'msbuild server\OmniSharp.sln', 'for': 'cs' } " Remove when merged
     " Omnisharp Config {{{
     "let g:Omnisharp_start_server = 0
@@ -108,15 +109,16 @@ Plug 'Valloric/MatchTagAlways'
         \ 'vue': 1,
         \}
     " }}}
-Plug 'augustomelo/neomake', { 'branch': 'msbuild_maker' } " Removed when merged
+Plug 'neomake/neomake'
     " Neomake Config {{{
     "let g:neomake_verbose = 3
+
     let g:neomake_open_list = 2
     let g:neomake_list_height  = 4
     let g:neomake_javascript_enabled_makers = ['eslint']
     let g:neomake_cs_enabled_makers = ['msbuild']
     let g:neomake_error_sign = {
-                \ 'text': '✗',
+                \ 'text': 'X',
                 \ 'texthl': 'ErrorMsg',
                 \ }
     let g:neomake_warning_sign = {
@@ -335,7 +337,7 @@ call plug#end()
 
     function! ReadOnly()
         if &readonly || !&modifiable
-            return ' '
+            return ' Read only'
         else
             return ''
         endif
