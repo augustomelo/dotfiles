@@ -22,21 +22,15 @@
 
 ## Editor
 ### Buffer
-`:b (name|number)` Go to buffer name/number.  
 `:bn` Next buffer.  
 `:bp` Previous buffer.  
-`:bd` Buffer delete.  
 `:bw` Wipe buffer.  
-`:bufdo (command)` Runs a coomand on all buffers.  
+`:bufdo (command)` Runs a command on all buffers.  
 `:.+,$bwipeout` Wipe all buffers except the current one.  
-`c-^` Previous buffer (cycle between 2).  
 
 ### Command
 `q:` Command window history.  
 `q\` Search window history.  
-`c-f` Bring a history of every command.  
-`c-p` Previous command.  
-`c-n` Next command.  
 
 ### Diff
 `:diffsplit (filename)` Diff current and the newly opened filename.  
@@ -44,7 +38,6 @@
 `:diffoff` Turn off diff.  
 
 ### Fold
-`za` Toggle current fold open/close.  
 `zc` Close current fold.  
 `zM` Close all folds.  
 `zR` Open all folds.  
@@ -52,18 +45,13 @@
 
 ### General
 `:norm (command)` Execute a normal mode command.  
-`:retab` Can be use to convert spaces to tab and vice versa.  
+`:retab!` Can be use to convert spaces to tab and vice versa.  
 `:sort` Sort lines.  
-`:vim[grep][!] /{pattern}/[g][j] {file}` Search a pattern in a file.  
+`:vim[grep][!] /{pattern}/[g][j] {dir}` Search a pattern in files across the directories.  
 `e!` Restore original file.  
 `c-a` Increment a number.  
 `c-x` Decrement a number.  
-`Y` Yank the whole line .  
 `nvim -u NONE` Start Neovim without configuration.  
-`%:p:h` Expand to full path to the current location.  
-`cc` Display error no quick fix list.  
-`cn` Next occurrence in quick fix list.  
-`cp` Previous occurrence in quick fix list.  
 `g+` Go to newer text state on history tree.  
 `g-` Go to older text state on history tree.  
 `:erlier {N}s` Go to the older text state about {N} seconds before.  
@@ -83,8 +71,6 @@
 
 ### Movement
 `gJ` Concatenate lines without space.  
-`c-o` Jump back to previous location.  
-`c-i` Jump to newer location.  
 `g;` Move back the change list.  
 `g,` Move forwards the change list.  
 `[m` Go to previous start of method.  
@@ -103,7 +89,6 @@
 
 ### Spell Checking
 `z=` Show a list of suggestions for the word under the cursor.  
-`1z=` Substitute the word under the cursor with the first suggested one.  
 `C-x` Same as z= but in insert mode (after a badly spelled word).
 `zg` Add word under the cursor as good.  
 `zw` Add word under the cursor as bad.  
@@ -116,10 +101,9 @@
 `#gt` Move to tab number.  
 
 ### Window
-`c-w |` Set current window width to N (default: highest possible).  
 `c-w _` Set current window height to N (default: highest possible).  
 `c-w t c-w H` Horizontally to vertically.  
-`c-w x` Exchange current window with its neighbour.  
+`c-w x` Exchange current window with its neighbor.  
 `c-w T` Move current split window into its own tab.  
 
 ## Plugins
