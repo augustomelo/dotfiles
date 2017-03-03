@@ -54,12 +54,12 @@ goto case_%option%
     %userprofile%\vimfiles\autoload\plug.vim
     echo Done!
 
-    echo Creating a link to the file .vimrc!
-    mklink .vimrc %userprofile%\workspace\dotfiles\vim\.vimrc
+    echo Creating a link to the file vimrc!
+    mklink .vimrc %userprofile%\workspace\dotfiles\vim\vimrc
     echo Done!
 
-    echo Creating a link to the file .gvimrc!
-    mklink .gvimrc %userprofile%\workspace\dotfiles\vim\.gvimrc
+    echo Creating a link to the file gvimrc!
+    mklink .gvimrc %userprofile%\workspace\dotfiles\vim\gvimrc
     echo Done!
 
     goto end_switch
@@ -71,8 +71,8 @@ pause
 :check_Permission
 net session>nul 2>&1
 if %errorLevel% NEQ 0 (
-	echo Admin permission is required!
-	pause
+    echo Admin permission is required!
+    pause
     exit
 )
 goto:eof

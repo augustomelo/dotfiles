@@ -16,7 +16,7 @@ read option
 case "$option" in
     1)
         echo "Creating link bashrc"
-        ln -s "$(pwd)/bash/.bashrc" ~/.bashrc
+        ln -s "$(pwd)/bash/bashrc" ~/.bashrc
         echo "Done!"
         ;;
 
@@ -76,8 +76,8 @@ case "$option" in
                 https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         echo "Done!"
 
-        echo "Creating link to .vimrc"
-        ln -s "$(pwd)/vim/.vimrc" ~/.vimrc
+        echo "Creating link to vimrc"
+        ln -s "$(pwd)/vim/vimrc" ~/.vimrc
         echo "Done!"
 
         ;;
@@ -96,12 +96,12 @@ case "$option" in
                 https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         echo "Done!"
 
-        echo "Creating link to .vimrc"
-        ln -s "$(pwd)/vim/.vimrc" ~/.vimrc
+        echo "Creating link to vimrc"
+        ln -s "$(pwd)/vim/vimrc" ~/.vimrc
         echo "Done!"
 
-        echo "Creating link to .gvimrc"
-        ln -s "$(pwd)/vim/.gvimrc" ~/.gvimrc
+        echo "Creating link to gvimrc"
+        ln -s "$(pwd)/vim/gvimrc" ~/.gvimrc
         echo "Done!"
         ;;
 esac
