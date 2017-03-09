@@ -15,7 +15,7 @@ call plug#begin()
 " C# {{{
 " Remove when merged
 "Plug 'tpope/vim-dispatch'
-"Plug 'aignas/omnisharp-vim', { 'branch': 'feature/jobstart', 'do': 'msbuild server\OmniSharp.sln', 'for': 'cs' } " Remove when merged
+"Plug 'OmniSharp/omnisharp-vim', { \'for': 'cs', \'do': 'msbuild -nologo -v:q server\OmniSharp.sln' }
     " Omnisharp Config {{{
     "let g:Omnisharp_start_server = 0
     "let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
@@ -194,6 +194,7 @@ call plug#end()
         " Command {{{
         cnoremap <C-a> <Home>
         cnoremap <C-e> <End>
+        cnoremap w!! w !sudo tee % > /dev/null
         " }}}
 
         " Leader {{{
