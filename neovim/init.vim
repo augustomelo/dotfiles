@@ -13,7 +13,6 @@
 call plug#begin()
 
 " C# {{{
-" Remove when merged
 "Plug 'tpope/vim-dispatch'
 "Plug 'OmniSharp/omnisharp-vim', { \'for': 'cs', \'do': 'msbuild -nologo -v:q server\OmniSharp.sln' }
     " Omnisharp Config {{{
@@ -41,15 +40,14 @@ call plug#begin()
 " }}}
 
 " Cosmetic {{{
-"Plug 'flazz/vim-colorschemes'
-"Plug 'sotte/presenting.vim'
+Plug 'chriskempson/base16-vim'
+Plug 'equalsraf/neovim-gui-shim'
 "Plug 'tpope/vim-markdown'
     "" Vim-Markdown Config  {{{
     "let g:markdown_fenced_languages = ['cs']
     "" }}}
-
-Plug 'chriskempson/base16-vim'
-Plug 'equalsraf/neovim-gui-shim'
+"Plug 'flazz/vim-colorschemes'
+"Plug 'sotte/presenting.vim'
 " }}}
 
 " Global {{{
@@ -164,11 +162,12 @@ Plug 'alvan/vim-closetag'
     " Closetag Config {{{
     let g:closetag_filenames = "*.html,*.xml,*.ts,*.vue"
     " }}}
-Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'garbas/vim-snipmate'
-    " SnipMate Config {{{
-    let g:snipMate = get(g:, 'snipMate', {}) " Allow for vimrc re-sourcing
-    let g:snipMate.scope_aliases = {}
-    let g:snipMate.scope_aliases['vue'] = 'html,javascript,sass,css'
+"Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
+Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'augustomelo/vim-snippets', {'branch': 'cs-update'} | Plug 'SirVer/ultisnips' " Remove when merged
+    " UltiSnips Config {{{
+    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsJumpForwardTrigger="<tab>"
+    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
     " }}}
 " }}}
 
@@ -195,6 +194,13 @@ call plug#end()
         cnoremap <C-a> <Home>
         cnoremap <C-e> <End>
         cnoremap w!! w !sudo tee % > /dev/null
+        " }}}
+
+        " Insert {{{
+        inoremap <C-h> <Left>
+        inoremap <C-j> <Down>
+        inoremap <C-k> <Up>
+        inoremap <C-l> <Right>
         " }}}
 
         " Leader {{{
