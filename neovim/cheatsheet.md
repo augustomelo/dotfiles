@@ -74,6 +74,7 @@
 `g;` Move back the change list.  
 `g,` Move forwards the change list.  
 `[m` Go to previous start of method.  
+`[{` Go to previous unmatched `{`.  
 
 ### Search
 `$` End of the line.  
