@@ -14,7 +14,7 @@ call plug#begin()
 
 " C# {{{
 "Plug 'tpope/vim-dispatch'
-"Plug 'OmniSharp/omnisharp-vim', { \'for': 'cs', \'do': 'msbuild -nologo -v:q server\OmniSharp.sln' }
+"Plug 'OmniSharp/omnisharp-vim', { 'for': 'cs', 'do': 'msbuild -nologo -v:q server\OmniSharp.sln' }
     " Omnisharp Config {{{
     "let g:Omnisharp_start_server = 0
     "let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
@@ -52,6 +52,7 @@ Plug 'equalsraf/neovim-gui-shim'
 
 " Global {{{
 Plug 'Raimondi/delimitMate'
+Plug 'Konfekt/FastFold'
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
@@ -162,12 +163,13 @@ Plug 'alvan/vim-closetag'
     " Closetag Config {{{
     let g:closetag_filenames = "*.html,*.xml,*.ts,*.vue"
     " }}}
-"Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
-Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'augustomelo/vim-snippets', {'branch': 'cs-update'} | Plug 'SirVer/ultisnips' " Remove when merged
+Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
     " UltiSnips Config {{{
+    let g:UltiSnipsEnableSnipMate=0
     let g:UltiSnipsExpandTrigger="<tab>"
     let g:UltiSnipsJumpForwardTrigger="<tab>"
     let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+    let g:UltiSnipsEditSplit="vertical"
     " }}}
 " }}}
 
@@ -315,6 +317,12 @@ call plug#end()
 
     autocmd Filetype gitcommit setlocal spell textwidth=72
     autocmd Filetype tex setlocal textwidth=120
+
+    if has("win32")
+        let g:python_host_prog='C:\Python27\python.exe'
+        let g:python3_host_prog='C:\Users\augusto.melo\AppData\Local\Programs\Python\Python35-32\python3.exe'
+    endif
+
     " }}}
 
     " Status Line {{{
