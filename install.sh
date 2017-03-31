@@ -3,11 +3,12 @@ echo
 echo "****************************************************"
 echo "*-----------Linux Configuration Installer----------*"
 echo "* Choose one of the following options:             *"
-echo "*    1- Bashrc                                     *"
-echo "*    2- Neovim                                     *"
-echo "*    3- Neovim-QT                                  *"
-echo "*    4- Vim                                        *"
-echo "*    5- GVim                                       *"
+echo "*    1- Zsh                                        *"
+echo "*    2- Bashrc                                     *"
+echo "*    3- Neovim                                     *"
+echo "*    4- Neovim-QT                                  *"
+echo "*    5- Vim                                        *"
+echo "*    6- GVim                                       *"
 echo "****************************************************"
 echo
 
@@ -15,12 +16,18 @@ read option
 
 case "$option" in
     1)
+        echo "Creating link zshrc"
+        ln -s "$(pwd)/zsh/zshrc" ~/.zshrc
+        echo "Done!"
+        ;;
+
+    2)
         echo "Creating link bashrc"
         ln -s "$(pwd)/bash/bashrc" ~/.bashrc
         echo "Done!"
         ;;
 
-    2)
+    3)
         echo "Creating nvim folder under config"
         mkdir ~/.config/nvim
         echo "Done!"
@@ -39,7 +46,7 @@ case "$option" in
         echo "Done!"
         ;;
 
-    3)
+    4)
         echo "Creating nvim folder under config"
         mkdir ~/.config/nvim
         echo "Done!"
@@ -62,7 +69,7 @@ case "$option" in
         echo "Done!"
         ;;
 
-    4)
+    5)
         echo "Creating .vim folder under home"
         mkdir ~/.vim
         echo "Done!"
@@ -82,7 +89,7 @@ case "$option" in
 
         ;;
 
-    5)
+    6)
         echo "Creating .vim folder under home"
         mkdir ~/.vim
         echo "Done!"

@@ -13,9 +13,8 @@
 call plug#begin()
 
 " C# {{{
-" Remove when merged
 "Plug 'tpope/vim-dispatch'
-"Plug 'OmniSharp/omnisharp-vim', { \'for': 'cs', \'do': 'msbuild -nologo -v:q server\OmniSharp.sln' }
+"Plug 'OmniSharp/omnisharp-vim', { 'for': 'cs', 'do': 'msbuild -nologo -v:q server\OmniSharp.sln' }
     " Omnisharp Config {{{
     "let g:Omnisharp_start_server = 0
     "let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
@@ -41,19 +40,19 @@ call plug#begin()
 " }}}
 
 " Cosmetic {{{
-"Plug 'flazz/vim-colorschemes'
-"Plug 'sotte/presenting.vim'
+Plug 'chriskempson/base16-vim'
+Plug 'equalsraf/neovim-gui-shim'
 "Plug 'tpope/vim-markdown'
     "" Vim-Markdown Config  {{{
     "let g:markdown_fenced_languages = ['cs']
     "" }}}
-
-Plug 'chriskempson/base16-vim'
-Plug 'equalsraf/neovim-gui-shim'
+"Plug 'flazz/vim-colorschemes'
+"Plug 'sotte/presenting.vim'
 " }}}
 
 " Global {{{
 Plug 'Raimondi/delimitMate'
+Plug 'Konfekt/FastFold'
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
@@ -164,11 +163,13 @@ Plug 'alvan/vim-closetag'
     " Closetag Config {{{
     let g:closetag_filenames = "*.html,*.xml,*.ts,*.vue"
     " }}}
-Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'garbas/vim-snipmate'
-    " SnipMate Config {{{
-    let g:snipMate = get(g:, 'snipMate', {}) " Allow for vimrc re-sourcing
-    let g:snipMate.scope_aliases = {}
-    let g:snipMate.scope_aliases['vue'] = 'html,javascript,sass,css'
+Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
+    " UltiSnips Config {{{
+    let g:UltiSnipsEnableSnipMate=0
+    let g:UltiSnipsExpandTrigger="<tab>"
+    let g:UltiSnipsJumpForwardTrigger="<tab>"
+    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+    let g:UltiSnipsEditSplit="vertical"
     " }}}
 " }}}
 
@@ -195,6 +196,13 @@ call plug#end()
         cnoremap <C-a> <Home>
         cnoremap <C-e> <End>
         cnoremap w!! w !sudo tee % > /dev/null
+        " }}}
+
+        " Insert {{{
+        inoremap <C-h> <Left>
+        inoremap <C-j> <Down>
+        inoremap <C-k> <Up>
+        inoremap <C-l> <Right>
         " }}}
 
         " Leader {{{
@@ -309,6 +317,12 @@ call plug#end()
 
     autocmd Filetype gitcommit setlocal spell textwidth=72
     autocmd Filetype tex setlocal textwidth=120
+
+    if has("win32")
+        let g:python_host_prog='C:\Python27\python.exe'
+        let g:python3_host_prog='C:\Users\augusto.melo\AppData\Local\Programs\Python\Python35-32\python3.exe'
+    endif
+
     " }}}
 
     " Status Line {{{
