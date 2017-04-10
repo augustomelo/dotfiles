@@ -41,14 +41,14 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 alias ls='ls --color=auto'
 
 ## xrandr
-alias moHdmiPLeft='xrandr --output HDMI1 --auto --primary --left-of eDP1 --output eDP1 --auto'
-alias moEDPPLeft='xrandr --output eDP1 --auto --primary --left-of HDM1 --output HDM1 --auto'
-alias moHdmiPRight='xrandr --output HDMI1 --auto --primary --right-of eDP1 --output eDP1 --auto'
-alias moEDPPRight='xrandr --output eDP1 --auto --primary --right-of HDMI1 --output HDMI1 --auto'
-alias moHdmiPClone='xrandr --output HDMI1 --auto --primary --same-as eDP1 --output eDP1 --auto'
-alias moEDPPClone='xrandr --output eDP1 --auto --primary --same-as HDMI1 --output HDMI1 --auto'
-alias moHdmiOnly='xrandr --output HDMI1 --auto --primary --output eDP1 --off'
-alias moEDPOnly='xrandr --output eDP1 --auto --primary --output HDM1 --off'
+alias moHdmiPLeft='xrandr --output HDMI-1 --auto --primary --left-of eDP-1 --output eDP-1 --auto'
+alias moEdpPLeft='xrandr --output eDP-1 --auto --primary --left-of HDM1 --output HDM1 --auto'
+alias moHdmiPRight='xrandr --output HDMI-1 --auto --primary --right-of eDP-1 --output eDP-1 --auto'
+alias moEdpPRight='xrandr --output eDP-1 --auto --primary --right-of HDMI-1 --output HDMI-1 --auto'
+alias moHdmiPClone='xrandr --output HDMI-1 --auto --primary --same-as eDP-1 --output eDP-1 --auto'
+alias moEdpPClone='xrandr --output eDP-1 --auto --primary --same-as HDMI-1 --output HDMI-1 --auto'
+alias moHdmiOnly='xrandr --output HDMI-1 --auto --primary --output eDP-1 --off'
+alias moEdPonly='xrandr --output eDP-1 --auto --primary --output HDM1 --off'
 
 # Prompt configuration
 setopt PROMPT_SUBST

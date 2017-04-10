@@ -321,6 +321,9 @@ call plug#end()
     if has("win32")
         let g:python_host_prog='C:\Python27\python.exe'
         let g:python3_host_prog='C:\Users\augusto.melo\AppData\Local\Programs\Python\Python35-32\python3.exe'
+    else
+        let g:python_host_prog='/usr/bin/python2'
+        let g:python3_host_prog='/usr/bin/python3.6'
     endif
 
     " }}}
