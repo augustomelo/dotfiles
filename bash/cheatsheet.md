@@ -5,7 +5,7 @@
 * [Terminal](#terminal)
 * [Git](#git)
 
-##Commands
+## Commands
 `netstat -atunp` List all ports TCP/UDP and show numbers and program.  
 `find location comparison-criteria search-term` Find a file on a directory Ex.: `find . -name "test"`.  
 `grep` Find a pattern in data Ex.: `grep -r --include=\*.{cpp,h} 'string'`.  
@@ -16,7 +16,7 @@
 `dd if=source of=destination bs=size status=progress` Write the data from the source to the destination, Ex.: `dd if=/dev/zero of=/dev/sdXX bs=1M status=progress`  
 `fuser /dev/sdb` Identify process using files or sockets, Ex.: `fuser -kim /dev/sdb`  
 
-##Terminal
+## Terminal
 `Ctrl + a` Go to the beginning of the line.  
 `Ctrl + e` Go to the end of the line.  
 `Ctrl + p` Previous command.  
@@ -28,7 +28,7 @@
 `Alt + b` Back (left) one word.  
 `Alt + f` Forward (right) one word.  
 
-##Git
+## Git
 `git diff --(staged|cached)` Difference between staged area and HEAD.  
 `git checkout <file>` Rollback a file.  
 `git reset HEAD <file>` Undo a file git add.  
