@@ -5,10 +5,11 @@ echo "*-----------Linux Configuration Installer----------*"
 echo "* Choose one of the following options:             *"
 echo "*    1- Zsh                                        *"
 echo "*    2- Bashrc                                     *"
-echo "*    3- Neovim                                     *"
-echo "*    4- Neovim-QT                                  *"
-echo "*    5- Vim                                        *"
-echo "*    6- GVim                                       *"
+echo "*    3- tmux                                       *"
+echo "*    4- Neovim                                     *"
+echo "*    5- Neovim-QT                                  *"
+echo "*    6- Vim                                        *"
+echo "*    7- GVim                                       *"
 echo "****************************************************"
 echo
 
@@ -28,6 +29,12 @@ case "$option" in
         ;;
 
     3)
+        echo "Creating link tmux.conf"
+        ln -s "$(pwd)/tmux/tmux.conf" ~/.tmux.conf
+        echo "Done!"
+        ;;
+
+    4)
         echo "Creating nvim folder under config"
         mkdir ~/.config/nvim
         echo "Done!"
@@ -46,7 +53,7 @@ case "$option" in
         echo "Done!"
         ;;
 
-    4)
+    5)
         echo "Creating nvim folder under config"
         mkdir ~/.config/nvim
         echo "Done!"
@@ -69,7 +76,7 @@ case "$option" in
         echo "Done!"
         ;;
 
-    5)
+    6)
         echo "Creating .vim folder under home"
         mkdir ~/.vim
         echo "Done!"
@@ -89,7 +96,7 @@ case "$option" in
 
         ;;
 
-    6)
+    7)
         echo "Creating .vim folder under home"
         mkdir ~/.vim
         echo "Done!"
