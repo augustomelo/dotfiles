@@ -60,6 +60,7 @@
 `redir @{a-Z}` Redirect a command to a register.  
 `redir END` Ends the redirect command.  
 `uniq()` Remove equals entries, Ex.: `:1,$!uniq`  
+`C-v u1234` Inserts a unicode character  
 
 ### Macro
 `"qp` Paste the contents of the register to the current cursor position.  
