@@ -103,9 +103,11 @@
 `#gt` Move to tab number.  
 
 ### Window
-`c-w _` Set current window height to N (default: highest possible).  
-`c-w t c-w H` Horizontally to vertically.  
+`c-w _` Set current window to the max height.  
+`c-w |` Set current window to the max width.  
+`c-w [HJKL]` Move window to the position.  
 `c-w x` Exchange current window with its neighbor.  
+`c-w r` Rotate all windows.  
 `c-w T` Move current split window into its own tab.  
 
 ## Plugins
@@ -127,7 +129,7 @@
 
 ### Surround
 `cs<from><to>` Change surround from to (remember t stands for tag).  
-`ds<>` Delete surround.  
+
 `ys<text object, movement>` Insert surround.  
 `S` on visual mode will insert the surrounding.  
 
