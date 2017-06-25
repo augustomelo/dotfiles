@@ -7,10 +7,4 @@ configurations is through the install scripts
 ./install.sh
 
 ## Windows
-
-
-## Linux
-./install.sh
-
-## Windows
 Run as admin install.bat
