@@ -18,24 +18,24 @@ call plug#begin()
     " Omnisharp Config {{{
     "let g:Omnisharp_start_server = 0
     "let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-    let g:OmniSharp_selector_ui = 'ctrlp'
-    let g:OmniSharp_timeout = 1
-    augroup omnisharp_commands
-        autocmd!
+    "let g:OmniSharp_selector_ui = 'ctrlp'
+    "let g:OmniSharp_timeout = 1
+    "augroup omnisharp_commands
+        "autocmd!
 
-        autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-        "autocmd TextChanged,InsertLeave *.cs SyntasticCheck
-        "autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+        "autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+        ""autocmd TextChanged,InsertLeave *.cs SyntasticCheck
+        ""autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
 
-        autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
-        autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr> :OmniSharpFixUsings<cr>
-        autocmd FileType cs nnoremap <Leader>dc :OmniSharpDocumentation<cr>
-        autocmd FileType cs nnoremap <F2> :OmniSharpRename<cr>
-        autocmd FileType cs nnoremap <Leader><Space> :OmniSharpGetCodeActions<cr>
-        "navigate up/down by method/property/field
-        "autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
-        "autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
-    augroup END
+        "autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
+        "autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr> :OmniSharpFixUsings<cr>
+        "autocmd FileType cs nnoremap <Leader>dc :OmniSharpDocumentation<cr>
+        "autocmd FileType cs nnoremap <F2> :OmniSharpRename<cr>
+        "autocmd FileType cs nnoremap <Leader><Space> :OmniSharpGetCodeActions<cr>
+        ""navigate up/down by method/property/field
+        ""autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
+        ""autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
+    "augroup END
     " }}}
 " }}}
 
@@ -269,7 +269,7 @@ call plug#end()
     filetype plugin indent on
     cd ~/workspace
 
-    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1                   " makes the cursor a pipe in insert mode, and a block in normal-mode. Temporary measure
+    set guicursor                                        " makes the cursor a pipe in insert mode, and a block in normal-mode. Temporary measure
     set termguicolors
     set cursorline
     set noswapfile
@@ -319,8 +319,8 @@ call plug#end()
     autocmd Filetype tex setlocal textwidth=120
 
     if has("win32")
-        let g:python_host_prog='C:\Python27\python.exe'
-        let g:python3_host_prog='C:\Users\augusto.melo\AppData\Local\Programs\Python\Python35-32\python3.exe'
+        let g:python_host_prog='C:\Users\augusto.melo\Envs\neovim\Scripts\python.exe'
+        let g:python3_host_prog='C:\Users\augusto.melo\Envs\neovim3\Scripts\python.exe'
     else
         let g:python_host_prog='/usr/bin/python2'
         let g:python3_host_prog='/usr/bin/python3.6'
