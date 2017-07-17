@@ -12,30 +12,15 @@
 " Plugins {{{
 call plug#begin()
 
-" C# {{{
-"Plug 'tpope/vim-dispatch'
-"Plug 'OmniSharp/omnisharp-vim', { 'for': 'cs', 'do': 'msbuild -nologo -v:q server\OmniSharp.sln' }
-    " Omnisharp Config {{{
-    "let g:Omnisharp_start_server = 0
-    "let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-    "let g:OmniSharp_selector_ui = 'ctrlp'
-    "let g:OmniSharp_timeout = 1
-    "augroup omnisharp_commands
-        "autocmd!
+" Languages {{{
 
-        "autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-        ""autocmd TextChanged,InsertLeave *.cs SyntasticCheck
-        ""autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+    " C# {{{
+    "Plug 'tpope/vim-dispatch'
+    "Plug 'OmniSharp/omnisharp-vim', { 'for': 'cs', 'do': 'msbuild -nologo -v:q server\OmniSharp.sln' }
+    " }}}
 
-        "autocmd FileType cs nnoremap <F12> :OmniSharpGotoDefinition<cr>
-        "autocmd FileType cs nnoremap <S-A-F10>  :OmniSharpFixIssue<cr> :OmniSharpFixUsings<cr>
-        "autocmd FileType cs nnoremap <Leader>dc :OmniSharpDocumentation<cr>
-        "autocmd FileType cs nnoremap <F2> :OmniSharpRename<cr>
-        "autocmd FileType cs nnoremap <Leader><Space> :OmniSharpGetCodeActions<cr>
-        ""navigate up/down by method/property/field
-        ""autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
-        ""autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
-    "augroup END
+    " PHP {{{
+    "Plug 'StanAngeloff/php.vim'
     " }}}
 " }}}
 
@@ -114,8 +99,6 @@ Plug 'neomake/neomake'
 
     let g:neomake_open_list = 2
     let g:neomake_list_height  = 4
-    let g:neomake_javascript_enabled_makers = ['eslint']
-    let g:neomake_cs_enabled_makers = ['msbuild']
     let g:neomake_error_sign = {
                 \ 'text': 'X',
                 \ 'texthl': 'ErrorMsg',
@@ -124,6 +107,10 @@ Plug 'neomake/neomake'
                 \ 'text': '!',
                 \ 'texthl': 'WarningMsg',
                 \ }
+
+    let g:neomake_javascript_enabled_makers = ['eslint']
+    let g:neomake_cs_enabled_makers = ['msbuild']
+    let g:neomake_php_enabled_makers = ['php']
 
     autocmd! BufWritePost * Neomake
     " }}}
@@ -284,7 +271,7 @@ call plug#end()
     set spell spelllang=en_us
     set equalalways
     set list
-    set listchars=nbsp:⦸,eol:¬,trail:•,tab:▸\
+    set listchars=tab:»\ ,nbsp:⦸,eol:¬,trail:•,
     set noshowmatch
     set foldmethod=syntax
     set completeopt=menuone,preview,noinsert
