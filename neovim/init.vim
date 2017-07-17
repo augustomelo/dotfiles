@@ -26,6 +26,12 @@ call plug#begin()
 
 " Cosmetic {{{
 Plug 'chriskempson/base16-vim'
+Plug 'vimwiki/vimwiki'
+if has("win32")
+  let g:vimwiki_list = [{'path': 'C:\Users\augusto.melo\util\wiki', 'path_html': 'C:\Users\augusto.melo\util\wiki\html'}]
+else
+  let g:vimwiki_list = [{'path': '~\util\wiki', 'path_html': '~\util\wiki\html'}]
+endif
 "Plug 'tpope/vim-markdown'
     "" Vim-Markdown Config  {{{
     "let g:markdown_fenced_languages = ['cs']
