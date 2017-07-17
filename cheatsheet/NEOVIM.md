@@ -8,6 +8,7 @@
     * [General](#general)
     * [Macro](#macro)
     * [Mark](#mark)
+    * [Movement](#moviment)
     * [Search](#search)
     * [Spell Checking](#spell-checking)
     * [Tab](#tab)
