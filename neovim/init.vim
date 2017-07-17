@@ -26,7 +26,6 @@ call plug#begin()
 
 " Cosmetic {{{
 Plug 'chriskempson/base16-vim'
-Plug 'equalsraf/neovim-gui-shim'
 "Plug 'tpope/vim-markdown'
     "" Vim-Markdown Config  {{{
     "let g:markdown_fenced_languages = ['cs']
