@@ -1,10 +1,4 @@
-" Plugins {{{
-call plug#begin()
-	Plug 'equalsraf/neovim-gui-shim'
-call plug#end()
-" }}}
-
-" Configu {{{
+" Config {{{
 call GuiWindowMaximized(1)
 Guifont Consolas:b:h9
 " }}}

@@ -13,7 +13,6 @@
 call plug#begin()
 
 " Languages {{{
-
     " C# {{{
     "Plug 'tpope/vim-dispatch'
     "Plug 'OmniSharp/omnisharp-vim', { 'for': 'cs', 'do': 'msbuild -nologo -v:q server\OmniSharp.sln' }
@@ -26,6 +25,7 @@ call plug#begin()
 
 " Cosmetic {{{
 Plug 'chriskempson/base16-vim'
+Plug 'equalsraf/neovim-gui-shim'
 Plug 'vimwiki/vimwiki'
 if has("win32")
   let g:vimwiki_list = [{'path': 'C:\Users\augusto.melo\util\wiki', 'path_html': 'C:\Users\augusto.melo\util\wiki\html'}]
