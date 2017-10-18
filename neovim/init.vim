@@ -57,7 +57,7 @@ Plug 'ctrlpvim/ctrlp.vim'
                 \ }
     let g:ctrlp_custom_ignore = {
                 \ 'dir':  '\v\/(bin|obj|Properties|_references|.svn|.git|node_modules|typings|bower_components)',
-                \ 'file': '\v\.(exe|so|dll|csproj|sln|suo)$',
+                \ 'file': '\v\.(exe|so|dll|csproj|sln|suo|class)$',
                 \ }
 
     function! CtrlPMainStatus(focus, byfname, regex, prev, item, next, marked)
@@ -182,6 +182,12 @@ call plug#end()
     cabbrev sb vert sb
     " }}}
 
+    " Autocommands {{{
+    autocmd Filetype gitcommit setlocal spell textwidth=72
+    autocmd Filetype tex setlocal textwidth=120
+    autocmd BufEnter * call DetectIndentation()
+    " }}}
+
     " Bindings {{{
 
         " Command {{{
@@ -233,6 +239,8 @@ call plug#end()
         nnoremap <C-j> <C-w>j
         nnoremap <C-k> <C-w>k
         nnoremap <C-l> <C-w>l
+        nnoremap <C-Tab> gt
+        nnoremap <C-S-Tab> gT
         nnoremap <silent> gce :ll<CR>                                          " go to current error/warning
         nnoremap <silent> gne :lnext<CR>                                       " go to next error/warning
         nnoremap <silent> gpe :lprev<CR>                                       " go to previous error/warning
@@ -253,6 +261,29 @@ call plug#end()
         vnoremap / /\v
         " }}}
 
+    " }}}
+
+    " Functions GetIndentation {{{
+    function SearchPattern(pattern)
+        return search(a:pattern, 'Wnc', 0, 20) > 0 || search(a:pattern, 'Wnb', 0, 20) > 0
+    endfunction
+
+    " This functions are inspired in this plugin:
+    " https://github.com/luochen1990/indent-detector.vim
+    function DetectIndentation()
+        if &readonly == 0
+            let leadTab = SearchPattern('^\t')
+            let leadSpace = SearchPattern('^ ')
+
+            if leadTab && leadSpace
+                set noexpandtab
+            elseif leadTab
+                set noexpandtab
+            else
+                set expandtab
+            endif
+        endif
+    endfunction
     " }}}
 
     " Settings {{{
@@ -285,7 +316,7 @@ call plug#end()
     set hidden
     set mouse=a
     set background=dark
-    set ts=4 sts=4 sw=4 expandtab
+    set ts=4 sts=4 sw=4
     set hlsearch
     set ignorecase
     set smartcase
@@ -300,6 +331,7 @@ call plug#end()
     set wildignore+=*/.svn/*,*/.git/*,*/node_modules/*    " ignore folders
     set wildignore+=*/typings/*,*/bower_components/*      " ignore folders
     set wildignore+=*.exe,*.so,*.dll,*.csproj,*.sln,*.suo " ignore files
+    set wildignore+=*.class                               " ignore files
 
     colorscheme base16-ocean
     let base16colorspace=256
@@ -392,4 +424,5 @@ call plug#end()
 
     highlight StatusLine guifg=#efefef guibg=#4271ae
     "}}}
+
 "}}}
