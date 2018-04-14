@@ -67,7 +67,7 @@ endif
     nnoremap <silent> <C-p> :Files <CR>
 " }}}
 
-Plug 'augustomelo/indentLine', { 'branch': 'fix_fileTypeExclude' } " Removed when merged
+Plug 'Yggdroot/indentLine'
     " indentLine Config {{{
     let g:indentLine_fileTypeExclude=['json', 'tex']
     " }}}
