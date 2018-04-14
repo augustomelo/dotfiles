@@ -46,44 +46,27 @@ Plug 'Konfekt/FastFold'
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
+Plug 'junegunn/fzf.vim'
 
-Plug 'ctrlpvim/ctrlp.vim'
-    " Ctrl-P Config {{{
-    let g:ctrlp_working_path_mode=0
+if (has("win32"))
+    Plug 'junegunn/fzf'
+else
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+endif
 
-    let g:ctrlp_status_func = {
-                \ 'main': 'CtrlPMainStatus',
-                \ 'prog': 'CtrlPProressStatus',
-                \ }
-    let g:ctrlp_custom_ignore = {
-                \ 'dir':  '\v\/(bin|obj|Properties|_references|.svn|.git|node_modules|typings|bower_components)',
-                \ 'file': '\v\.(exe|so|dll|csproj|sln|suo|class)$',
-                \ }
+" Fzf Config {{{
 
-    function! CtrlPMainStatus(focus, byfname, regex, prev, item, next, marked)
-        let stLine=''
-        let stLine.=' '      " Separator
-        let stLine.=a:item   " The current search mode
-        let stLine.='%='     " Right side of status line
-        let stLine.='%<'     " Truncate
-        let stLine.=getcwd() " Get working directory
-        let stLine.=' '      " Separator
+    " Fzf to use ripgrep
+    command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+      \   <bang>0 ? fzf#vim#with_preview('up:60%')
+      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+      \   <bang>0)
 
-        return stLine
-    endf
+    nnoremap <silent> <C-p> :Files <CR>
+" }}}
 
-    function! CtrlPProressStatus(str)
-        let stLine=''
-        let stLine.=' '      " Separator
-        let stLine.=a:str    " Number of files scanned so for
-        let stLine.='%='     " Right side of status line
-        let stLine.='%<'     " Truncate
-        let stLine.=getcwd() " Get working directory
-        let stLine.=' '      " Separator
-
-        return stLine
-    endf
-    " }}}
 Plug 'augustomelo/indentLine', { 'branch': 'fix_fileTypeExclude' } " Removed when merged
     " indentLine Config {{{
     let g:indentLine_fileTypeExclude=['json', 'tex']
@@ -186,6 +169,20 @@ call plug#end()
     autocmd Filetype gitcommit setlocal spell textwidth=72
     autocmd Filetype tex setlocal textwidth=120
     autocmd BufEnter * call DetectIndentation()
+
+
+    " This function make fzf use wildignore from neovim from neovim
+    function! s:with_agignore(bang, args)
+        let fileignore = $TEMP . '/fileignore-for-fzf'
+        let entries = split(&wildignore, ',')
+        let source = 'rg --files --follow --ignore-file ' . fileignore
+
+        call writefile(entries, fileignore)
+        call fzf#vim#files(a:args, {'source': source})
+    endfunction
+
+    autocmd VimEnter * command! -bang -nargs=? -complete=dir Files
+          \ call s:with_agignore(<bang>0, <q-args>)
     " }}}
 
     " Bindings {{{
@@ -326,12 +323,18 @@ call plug#end()
     set scrolloff=3                                       " start scrolling 3 lines before edge of view port
     set visualbell                                        " set the visual bell so it can be assign a sound
     set t_vb=                                             " assign no sound (disable bell)
-    set wildignore+=*/bin/*,*/obj/*                       " ignore folders
-    set wildignore+=*/Properties/*,*/_references/*,       " ignore folders
-    set wildignore+=*/.svn/*,*/.git/*,*/node_modules/*    " ignore folders
-    set wildignore+=*/typings/*,*/bower_components/*      " ignore folders
+    set wildignore+=**/bin/,**/obj/,**/target/            " ignore folders
+    set wildignore+=**/Properties/,**/_references/,       " ignore folders
+    set wildignore+=**/.svn/,**/.git/,**/node_modules/    " ignore folders
+    set wildignore+=**/typings/,**/bower_components/      " ignore folders
     set wildignore+=*.exe,*.so,*.dll,*.csproj,*.sln,*.suo " ignore files
     set wildignore+=*.class                               " ignore files
+
+    " If ripgrep is available use it as default grep programming
+    if executable("rg")
+        set grepprg=rg\ --vimgrep\ --no-heading
+        set grepformat=%f:%l:%c:%m,%f:%l:%m
+    endif
 
     colorscheme base16-ocean
     let base16colorspace=256
