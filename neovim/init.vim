@@ -28,7 +28,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'equalsraf/neovim-gui-shim'
 Plug 'vimwiki/vimwiki'
 if has("win32")
-  let g:vimwiki_list = [{'path': 'C:\Users\augusto.melo\util\wiki', 'path_html': 'C:\Users\augusto.melo\util\wiki\html'}]
+  let g:vimwiki_list = [{'path': $HOME . '\util\wiki', 'path_html': $HOME . '\util\wiki\html'}]
 else
   let g:vimwiki_list = [{'path': '~\util\wiki', 'path_html': '~\util\wiki\html'}]
 endif
@@ -41,6 +41,35 @@ endif
 " }}}
 
 " Global {{{
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+au User lsp_setup call lsp#register_server({
+    \ 'name': 'java',
+    \ 'cmd': {server_info->['java',
+        \ '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+        \ '-Dosgi.bundles.defaultStartLevel=4',
+        \ '-Declipse.product=org.eclipse.jdt.ls.core.product',
+        \ '-Dlog.protocol=true',
+        \ '-Dlog.level=ALL',
+        \ '-noverify',
+        \ '-Xmx1G',
+        \ '-jar',
+        \ $HOME . '\\util\\programs\\java\\jdt-language-server-latest\\plugins\\org.eclipse.equinox.launcher_1.5.100.v20180611-1436.jar',
+        \ '-configuration',
+        \ $HOME . '\\util\\programs\\java\\jdt-language-server-latest\\config_win',
+        \ '-data',
+        \ $TEMP]},
+    \ 'whitelist': ['java'],
+    \ })
+"let g:lsp_log_verbose = 1
+"let g:lsp_log_file = expand('~/vim-lsp.log')
+let g:lsp_signs_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_signs_error = {'text': 'X'}
+let g:lsp_signs_warning = {'text': '!'}
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
 Plug 'Raimondi/delimitMate'
 Plug 'Konfekt/FastFold'
 Plug 'godlygeek/tabular'
@@ -96,9 +125,11 @@ Plug 'neomake/neomake'
                 \ 'texthl': 'WarningMsg',
                 \ }
 
-    let g:neomake_javascript_enabled_makers = ['eslint']
     let g:neomake_cs_enabled_makers = ['msbuild']
+    "let g:neomake_java_enabled_makers = ['mvn']
+    let g:neomake_javascript_enabled_makers = ['eslint']
     let g:neomake_php_enabled_makers = ['php']
+    let g:neomake_python_enabled_makers = ['flake8']
 
     autocmd! BufWritePost * Neomake
     " }}}
@@ -346,8 +377,8 @@ call plug#end()
     autocmd Filetype tex setlocal textwidth=120
 
     if has("win32")
-        let g:python_host_prog='C:\Users\augusto.melo\Envs\neovim\Scripts\python.exe'
-        let g:python3_host_prog='C:\Users\augusto.melo\Envs\neovim3\Scripts\python.exe'
+        let g:python_host_prog=$HOME . '\envs\neovim2\Scripts\python.exe'
+        let g:python3_host_prog=$HOME . '\envs\neovim3\Scripts\python.exe'
     else
         let g:python_host_prog='/usr/bin/python2'
         let g:python3_host_prog='/usr/bin/python3.6'
