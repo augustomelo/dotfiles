@@ -12,23 +12,13 @@
 " Plugins {{{
 call plug#begin()
 
-" Languages {{{
-    " C# {{{
-    "Plug 'tpope/vim-dispatch'
-    "Plug 'OmniSharp/omnisharp-vim', { 'for': 'cs', 'do': 'msbuild -nologo -v:q server\OmniSharp.sln' }
-    " }}}
-
-    " PHP {{{
-    "Plug 'StanAngeloff/php.vim'
-    " }}}
-" }}}
-
 " Cosmetic {{{
 Plug 'chriskempson/base16-vim'
+Plug 'junegunn/goyo.vim'
 Plug 'equalsraf/neovim-gui-shim'
 Plug 'vimwiki/vimwiki'
-if has("win32")
-  let g:vimwiki_list = [{'path': $HOME . '\util\wiki', 'path_html': $HOME . '\util\wiki\html'}]
+if has('win32')
+  let g:vimwiki_list = [{'path': $HOME . '\util\_wiki', 'path_html': $HOME . '\util\wiki\html'}]
 else
   let g:vimwiki_list = [{'path': '~\util\wiki', 'path_html': '~\util\wiki\html'}]
 endif
@@ -54,15 +44,15 @@ au User lsp_setup call lsp#register_server({
         \ '-noverify',
         \ '-Xmx1G',
         \ '-jar',
-        \ $HOME . '\\util\\programs\\java\\jdt-language-server-latest\\plugins\\org.eclipse.equinox.launcher_1.5.100.v20180611-1436.jar',
+        \ $HOME . '\\util\\programs\\java\\jdt-language-server\\plugins\\org.eclipse.equinox.launcher_1.5.200.v20180922-1751.jar',
         \ '-configuration',
-        \ $HOME . '\\util\\programs\\java\\jdt-language-server-latest\\config_win',
+        \ $HOME . '\\util\\programs\\java\\jdt-language-server\\config_win',
         \ '-data',
         \ $TEMP]},
     \ 'whitelist': ['java'],
     \ })
-"let g:lsp_log_verbose = 1
-"let g:lsp_log_file = expand('~/vim-lsp.log')
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('~/vim-lsp.log')
 let g:lsp_signs_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_signs_error = {'text': 'X'}
@@ -74,10 +64,11 @@ Plug 'Raimondi/delimitMate'
 Plug 'Konfekt/FastFold'
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdcommenter'
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf.vim'
 
-if (has("win32"))
+if (has('win32'))
     Plug 'junegunn/fzf'
 else
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
@@ -135,7 +126,7 @@ Plug 'neomake/neomake'
     " }}}
 Plug 'scrooloose/nerdtree'
     " NERDtree Config {{{
-    let g:NERDTreeWinPos = "right"
+    let g:NERDTreeWinPos = 'right'
     let g:NERDTreeDirArrowExpandable = '▸'
     let g:NERDTreeDirArrowCollapsible = '▾'
     let g:NERDTreeMapActivateNode = '<Space>'
@@ -150,7 +141,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'ervandew/supertab'
     " Supertab Config {{{
     let g:SuperTabDefaultCompletionType = 'context'
-    let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>"]
+    let g:SuperTabDefaultCompletionTypeDiscovery = ['&omnifunc:<c-x><c-o>']
     let g:SuperTabClosePreviewOnPopupClose = 1
     let g:SuperTabCrMapping=1
     autocmd FileType *
@@ -161,21 +152,21 @@ Plug 'ervandew/supertab'
     " }}}
 Plug 'majutsushi/tagbar'
     " Tagbar Config {{{
-    if has("win32")
+    if has('win32')
         let g:tagbar_ctags_bin = '~\AppData\Local\nvim\autoload\ctags58\ctags.exe'
     endif
     " }}}
 Plug 'alvan/vim-closetag'
     " Closetag Config {{{
-    let g:closetag_filenames = "*.html,*.xml,*.ts,*.vue"
+    let g:closetag_filenames = '*.html,*.xml,*.ts,*.vue'
     " }}}
 Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
     " UltiSnips Config {{{
     let g:UltiSnipsEnableSnipMate=0
-    let g:UltiSnipsExpandTrigger="<tab>"
-    let g:UltiSnipsJumpForwardTrigger="<tab>"
-    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-    let g:UltiSnipsEditSplit="vertical"
+    let g:UltiSnipsExpandTrigger='<tab>'
+    let g:UltiSnipsJumpForwardTrigger='<tab>'
+    let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
+    let g:UltiSnipsEditSplit='vertical'
     " }}}
 " }}}
 
@@ -232,14 +223,14 @@ call plug#end()
         " }}}
 
         " Leader {{{
-        let mapleader=","
+        let mapleader=','
 
         nnoremap <Leader><Leader> <C-^>
         nnoremap <silent> <Leader>n :nohlsearch<CR>
         nnoremap <silent> <Leader>q :quit<CR>
         nnoremap <silent> <Leader>w :write<CR>
 
-        if has("win32")
+        if has('win32')
             nnoremap <silent> <Leader>v :set paste<CR>"*P:set nopaste<CR>
             vnoremap <Leader>c "*y
             vnoremap <Leader>x "*d
@@ -274,8 +265,9 @@ call plug#end()
         nnoremap <silent> gpe :lprev<CR>                                       " go to previous error/warning
         nnoremap <silent> <F4> :e $MYVIMRC<CR>
         nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\v\s+$//e<Bar>:let @/=_s<CR> " remove all trailing whitespace
+        nnoremap <F10> :e $HOME/util/wiki
 
-        if has("win32")
+        if has('win32')
             nnoremap <C-h> <C-w>h
             nnoremap <silent> <C-=> :Guifont Consolas:b:h17<CR>
             nnoremap <silent> <C--> :Guifont Consolas:b:h9<CR>
@@ -344,7 +336,7 @@ call plug#end()
     set hidden
     set mouse=a
     set background=dark
-    set ts=4 sts=4 sw=4
+    set tabstop=4 sts=4 sw=4
     set hlsearch
     set ignorecase
     set smartcase
@@ -362,7 +354,7 @@ call plug#end()
     set wildignore+=*.class                               " ignore files
 
     " If ripgrep is available use it as default grep programming
-    if executable("rg")
+    if executable('rg')
         set grepprg=rg\ --vimgrep\ --no-heading
         set grepformat=%f:%l:%c:%m,%f:%l:%m
     endif
@@ -376,7 +368,7 @@ call plug#end()
     autocmd Filetype gitcommit setlocal spell textwidth=72
     autocmd Filetype tex setlocal textwidth=120
 
-    if has("win32")
+    if has('win32')
         let g:python_host_prog=$HOME . '\envs\neovim2\Scripts\python.exe'
         let g:python3_host_prog=$HOME . '\envs\neovim3\Scripts\python.exe'
     else
@@ -420,10 +412,10 @@ call plug#end()
     endfunction
 
     function! GetEncoding()
-        if !empty(&fenc)
-            return &fenc
+        if !empty(&fileencoding)
+            return &fileencoding
         else
-            return &enc
+            return &encoding
         endif
     endfunction
 
