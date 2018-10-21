@@ -16,18 +16,7 @@ call plug#begin()
 Plug 'chriskempson/base16-vim'
 Plug 'junegunn/goyo.vim'
 Plug 'equalsraf/neovim-gui-shim'
-Plug 'vimwiki/vimwiki'
-if has('win32')
-  let g:vimwiki_list = [{'path': $HOME . '\util\_wiki', 'path_html': $HOME . '\util\wiki\html'}]
-else
-  let g:vimwiki_list = [{'path': '~\util\wiki', 'path_html': '~\util\wiki\html'}]
-endif
-"Plug 'tpope/vim-markdown'
-    "" Vim-Markdown Config  {{{
-    "let g:markdown_fenced_languages = ['cs']
-    "" }}}
-"Plug 'flazz/vim-colorschemes'
-"Plug 'sotte/presenting.vim'
+Plug 'sheerun/vim-polyglot'
 " }}}
 
 " Global {{{
@@ -51,7 +40,7 @@ au User lsp_setup call lsp#register_server({
         \ $TEMP]},
     \ 'whitelist': ['java'],
     \ })
-let g:lsp_log_verbose = 1
+"let g:lsp_log_verbose = 1
 let g:lsp_log_file = expand('~/vim-lsp.log')
 let g:lsp_signs_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
@@ -61,10 +50,8 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 Plug 'Raimondi/delimitMate'
-Plug 'Konfekt/FastFold'
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdcommenter'
-Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf.vim'
 
@@ -90,16 +77,6 @@ endif
 Plug 'Yggdroot/indentLine'
     " indentLine Config {{{
     let g:indentLine_fileTypeExclude=['json', 'tex']
-    " }}}
-Plug 'Valloric/MatchTagAlways'
-    " MatchTagAlways Config {{{
-    let g:mta_filetypes = {
-        \ 'html' : 1,
-        \ 'xhtml' : 1,
-        \ 'xml' : 1,
-        \ 'jinja' : 1,
-        \ 'vue': 1,
-        \}
     " }}}
 Plug 'neomake/neomake'
     " Neomake Config {{{
@@ -150,16 +127,6 @@ Plug 'ervandew/supertab'
                 \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
                 \ endif
     " }}}
-Plug 'majutsushi/tagbar'
-    " Tagbar Config {{{
-    if has('win32')
-        let g:tagbar_ctags_bin = '~\AppData\Local\nvim\autoload\ctags58\ctags.exe'
-    endif
-    " }}}
-Plug 'alvan/vim-closetag'
-    " Closetag Config {{{
-    let g:closetag_filenames = '*.html,*.xml,*.ts,*.vue'
-    " }}}
 Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
     " UltiSnips Config {{{
     let g:UltiSnipsEnableSnipMate=0
@@ -168,13 +135,6 @@ Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-s
     let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
     let g:UltiSnipsEditSplit='vertical'
     " }}}
-" }}}
-
-" Web {{{
-"Plug 'leafgarland/typescript-vim'
-"Plug 'othree/html5.vim'
-"Plug 'pangloss/vim-javascript'
-"Plug 'posva/vim-vue'
 " }}}
 
 call plug#end()
@@ -419,14 +379,6 @@ call plug#end()
         endif
     endfunction
 
-    function! GetCurrentFunction()
-        if exists(':Tagbar')
-            return tagbar#currenttag('%s', '')
-        endif
-
-        return ''
-    endfunction
-
     let &statusline=''
     let &statusline.='%{GetStatusLine()}'
     let &statusline.=' '                       " Separator
@@ -440,12 +392,11 @@ call plug#end()
 
     let &statusline.='%='                      " Right side of status line
     let &statusline.=' '                       " Separator
-    let &statusline.='%<'                      " Truncate
-    let &statusline.='%{GetCurrentFunction()}'
-    let &statusline.=' '                       " Separator
     let &statusline.='Col %-3v'                " Show the virtual column
     let &statusline.=' '                       " Separator
     let &statusline.='%0*Ln %-4L'              " Show total lines in the file
+    let &statusline.=' '                       " Separator
+    let &statusline.=':)'              " Show total lines in the file
     let &statusline.=' '                       " Separator
 
     highlight StatusLine guifg=#efefef guibg=#4271ae
