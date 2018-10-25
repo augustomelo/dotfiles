@@ -104,6 +104,7 @@ Plug 'neomake/neomake'
 Plug 'scrooloose/nerdtree'
     " NERDtree Config {{{
     let g:NERDTreeWinPos = 'right'
+    let g:NERDTreeWinSize = 40
     let g:NERDTreeDirArrowExpandable = '▸'
     let g:NERDTreeDirArrowCollapsible = '▾'
     let g:NERDTreeMapActivateNode = '<Space>'
@@ -225,7 +226,7 @@ call plug#end()
         nnoremap <silent> gpe :lprev<CR>                                       " go to previous error/warning
         nnoremap <silent> <F4> :e $MYVIMRC<CR>
         nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\v\s+$//e<Bar>:let @/=_s<CR> " remove all trailing whitespace
-        nnoremap <F10> :e $HOME/util/wiki
+        nnoremap <F1> :NERDTree $HOME/util/wiki<CR>
 
         if has('win32')
             nnoremap <C-h> <C-w>h
@@ -288,6 +289,7 @@ call plug#end()
     set equalalways
     set list
     set listchars=tab:»\ ,nbsp:⦸,eol:¬,trail:•,
+    set fillchars=vert:\|
     set noshowmatch
     set foldmethod=syntax
     set completeopt=menuone,preview,noinsert
@@ -324,6 +326,7 @@ call plug#end()
     highlight Search guibg=background guifg=#2abcdf gui=underline
     highlight MatchParen guibg=background guifg=#00b400 gui=underline
     highlight Error guibg=background guifg=#c20000
+    highlight VertSplit guibg=background guifg=4f5b66
 
     autocmd Filetype gitcommit setlocal spell textwidth=72
     autocmd Filetype tex setlocal textwidth=120
