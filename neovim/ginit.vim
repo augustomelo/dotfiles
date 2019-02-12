@@ -1,6 +1,7 @@
 " Config {{{
 call GuiWindowMaximized(1)
 Guifont Consolas:b:h9
+GuiPopupmenu 0
 " }}}
 
 " Highligth {{{
