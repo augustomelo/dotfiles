@@ -21,7 +21,7 @@ Plug 'sheerun/vim-polyglot'
 
 " Global {{{
 Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/vim-lsp', { 'commit': '78d549b0068b9d6f03cb7693943db83044a736ed' }
 au User lsp_setup call lsp#register_server({
     \ 'name': 'java',
     \ 'cmd': {server_info->['java',
@@ -40,7 +40,13 @@ au User lsp_setup call lsp#register_server({
         \ $TEMP]},
     \ 'whitelist': ['java'],
     \ })
-"let g:lsp_log_verbose = 1
+au User lsp_setup call lsp#register_server({
+    \ 'name': 'pyls',
+    \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+    \ })
+
+let g:lsp_log_verbose = 1
 let g:lsp_log_file = expand('~/vim-lsp.log')
 let g:lsp_signs_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
@@ -50,6 +56,7 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 Plug 'Raimondi/delimitMate'
+Plug 'mattn/emmet-vim'
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
@@ -82,24 +89,24 @@ Plug 'neomake/neomake'
     " Neomake Config {{{
     "let g:neomake_verbose = 3
 
-    let g:neomake_open_list = 2
-    let g:neomake_list_height  = 4
-    let g:neomake_error_sign = {
-                \ 'text': 'X',
-                \ 'texthl': 'ErrorMsg',
-                \ }
-    let g:neomake_warning_sign = {
-                \ 'text': '!',
-                \ 'texthl': 'WarningMsg',
-                \ }
+    "let g:neomake_open_list = 2
+    "let g:neomake_list_height  = 4
+    "let g:neomake_error_sign = {
+                "\ 'text': 'X',
+                "\ 'texthl': 'ErrorMsg',
+                "\ }
+    "let g:neomake_warning_sign = {
+                "\ 'text': '!',
+                "\ 'texthl': 'WarningMsg',
+                "\ }
 
-    let g:neomake_cs_enabled_makers = ['msbuild']
-    "let g:neomake_java_enabled_makers = ['mvn']
-    let g:neomake_javascript_enabled_makers = ['eslint']
-    let g:neomake_php_enabled_makers = ['php']
-    let g:neomake_python_enabled_makers = ['flake8']
+    "let g:neomake_cs_enabled_makers = ['msbuild']
+    ""let g:neomake_java_enabled_makers = ['mvn']
+    "let g:neomake_javascript_enabled_makers = ['eslint']
+    "let g:neomake_php_enabled_makers = ['php']
+    "let g:neomake_python_enabled_makers = ['flake8']
 
-    autocmd! BufWritePost * Neomake
+    "autocmd! BufWritePost * Neomake
     " }}}
 Plug 'scrooloose/nerdtree'
     " NERDtree Config {{{
@@ -111,6 +118,7 @@ Plug 'scrooloose/nerdtree'
     let g:NERDTreeIgnore = [
                 \'\.csproj.user$[[file]]',
                 \'\.suo$[[file]]',
+                \'\.pyc$[[file]]',
                 \'Properties[[dir]]',
                 \'obj[[dir]]',
                 \'bin[[dir]]'
@@ -128,7 +136,7 @@ Plug 'ervandew/supertab'
                 \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
                 \ endif
     " }}}
-Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
+"Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
     " UltiSnips Config {{{
     let g:UltiSnipsEnableSnipMate=0
     let g:UltiSnipsExpandTrigger='<tab>'
@@ -225,7 +233,7 @@ call plug#end()
         nnoremap <silent> gne :lnext<CR>                                       " go to next error/warning
         nnoremap <silent> gpe :lprev<CR>                                       " go to previous error/warning
         nnoremap <silent> <F4> :e $MYVIMRC<CR>
-        nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\v\s+$//e<Bar>:let @/=_s<CR> " remove all trailing whitespace
+        nnoremap <silent> <F5> :call TrimWhitespace()<CR>
         nnoremap <F1> :NERDTree $HOME/util/wiki<CR>
 
         if has('win32')
@@ -244,7 +252,13 @@ call plug#end()
 
     " }}}
 
-    " Functions GetIndentation {{{
+    " Function {{{
+    function TrimWhitespace()
+        let l:prevPos = winsaveview()
+        keeppatterns %s/\s\+$//e
+        call winrestview(l:prevPos)
+    endfunction
+
     function SearchPattern(pattern)
         return search(a:pattern, 'Wnc', 0, 20) > 0 || search(a:pattern, 'Wnb', 0, 20) > 0
     endfunction
@@ -269,7 +283,6 @@ call plug#end()
 
     " Settings {{{
     syntax on
-    set synmaxcol=200                                     " do not highlight long lines
     filetype plugin indent on
     cd ~/workspace
 
@@ -280,6 +293,7 @@ call plug#end()
     set number
     set relativenumber
     set linebreak
+    set inccommand=nosplit
     set breakindent                                       " indent wrapped lines to match start
     set breakindentopt=shift:2                            " emphasize broken lines by indenting them
     let &showbreak='⤷ '
@@ -313,7 +327,7 @@ call plug#end()
     set wildignore+=**/.svn/,**/.git/,**/node_modules/    " ignore folders
     set wildignore+=**/typings/,**/bower_components/      " ignore folders
     set wildignore+=*.exe,*.so,*.dll,*.csproj,*.sln,*.suo " ignore files
-    set wildignore+=*.class                               " ignore files
+    set wildignore+=*.class,*.pyc                         " ignore files
 
     " If ripgrep is available use it as default grep programming
     if executable('rg')
@@ -332,8 +346,8 @@ call plug#end()
     autocmd Filetype tex setlocal textwidth=120
 
     if has('win32')
-        let g:python_host_prog=$HOME . '\envs\neovim2\Scripts\python.exe'
-        let g:python3_host_prog=$HOME . '\envs\neovim3\Scripts\python.exe'
+        let g:python_host_prog=$HOME . '\envs\neovim2\Scripts\python'
+        let g:python3_host_prog=$HOME . '\envs\neovim3\Scripts\python'
     else
         let g:python_host_prog='/usr/bin/python2'
         let g:python3_host_prog='/usr/bin/python3.6'
