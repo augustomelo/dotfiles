@@ -8,6 +8,7 @@ echo *----------Windows Configuration Installer---------*
 echo * Choose one of the following options:             *
 echo *    1- Neovim-QT                                  *
 echo *    2- GVim                                       *
+echo *    3- Visual Code                                *
 echo ****************************************************
 echo.
 
@@ -63,6 +64,20 @@ goto case_%option%
     echo Done!
 
     goto end_switch
+:case_3
+    echo Delete symbolic link settings
+    del %appdata%\Code\User\settings.json
+
+    echo Delete symbolic link keybindings
+    del %appdata%\Code\User\keybindings.json
+
+    echo Creating symbolic link settings
+    mklink %appdata%\Code\User\settings.json %userprofile%\workspace\dotfiles\visualcode\settings.json
+
+    echo Creating symbolic link keybindings
+    mklink %appdata%\Code\User\keybindings.json %userprofile%\workspace\dotfiles\visualcode\keybindings.json
+
+    echo Done!
 :end_switch
 
 pause
