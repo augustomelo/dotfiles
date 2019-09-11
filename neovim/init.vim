@@ -224,6 +224,7 @@ call plug#end()
         nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
         nnoremap Q <nop>
         nnoremap K <nop>
+        nnoremap <C-h> <C-w>h
         nnoremap <C-j> <C-w>j
         nnoremap <C-k> <C-w>k
         nnoremap <C-l> <C-w>l
@@ -240,8 +241,6 @@ call plug#end()
             nnoremap <C-h> <C-w>h
             nnoremap <silent> <C-=> :Guifont Consolas:b:h17<CR>
             nnoremap <silent> <C--> :Guifont Consolas:b:h9<CR>
-        else
-            nnoremap <BS> <C-w>h " workaround issues=2048
         endif
 
         " }}}
@@ -286,7 +285,6 @@ call plug#end()
     filetype plugin indent on
     cd ~/workspace
 
-    set guicursor                                        " makes the cursor a pipe in insert mode, and a block in normal-mode. Temporary measure
     set termguicolors
     set cursorline
     set noswapfile
