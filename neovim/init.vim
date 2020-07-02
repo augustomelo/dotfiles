@@ -20,45 +20,11 @@ Plug 'sheerun/vim-polyglot'
 " }}}
 
 " Global {{{
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp', { 'commit': '78d549b0068b9d6f03cb7693943db83044a736ed' }
-au User lsp_setup call lsp#register_server({
-    \ 'name': 'java',
-    \ 'cmd': {server_info->['java',
-        \ '-Declipse.application=org.eclipse.jdt.ls.core.id1',
-        \ '-Dosgi.bundles.defaultStartLevel=4',
-        \ '-Declipse.product=org.eclipse.jdt.ls.core.product',
-        \ '-Dlog.protocol=true',
-        \ '-Dlog.level=ALL',
-        \ '-noverify',
-        \ '-Xmx1G',
-        \ '-jar',
-        \ $HOME . '\\util\\programs\\java\\jdt-language-server\\plugins\\org.eclipse.equinox.launcher_1.5.200.v20180922-1751.jar',
-        \ '-configuration',
-        \ $HOME . '\\util\\programs\\java\\jdt-language-server\\config_win',
-        \ '-data',
-        \ $TEMP]},
-    \ 'whitelist': ['java'],
-    \ })
-au User lsp_setup call lsp#register_server({
-    \ 'name': 'pyls',
-    \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-    \ })
-
-let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand('~/vim-lsp.log')
-let g:lsp_signs_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_signs_error = {'text': 'X'}
-let g:lsp_signs_warning = {'text': '!'}
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdcommenter'
+Plug 'neovim/nvim-lsp'
 Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf.vim'
 
@@ -84,29 +50,6 @@ endif
 Plug 'Yggdroot/indentLine'
     " indentLine Config {{{
     let g:indentLine_fileTypeExclude=['json', 'tex']
-    " }}}
-Plug 'neomake/neomake'
-    " Neomake Config {{{
-    "let g:neomake_verbose = 3
-
-    "let g:neomake_open_list = 2
-    "let g:neomake_list_height  = 4
-    "let g:neomake_error_sign = {
-                "\ 'text': 'X',
-                "\ 'texthl': 'ErrorMsg',
-                "\ }
-    "let g:neomake_warning_sign = {
-                "\ 'text': '!',
-                "\ 'texthl': 'WarningMsg',
-                "\ }
-
-    "let g:neomake_cs_enabled_makers = ['msbuild']
-    ""let g:neomake_java_enabled_makers = ['mvn']
-    "let g:neomake_javascript_enabled_makers = ['eslint']
-    "let g:neomake_php_enabled_makers = ['php']
-    "let g:neomake_python_enabled_makers = ['flake8']
-
-    "autocmd! BufWritePost * Neomake
     " }}}
 Plug 'scrooloose/nerdtree'
     " NERDtree Config {{{
@@ -135,14 +78,6 @@ Plug 'ervandew/supertab'
                 \   call SuperTabChain(&omnifunc, "<c-p>") |
                 \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
                 \ endif
-    " }}}
-"Plug 'MarcWeber/vim-addon-mw-utils' | Plug 'tomtom/tlib_vim' | Plug 'honza/vim-snippets' | Plug 'SirVer/ultisnips'
-    " UltiSnips Config {{{
-    let g:UltiSnipsEnableSnipMate=0
-    let g:UltiSnipsExpandTrigger='<tab>'
-    let g:UltiSnipsJumpForwardTrigger='<tab>'
-    let g:UltiSnipsJumpBackwardTrigger='<s-tab>'
-    let g:UltiSnipsEditSplit='vertical'
     " }}}
 " }}}
 
@@ -198,17 +133,6 @@ call plug#end()
         nnoremap <silent> <Leader>n :nohlsearch<CR>
         nnoremap <silent> <Leader>q :quit<CR>
         nnoremap <silent> <Leader>w :write<CR>
-
-        if has('win32')
-            nnoremap <silent> <Leader>v :set paste<CR>"*P:set nopaste<CR>
-            vnoremap <Leader>c "*y
-            vnoremap <Leader>x "*d
-        else
-            nnoremap <silent> <Leader>v :set paste<CR>"+P:set nopaste<CR>
-            vnoremap <Leader>c "+y
-            vnoremap <Leader>x "+d
-        endif
-
         " }}}
 
         " Normal {{{
@@ -236,12 +160,6 @@ call plug#end()
         nnoremap <silent> <F4> :e $MYVIMRC<CR>
         nnoremap <silent> <F5> :call TrimWhitespace()<CR>
         nnoremap <F1> :NERDTree $HOME/util/wiki<CR>
-
-        if has('win32')
-            nnoremap <C-h> <C-w>h
-            nnoremap <silent> <C-=> :Guifont Consolas:b:h17<CR>
-            nnoremap <silent> <C--> :Guifont Consolas:b:h9<CR>
-        endif
 
         " }}}
 
@@ -278,6 +196,45 @@ call plug#end()
             endif
         endif
     endfunction
+
+    " This function synchronize the clipboard between WSL
+    let s:clip = '/mnt/c/Windows/System32/clip.exe'
+    if executable(s:clip)
+        augroup WSLYank
+            autocmd!
+            autocmd TextYankPost * call system('echo '.shellescape(join(v:event.regcontents, "\<CR>")).' | '.s:clip)
+        augroup END
+    end
+    " }}}
+
+    " LSP {{{
+
+:lua << EOF
+require'nvim_lsp'.pyls.setup{
+  name = "pyls";
+  pyls = {
+    puglins = {
+      black = {
+        enabled = true;
+      };
+      yapf = {
+        enabled = false;
+      };
+    }
+  }
+}
+
+require'nvim_lsp'.sumneko_lua.setup{
+  name = "sumneko_lua";
+  cmd = {
+      "/home/augusto/util/programs/lsp/lua-language-server/bin/Linux/lua-language-server",
+      "-E",
+      "/home/augusto/util/programs/lsp/lua-language-server/main.lua",
+  }
+}
+EOF
+
+    autocmd Filetype python,lua setl omnifunc=v:lua.vim.lsp.omnifunc
     " }}}
 
     " Settings {{{
@@ -285,6 +242,7 @@ call plug#end()
     filetype plugin indent on
     cd ~/workspace
 
+    set pastetoggle=<F2>
     set termguicolors
     set cursorline
     set noswapfile
