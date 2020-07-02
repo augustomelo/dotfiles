@@ -2,3 +2,4 @@
 alias k='kubectl'
 alias kg='kubectl get'
 alias kgpo='kubectl get pod'
+alias kpf='kubectl port-forward'

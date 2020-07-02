@@ -130,5 +130,17 @@ kexec () {
   echo $pod
 
   echo kubectl exec -it $pod -- $cmd
+  history -s kubectl exec -it $pod -- $cmd
   kubectl exec -it $pod -- $cmd
+}
+
+kdesc() {
+  local pod=($(kubectl get pods -o wide | fzf | awk '{print $1}'))
+  local cmd=${@:-"sh"}
+
+  echo $pod
+
+  echo kubectl describe pod $pod
+  history -s kubectl describe pod $pod
+  kubectl describe pod $pod
 }
