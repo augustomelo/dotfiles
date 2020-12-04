@@ -31,6 +31,7 @@
         "defaults":
         {
             // Put settings here that you want to apply to all profiles.
+			"bellStyle": "none",
 			"cursorShape": "filledBox",
             "fontFace": "Cascadia Code",
             "fontSize": 9,
