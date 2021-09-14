@@ -13,10 +13,12 @@
 call plug#begin()
 
 " Cosmetic {{{
-Plug 'chriskempson/base16-vim'
+"Plug 'chriskempson/base16-vim'
+Plug 'RRethy/nvim-base16'
 Plug 'junegunn/goyo.vim'
 Plug 'equalsraf/neovim-gui-shim'
 Plug 'sheerun/vim-polyglot'
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': 'TSUpdate' }
 " }}}
 
 " Global {{{
@@ -24,7 +26,9 @@ Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
 Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdcommenter'
-Plug 'neovim/nvim-lsp'
+Plug 'neovim/nvim-lspconfig'
+Plug 'kamykn/spelunker.vim'
+"Plug 'nvim-lua/completion-nvim'
 Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf.vim'
 
@@ -64,7 +68,8 @@ Plug 'scrooloose/nerdtree'
                 \'\.pyc$[[file]]',
                 \'Properties[[dir]]',
                 \'obj[[dir]]',
-                \'bin[[dir]]'
+                \'bin[[dir]]',
+                \'target[[dir]]'
                 \]
     " }}}
 Plug 'ervandew/supertab'
@@ -99,7 +104,7 @@ call plug#end()
 
     " This function make fzf use wildignore from neovim from neovim
     function! s:with_agignore(bang, args)
-        let fileignore = $TEMP . '/fileignore-for-fzf'
+        let fileignore = '/tmp/fileignore-for-fzf'
         let entries = split(&wildignore, ',')
         let source = 'rg --files --follow --ignore-file ' . fileignore
 
@@ -207,31 +212,96 @@ call plug#end()
     end
     " }}}
 
-    " LSP {{{
+    " Lua {{{
 
 :lua << EOF
-require'nvim_lsp'.pyls.setup{
-  name = "pyls";
-  pyls = {
-    puglins = {
-      black = {
-        enabled = true;
-      };
-      yapf = {
-        enabled = false;
-      };
-    }
-  }
+--require'lspconfig'.pyls.setup{
+--  name = "pyls";
+--  pyls = {
+--    puglins = {
+--      black = {
+--        enabled = true;
+--      };
+--      yapf = {
+--        enabled = false;
+--      };
+--    }
+--  }
+--}
+
+--require'lspconfig'.sumneko_lua.setup{
+--  name = "sumneko_lua";
+--  cmd = {
+--      "/home/augusto/util/programs/lsp/lua-language-server/bin/Linux/lua-language-server",
+--      "-E",
+--      "/home/augusto/util/programs/lsp/lua-language-server/main.lua",
+--  }
+--}
+
+local nvim_lsp = require('lspconfig')
+
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+
+end
+
+nvim_lsp.jdtls.setup {
+    cmd = {
+      "java",
+      "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+      "-Dosgi.bundles.defaultStartLevel=4",
+      "-Declipse.product=org.eclipse.jdt.ls.core.product",
+      "-Dlog.protocol=true",
+      "-Dlog.level=ALL",
+      "-Xms1g",
+      "-Xmx2G",
+      "-jar",
+      "/opt/lsp/jdt-ls/plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar",
+      "-configuration",
+      "/opt/lsp/jdt-ls/config_linux",
+      "-data",
+      "/tmp",
+      "--add-modules=ALL-SYSTEM",
+      "--add-opens java.base/java.util=ALL-UNNAMED",
+      "--add-opens java.base/java.lang=ALL-UNNAMED"
+    },
+    on_attach = on_attach
 }
 
-require'nvim_lsp'.sumneko_lua.setup{
-  name = "sumneko_lua";
-  cmd = {
-      "/home/augusto/util/programs/lsp/lua-language-server/bin/Linux/lua-language-server",
-      "-E",
-      "/home/augusto/util/programs/lsp/lua-language-server/main.lua",
-  }
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+  },
 }
+
+require'base16-colorscheme'.setup('ocean')
 EOF
 
     autocmd Filetype python,lua setl omnifunc=v:lua.vim.lsp.omnifunc
@@ -240,7 +310,7 @@ EOF
     " Settings {{{
     syntax on
     filetype plugin indent on
-    cd ~/workspace
+    cd /mnt/c/Users/augustomelo/workspace
 
     set pastetoggle=<F2>
     set termguicolors
@@ -255,7 +325,8 @@ EOF
     let &showbreak='⤷ '
     set showcmd
     set showmode
-    set spell spelllang=en_us
+    "set spell spelllang=en_us this is not necessary anymore because the
+    "plugin spelunker
     set equalalways
     set list
     set listchars=tab:»\ ,nbsp:⦸,eol:¬,trail:•,
@@ -268,7 +339,7 @@ EOF
     set hidden
     set mouse=a
     set background=dark
-    set tabstop=4 sts=4 sw=4
+    set ts=2 sts=2 sw=2
     set hlsearch
     set ignorecase
     set smartcase
@@ -291,8 +362,7 @@ EOF
         set grepformat=%f:%l:%c:%m,%f:%l:%m
     endif
 
-    colorscheme base16-ocean
-    let base16colorspace=256
+    "colorscheme base16-ocean
     highlight Search guibg=background guifg=#2abcdf gui=underline
     highlight MatchParen guibg=background guifg=#00b400 gui=underline
     highlight Error guibg=background guifg=#c20000
