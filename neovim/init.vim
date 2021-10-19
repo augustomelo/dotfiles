@@ -13,7 +13,6 @@
 call plug#begin()
 
 " Cosmetic {{{
-"Plug 'chriskempson/base16-vim'
 Plug 'RRethy/nvim-base16'
 Plug 'junegunn/goyo.vim'
 Plug 'equalsraf/neovim-gui-shim'
@@ -22,13 +21,13 @@ Plug 'nvim-treesitter/nvim-treesitter', { 'do': 'TSUpdate' }
 " }}}
 
 " Global {{{
+Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
-Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdcommenter'
+Plug 'hrsh7th/nvim-cmp'
 Plug 'neovim/nvim-lspconfig'
 Plug 'kamykn/spelunker.vim'
-"Plug 'nvim-lua/completion-nvim'
 Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf.vim'
 
@@ -72,17 +71,17 @@ Plug 'scrooloose/nerdtree'
                 \'target[[dir]]'
                 \]
     " }}}
-Plug 'ervandew/supertab'
-    " Supertab Config {{{
-    let g:SuperTabDefaultCompletionType = 'context'
-    let g:SuperTabDefaultCompletionTypeDiscovery = ['&omnifunc:<c-x><c-o>']
-    let g:SuperTabClosePreviewOnPopupClose = 1
-    let g:SuperTabCrMapping=1
-    autocmd FileType *
-                \ if &omnifunc != '' |
-                \   call SuperTabChain(&omnifunc, "<c-p>") |
-                \   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
-                \ endif
+"Plug 'ervandew/supertab'
+    "" Supertab Config {{{
+    "let g:SuperTabDefaultCompletionType = 'context'
+    "let g:SuperTabDefaultCompletionTypeDiscovery = ['&omnifunc:<c-x><c-o>']
+    "let g:SuperTabClosePreviewOnPopupClose = 1
+    "let g:SuperTabCrMapping=1
+    "autocmd FileType *
+                "\ if &omnifunc != '' |
+                "\   call SuperTabChain(&omnifunc, "<c-p>") |
+                "\   call SuperTabSetDefaultCompletionType("<c-x><c-o>") |
+                "\ endif
     " }}}
 " }}}
 
@@ -215,29 +214,6 @@ call plug#end()
     " Lua {{{
 
 :lua << EOF
---require'lspconfig'.pyls.setup{
---  name = "pyls";
---  pyls = {
---    puglins = {
---      black = {
---        enabled = true;
---      };
---      yapf = {
---        enabled = false;
---      };
---    }
---  }
---}
-
---require'lspconfig'.sumneko_lua.setup{
---  name = "sumneko_lua";
---  cmd = {
---      "/home/augusto/util/programs/lsp/lua-language-server/bin/Linux/lua-language-server",
---      "-E",
---      "/home/augusto/util/programs/lsp/lua-language-server/main.lua",
---  }
---}
-
 local nvim_lsp = require('lspconfig')
 
 local on_attach = function(client, bufnr)
@@ -245,7 +221,7 @@ local on_attach = function(client, bufnr)
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
   --Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+  --buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
   local opts = { noremap=true, silent=true }
@@ -272,26 +248,26 @@ local on_attach = function(client, bufnr)
 end
 
 nvim_lsp.jdtls.setup {
-    cmd = {
-      "java",
-      "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-      "-Dosgi.bundles.defaultStartLevel=4",
-      "-Declipse.product=org.eclipse.jdt.ls.core.product",
-      "-Dlog.protocol=true",
-      "-Dlog.level=ALL",
-      "-Xms1g",
-      "-Xmx2G",
-      "-jar",
-      "/opt/lsp/jdt-ls/plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar",
-      "-configuration",
-      "/opt/lsp/jdt-ls/config_linux",
-      "-data",
-      "/tmp",
-      "--add-modules=ALL-SYSTEM",
-      "--add-opens java.base/java.util=ALL-UNNAMED",
-      "--add-opens java.base/java.lang=ALL-UNNAMED"
+  cmd = {
+    "java",
+    "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+    "-Dosgi.bundles.defaultStartLevel=4",
+    "-Declipse.product=org.eclipse.jdt.ls.core.product",
+    "-Dlog.protocol=true",
+    "-Dlog.level=ALL",
+    "-Xms1g",
+    "-Xmx2G",
+    "-jar",
+    "/opt/lsp/jdt-ls/plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar",
+    "-configuration",
+    "/opt/lsp/jdt-ls/config_linux",
+    "-data",
+    "/tmp",
+    "--add-modules=ALL-SYSTEM",
+    "--add-opens java.base/java.util=ALL-UNNAMED",
+    "--add-opens java.base/java.lang=ALL-UNNAMED"
     },
-    on_attach = on_attach
+  on_attach = on_attach
 }
 
 require'nvim-treesitter.configs'.setup {
@@ -302,9 +278,26 @@ require'nvim-treesitter.configs'.setup {
 }
 
 require'base16-colorscheme'.setup('ocean')
-EOF
 
-    autocmd Filetype python,lua setl omnifunc=v:lua.vim.lsp.omnifunc
+local cmp = require('cmp')
+cmp.setup {
+  mapping = {
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<Esc>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+  },
+  sources = {
+    { name = "nvim_lsp" },
+  },
+}
+
+EOF
     " }}}
 
     " Settings {{{
@@ -362,7 +355,6 @@ EOF
         set grepformat=%f:%l:%c:%m,%f:%l:%m
     endif
 
-    "colorscheme base16-ocean
     highlight Search guibg=background guifg=#2abcdf gui=underline
     highlight MatchParen guibg=background guifg=#00b400 gui=underline
     highlight Error guibg=background guifg=#c20000
