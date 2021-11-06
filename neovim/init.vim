@@ -258,9 +258,9 @@ nvim_lsp.jdtls.setup {
     "-Xms1g",
     "-Xmx2G",
     "-jar",
-    "/opt/lsp/jdt-ls/plugins/org.eclipse.equinox.launcher_1.6.100.v20201223-0822.jar",
+    "/Users/meloaugu/util/ls/jdt/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar",
     "-configuration",
-    "/opt/lsp/jdt-ls/config_linux",
+    "/Users/meloaugu/util/ls/jdt/config_linux",
     "-data",
     "/tmp",
     "--add-modules=ALL-SYSTEM",
@@ -303,7 +303,7 @@ EOF
     " Settings {{{
     syntax on
     filetype plugin indent on
-    cd /mnt/c/Users/augustomelo/workspace
+    cd $HOME/workspace
 
     set pastetoggle=<F2>
     set termguicolors
