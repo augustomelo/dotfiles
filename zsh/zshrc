@@ -1,8 +1,7 @@
 # Set up the prompt
 
 autoload -Uz promptinit
-# promptinit
-# prompt adam1
+autoload -Uz vcs_info
 
 setopt histignorealldups sharehistory
 
@@ -53,13 +52,26 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # Prompt configuration
 setopt PROMPT_SUBST
-prompt() {
+precmd() {
+    vcs_info 
+    zstyle ':vcs_info:BRANCH_INFO:*' formats '%b'
+}
 
+prompt() {
     local TERMWIDTH=$(($COLUMNS + 2))
     local RIGHT='(%D{%a %b %d})'
     local LEFT='┌─[%B%n@%m%b] (%B%F{green}%~%f%b)'
-    local MAIN='└─(%D{%I:%M})─(%#)─ '
+    local MAIN='└─(%D{%I:%M})─(%#)─'
+    local BRANCH_INFO=''
 
-    printf "%*s\r%s\n%s" "$(($TERMWIDTH))" "$RIGHT" "$LEFT" "$MAIN"
+    if [[ ! -z ${vcs_info_msg_0_} ]]; then
+        BRANCH_INFO="(${vcs_info_msg_0_})"
+    fi
+
+    printf "%*s\r%s\n%s%s " "$(($TERMWIDTH))" "$RIGHT" "$LEFT" "$MAIN" $BRANCH_INFO
 }
+
 PROMPT='$(prompt)'
+
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
