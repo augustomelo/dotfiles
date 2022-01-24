@@ -17,7 +17,8 @@ Plug 'RRethy/nvim-base16'
 Plug 'junegunn/goyo.vim'
 Plug 'equalsraf/neovim-gui-shim'
 Plug 'sheerun/vim-polyglot'
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': 'TSUpdate' }
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'vim-scripts/hybris-ImpEx'
 " }}}
 
 " Global {{{
@@ -28,6 +29,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'neovim/nvim-lspconfig'
 Plug 'kamykn/spelunker.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf.vim'
 
@@ -38,16 +40,8 @@ else
 endif
 
 " Fzf Config {{{
+    command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
 
-    " Fzf to use ripgrep
-    command! -bang -nargs=* Rg
-      \ call fzf#vim#grep(
-      \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-      \   <bang>0 ? fzf#vim#with_preview('up:60%')
-      \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-      \   <bang>0)
-
-    nnoremap <silent> <C-p> :Files <CR>
 " }}}
 
 Plug 'Yggdroot/indentLine'
@@ -102,17 +96,17 @@ call plug#end()
 
 
     " This function make fzf use wildignore from neovim from neovim
-    function! s:with_agignore(bang, args)
+    function! s:with_ignore(bang, args)
         let fileignore = '/tmp/fileignore-for-fzf'
         let entries = split(&wildignore, ',')
         let source = 'rg --files --follow --ignore-file ' . fileignore
 
         call writefile(entries, fileignore)
-        call fzf#vim#files(a:args, {'source': source})
+        call fzf#vim#files(a:args, {'source': source, 'options': ['--preview', 'cat {}']})
     endfunction
 
     autocmd VimEnter * command! -bang -nargs=? -complete=dir Files
-          \ call s:with_agignore(<bang>0, <q-args>)
+          \ call s:with_ignore(<bang>0, <q-args>)
     " }}}
 
     " Bindings {{{
@@ -132,6 +126,10 @@ call plug#end()
 
         " Leader {{{
         let mapleader=','
+
+        nnoremap <leader>ff :Files<CR>
+        nnoremap <leader>ft :Rg<space>
+        nnoremap <leader>fb :Buffers<CR>
 
         nnoremap <Leader><Leader> <C-^>
         nnoremap <silent> <Leader>n :nohlsearch<CR>
@@ -227,23 +225,23 @@ local on_attach = function(client, bufnr)
   local opts = { noremap=true, silent=true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  buf_set_keymap('n', '<leader>fdc', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', '<leader>fdf', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', '<leader>h', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', '<leader>fi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<leader>sh', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<leader>td', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', '<leader>frf', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  buf_set_keymap('n', '<leader>gn', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', '<leader>gp', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<leader>sl', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
 end
 
@@ -260,7 +258,7 @@ nvim_lsp.jdtls.setup {
     "-jar",
     "/Users/meloaugu/util/ls/jdt/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar",
     "-configuration",
-    "/Users/meloaugu/util/ls/jdt/config_linux",
+    "/Users/meloaugu/util/ls/jdt/config_mac",
     "-data",
     "/tmp",
     "--add-modules=ALL-SYSTEM",
@@ -322,7 +320,7 @@ EOF
     "plugin spelunker
     set equalalways
     set list
-    set listchars=tab:»\ ,nbsp:⦸,eol:¬,trail:•,
+    set listchars=tab:\┆\ ,nbsp:⦸,eol:¬,trail:•,
     set fillchars=vert:\|
     set noshowmatch
     set foldmethod=syntax
@@ -362,6 +360,7 @@ EOF
 
     autocmd Filetype gitcommit setlocal spell textwidth=72
     autocmd Filetype tex setlocal textwidth=120
+    autocmd BufRead,BufNewFile *.impex set filetype=impex
 
     if has('win32')
         let g:python_host_prog=$HOME . '\envs\neovim2\Scripts\python'
@@ -370,7 +369,6 @@ EOF
         let g:python_host_prog='/usr/bin/python2'
         let g:python3_host_prog='/usr/bin/python3.6'
     endif
-
     " }}}
 
     " Status Line {{{
@@ -414,8 +412,14 @@ EOF
         endif
     endfunction
 
+    function! StatuslineGit()
+        return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+    endfunction
+
     let &statusline=''
     let &statusline.='%{GetStatusLine()}'
+    let &statusline.=' '                       " Separator
+    let &statusline.='%{StatuslineGit()}'
     let &statusline.=' '                       " Separator
     let &statusline.='%<'                      " Truncate
     let &statusline.='%f'                      " Relative path to the file in buffer
