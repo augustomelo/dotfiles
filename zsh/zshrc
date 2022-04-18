@@ -4,7 +4,6 @@ autoload -Uz promptinit
 autoload -Uz vcs_info
 
 setopt histignorealldups sharehistory
-
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
 
@@ -35,26 +34,14 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-#Alias
-## ls
-#alias ls='ls --color=auto'
-
-## xrandr
-#alias moHdmiPLeft='xrandr --output HDMI-1 --auto --primary --left-of eDP-1 --output eDP-1 --auto'
-#alias moHdmiPRight='xrandr --output HDMI-1 --auto --primary --right-of eDP-1 --output eDP-1 --auto'
-#alias moHdmiPClone='xrandr --output HDMI-1 --auto --primary --same-as eDP-1 --output eDP-1 --auto'
-#alias moHdmiOnly='xrandr --output HDMI-1 --auto --primary --output eDP-1 --off'
-
-#alias moEdpPLeft='xrandr --output eDP-1 --auto --primary --left-of HDM1 --output HDM1 --auto'
-#alias moEdpPRight='xrandr --output eDP-1 --auto --primary --right-of HDMI-1 --output HDMI-1 --auto'
-#alias moEdpPClone='xrandr --output eDP-1 --auto --primary --same-as HDMI-1 --output HDMI-1 --auto'
-#alias moEdpOnly='xrandr --output eDP-1 --auto --primary --output HDMI-1 --off'
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' formats "(%b)"
 
 # Prompt configuration
 setopt PROMPT_SUBST
+
 precmd() {
     vcs_info 
-    zstyle ':vcs_info:BRANCH_INFO:*' formats '%b'
 }
 
 prompt() {
@@ -65,13 +52,19 @@ prompt() {
     local BRANCH_INFO=''
 
     if [[ ! -z ${vcs_info_msg_0_} ]]; then
-        BRANCH_INFO="(${vcs_info_msg_0_})"
+        BRANCH_INFO=${vcs_info_msg_0_}
     fi
 
-    printf "%*s\r%s\n%s%s " "$(($TERMWIDTH))" "$RIGHT" "$LEFT" "$MAIN" $BRANCH_INFO
+    printf '%*s\r%s\n%s%s' "$(($TERMWIDTH))" "$RIGHT" "$LEFT" "$MAIN" $BRANCH_INFO
 }
 
-PROMPT='$(prompt)'
+PROMPT='$(prompt) '
 
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+# alias
+alias k='kubectl'
+
+export PATH="${PATH}:${HOME}/.krew/bin"
+export KUBECONFIG="${HOME}/.kube/config"
+export SDKMAN_DIR="$HOME/.sdkman"
+
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
