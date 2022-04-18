@@ -22,15 +22,21 @@ Plug 'vim-scripts/hybris-ImpEx'
 " }}}
 
 " Global {{{
+Plug 'editorconfig/editorconfig-vim'
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-vsnip'
 Plug 'Raimondi/delimitMate'
 Plug 'mattn/emmet-vim'
+Plug 'rafamadriz/friendly-snippets'
 Plug 'scrooloose/nerdcommenter'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'neovim/nvim-lspconfig'
 Plug 'kamykn/spelunker.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat' | Plug 'tpope/vim-surround'
+Plug 'hrsh7th/vim-vsnip'
 Plug 'junegunn/fzf.vim'
 
 if (has('win32'))
@@ -48,23 +54,23 @@ Plug 'Yggdroot/indentLine'
     " indentLine Config {{{
     let g:indentLine_fileTypeExclude=['json', 'tex']
     " }}}
-Plug 'scrooloose/nerdtree'
-    " NERDtree Config {{{
-    let g:NERDTreeWinPos = 'right'
-    let g:NERDTreeWinSize = 40
-    let g:NERDTreeDirArrowExpandable = '▸'
-    let g:NERDTreeDirArrowCollapsible = '▾'
-    let g:NERDTreeMapActivateNode = '<Space>'
-    let g:NERDTreeIgnore = [
-                \'\.csproj.user$[[file]]',
-                \'\.suo$[[file]]',
-                \'\.pyc$[[file]]',
-                \'Properties[[dir]]',
-                \'obj[[dir]]',
-                \'bin[[dir]]',
-                \'target[[dir]]'
-                \]
-    " }}}
+"Plug 'scrooloose/nerdtree'
+    "" NERDtree Config {{{
+    "let g:NERDTreeWinPos = 'right'
+    "let g:NERDTreeWinSize = 40
+    "let g:NERDTreeDirArrowExpandable = '▸'
+    "let g:NERDTreeDirArrowCollapsible = '▾'
+    "let g:NERDTreeMapActivateNode = '<Space>'
+    "let g:NERDTreeIgnore = [
+                "\'\.csproj.user$[[file]]',
+                "\'\.suo$[[file]]',
+                "\'\.pyc$[[file]]',
+                "\'Properties[[dir]]',
+                "\'obj[[dir]]',
+                "\'bin[[dir]]',
+                "\'target[[dir]]'
+                "\]
+    "" }}}
 "Plug 'ervandew/supertab'
     "" Supertab Config {{{
     "let g:SuperTabDefaultCompletionType = 'context'
@@ -138,7 +144,7 @@ call plug#end()
         " }}}
 
         " Normal {{{
-        nnoremap <silent> <C-n> :NERDTreeToggle<CR>
+        nnoremap <silent> <C-n> :Lexplore!<CR>
         nnoremap <silent> <F8> :TagbarToggle<CR>
 
         nnoremap j gj
@@ -161,7 +167,7 @@ call plug#end()
         nnoremap <silent> gpe :lprev<CR>                                       " go to previous error/warning
         nnoremap <silent> <F4> :e $MYVIMRC<CR>
         nnoremap <silent> <F5> :call TrimWhitespace()<CR>
-        nnoremap <F1> :NERDTree $HOME/util/wiki<CR>
+        nnoremap <F1> :Lexplore! $HOME/util/wiki<CR>
 
         " }}}
 
@@ -213,7 +219,6 @@ call plug#end()
 
 :lua << EOF
 local nvim_lsp = require('lspconfig')
-
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -254,7 +259,7 @@ nvim_lsp.jdtls.setup {
     "-Dlog.protocol=true",
     "-Dlog.level=ALL",
     "-Xms1g",
-    "-Xmx2G",
+    "-Xmx2g",
     "-jar",
     "/Users/meloaugu/util/ls/jdt/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar",
     "-configuration",
@@ -278,7 +283,12 @@ require'nvim-treesitter.configs'.setup {
 require'base16-colorscheme'.setup('ocean')
 
 local cmp = require('cmp')
-cmp.setup {
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
   mapping = {
     ['<S-Tab>'] = cmp.mapping.select_prev_item(),
     ['<Tab>'] = cmp.mapping.select_next_item(),
@@ -290,10 +300,13 @@ cmp.setup {
       select = true,
     },
   },
-  sources = {
-    { name = "nvim_lsp" },
-  },
-}
+  sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' }, 
+      }, {
+      { name = 'buffer' },
+    })
+})
 
 EOF
     " }}}
@@ -335,7 +348,7 @@ EOF
     set ignorecase
     set smartcase
     set incsearch
-    set laststatus=2                                      " always show status line
+    set laststatus=3
     set lazyredraw                                        " make the macro go faster
     set scrolloff=3                                       " start scrolling 3 lines before edge of view port
     set visualbell                                        " set the visual bell so it can be assign a sound
@@ -369,6 +382,9 @@ EOF
         let g:python_host_prog='/usr/bin/python2'
         let g:python3_host_prog='/usr/bin/python3.6'
     endif
+
+    let g:netrw_banner=0
+    let g:netrw_liststyle=3
     " }}}
 
     " Status Line {{{
@@ -413,7 +429,8 @@ EOF
     endfunction
 
     function! StatuslineGit()
-        return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+        let l:branchname = system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+        return strlen(l:branchname) > 0? '(' . l:branchname .')' : ''
     endfunction
 
     let &statusline=''
