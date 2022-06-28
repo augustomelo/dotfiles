@@ -219,15 +219,19 @@ call plug#end()
 
 :lua << EOF
 local nvim_lsp = require('lspconfig')
-local on_attach = function(client, bufnr)
-  local function vim.keymap.set(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
+local opts = { noremap=true, silent=true }
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+
+local on_attach = function(client, bufnr)
   --Enable completion triggered by <c-x><c-o>
   --buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
-  local opts = { noremap=true, silent=true, buffer=bufnr}
+  --local opts = { noremap=true, silent=true, buffer=bufnr}
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.keymap.set('n', '<leader>fdc', vim.lsp.buf.declaration, opts)
@@ -238,7 +242,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
   vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
   vim.keymap.set('n', '<leader>wl', function()
-  print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, opts)
   vim.keymap.set('n', '<leader>td', vim.lsp.buf.type_definition, opts)
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
@@ -249,7 +253,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>gp', vim.lsp.diagnostic.goto_next, opts)
   vim.keymap.set('n', '<leader>sl', vim.lsp.diagnostic.set_loclist, opts)
   vim.keymap.set("n", "<leader>f", vim.lsp.buf.formatting, opts)
-
 end
 
 nvim_lsp.jdtls.setup {
