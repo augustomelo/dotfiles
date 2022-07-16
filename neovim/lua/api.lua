@@ -12,5 +12,15 @@ vim.api.nvim_create_autocmd({'WinEnter', 'BufEnter'}, {
   group = vim.api.nvim_create_augroup('Statusline', { clear = true})
 })
 
---https://neovim.discourse.group/t/reload-init-lua-and-all-require-d-scripts/971/9
---vim.api.nvim_create_user_command('ReloadCfg', 'source $MYVIMRC', { nargs = 1 })
+vim.api.nvim_create_user_command('ReloadConfig',
+function (_)
+  local init_file_location = vim.env.MYVIMRC
+
+  for name,_ in pairs(package.loaded) do
+    package.loaded[name] = nil
+  end
+
+  dofile(init_file_location)
+  vim.cmd('PackerCompile')
+end,
+{ nargs = 0 })

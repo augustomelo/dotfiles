@@ -4,7 +4,7 @@ return {
   requires = {
     { 'nvim-lua/plenary.nvim' },
     { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-  }, 
+  },
   config = function ()
     require('telescope').setup {
       extensions = {
@@ -25,6 +25,7 @@ return {
         },
       },
       defaults = {
+        file_ignore_patterns = require('wildignore').as_lua_regex(),
         vimgrep_arguments = {
           'rg',
           '--follow',
@@ -40,15 +41,14 @@ return {
         mappings = {
           i = {
             ['<esc>'] = require('telescope.actions').close,
-            ['<C-j>'] = require('telescope.actions').move_selection_next,
-            ['<C-k>'] = require('telescope.actions').move_selection_previous,
+            ['<c-j>'] = require('telescope.actions').move_selection_next,
+            ['<c-k>'] = require('telescope.actions').move_selection_previous,
           },
         },
       },
     }
 
     vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
-    vim.keymap.set('n', '<leader>fc', '<cmd>Telescope find_files({cwd = vim.fn.expand(\'~/dotfiles\') })<cr>')
     vim.keymap.set('n', '<leader>ft', '<cmd>Telescope live_grep<cr>')
     vim.keymap.set('n', '<leader>fb', '<cmd>Telescope buffers<cr>')
     vim.keymap.set('n', '<leader>fc', function()
