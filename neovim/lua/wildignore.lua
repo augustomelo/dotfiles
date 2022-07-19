@@ -67,6 +67,7 @@ local ignore = {
     '{}node_modules/',
     '{}typings/',
     '{}bower_components/',
+    --'{}.terraform/',
   }
 }
 
@@ -104,6 +105,13 @@ end
 M.as_lua_regex = function()
   local files = replace_placeholder(ignore.file, '%%')
   local folders = replace_placeholder(ignore.folder, '^')
+
+  return merge_tables(files, folders)
+end
+
+M.as_regexp = function ()
+  local files = replace_placeholder(ignore.file, '.*\\')
+  local folders = replace_placeholder(ignore.folder, '' )
 
   return merge_tables(files, folders)
 end
