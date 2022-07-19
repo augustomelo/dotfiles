@@ -12,6 +12,18 @@ vim.api.nvim_create_autocmd({'WinEnter', 'BufEnter'}, {
   group = vim.api.nvim_create_augroup('Statusline', { clear = true})
 })
 
+vim.api.nvim_create_autocmd({'BufEnter', 'WinEnter'}, {
+  pattern = '*',
+  command = 'setlocal cursorline',
+  group = vim.api.nvim_create_augroup('CursorLine', { clear = true})
+})
+
+vim.api.nvim_create_autocmd({'BufLeave', 'WinLeave'}, {
+  pattern = '*',
+  command = 'setlocal nocursorline',
+  group = vim.api.nvim_create_augroup('CursorLine', { clear = false})
+})
+
 vim.api.nvim_create_user_command('ReloadConfig',
 function (_)
   local init_file_location = vim.env.MYVIMRC
