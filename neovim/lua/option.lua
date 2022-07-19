@@ -24,6 +24,7 @@ vim.opt.showbreak = '⤷ '
 vim.opt.smartcase = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.statusline = require('statusline').get_statusline()
 vim.opt.swapfile = false
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2

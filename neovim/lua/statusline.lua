@@ -16,7 +16,9 @@ local buffer_encoding = function()
   end
 end
 
-function _G.statusline()
+local M = {}
+
+M.get_statusline = function ()
   return table.concat {
     ' ',
     '%(',
@@ -40,3 +42,5 @@ function _G.statusline()
     ' ',
   }
 end
+
+return M

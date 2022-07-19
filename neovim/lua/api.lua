@@ -6,12 +6,6 @@ vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('GitCommitMessage', { clear = true})
 })
 
-vim.api.nvim_create_autocmd({'WinEnter', 'BufEnter'}, {
-  pattern = '*',
-  command = 'setlocal statusline=%!v:lua.statusline()',
-  group = vim.api.nvim_create_augroup('Statusline', { clear = true})
-})
-
 vim.api.nvim_create_autocmd({'BufEnter', 'WinEnter'}, {
   pattern = '*',
   command = 'setlocal cursorline',
