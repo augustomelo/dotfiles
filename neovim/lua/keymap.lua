@@ -7,8 +7,8 @@ vim.keymap.set('n', '<leader>q', '<cmd>quit<cr>')
 vim.keymap.set('n', '<leader>w', '<cmd>write<cr>')
 
 vim.keymap.set('n', '<c-n>', '<cmd>Lexplore!<cR>')
-vim.keymap.set('n', 'j', 'gj')
-vim.keymap.set('n', 'k', 'gk')
+vim.keymap.set('n', 'j', function () if vim.v.count == 0 then return 'gj' end return 'j' end, { expr = true })
+vim.keymap.set('n', 'k', function () if vim.v.count == 0 then return 'gk' end return 'k' end, { expr = true })
 vim.keymap.set('n', '<space>', 'za')
 vim.keymap.set('n', 'Y', 'y$')
 vim.keymap.set('n', '<c-h>', '<c-w>h')
@@ -19,3 +19,4 @@ vim.keymap.set('n', '<c-tab>', 'gt')
 vim.keymap.set('n', '<c-s-tab>', 'gT')
 
 vim.keymap.set({ 'n', 'i' }, '<f1>', '<nop>')
+
