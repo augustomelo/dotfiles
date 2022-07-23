@@ -3,8 +3,8 @@ vim.keymap.set('c', '<c-e>', '<end>')
 
 vim.keymap.set('n', '<leader><leader>', '<c-^>')
 vim.keymap.set('n', '<leader>n', '<cmd>nohlsearch<cr>')
-vim.keymap.set('n', '<leader>q', '<cmd>quit<cR>')
-vim.keymap.set('n', '<leader>w', '<cmd>write<cR>')
+vim.keymap.set('n', '<leader>q', '<cmd>quit<cr>')
+vim.keymap.set('n', '<leader>w', '<cmd>write<cr>')
 
 vim.keymap.set('n', '<c-n>', '<cmd>Lexplore!<cR>')
 vim.keymap.set('n', 'j', 'gj')

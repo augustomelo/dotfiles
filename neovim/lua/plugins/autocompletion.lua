@@ -26,12 +26,15 @@ return {
           select = true,
         },
       },
-      sources = require('cmp').config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'vsnip' }, 
-      }, {
-        { name = 'buffer' },
-      })
+      sources = require('cmp').config.sources(
+        {
+          { name = 'nvim_lsp' },
+          { name = 'vsnip' },
+        },
+        {
+          { name = 'buffer' },
+        }
+      )
     })
   end,
 }
