@@ -20,6 +20,7 @@ return require('packer').startup(function(use)
   use 'kamykn/spelunker.vim'
   use 'tpope/vim-fugitive'
   use 'lukas-reineke/indent-blankline.nvim'
+  use { 'tpope/vim-surround', requires = { 'tpope/vim-repeat' } }
 
   use(require('plugins.autocompletion'))
   use(require('plugins.autopairs'))
@@ -27,7 +28,6 @@ return require('packer').startup(function(use)
   use(require('plugins.fuzzy_finder'))
   use(require('plugins.lsp'))
   use(require('plugins.treesitter'))
-  use(require('plugins.vim_surround'))
 
   if packer_bootstrap then
     require('packer').sync()
