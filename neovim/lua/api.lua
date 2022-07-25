@@ -6,13 +6,13 @@ vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('GitCommitMessage', { clear = true})
 })
 
-vim.api.nvim_create_autocmd({'BufEnter', 'WinEnter'}, {
+vim.api.nvim_create_autocmd({'BufEnter', 'WinEnter', 'FocusGained'}, {
   pattern = '*',
   command = 'setlocal cursorline',
   group = vim.api.nvim_create_augroup('CursorLine', { clear = true})
 })
 
-vim.api.nvim_create_autocmd({'BufLeave', 'WinLeave'}, {
+vim.api.nvim_create_autocmd({'BufLeave', 'WinLeave', 'FocusLost'}, {
   pattern = '*',
   command = 'setlocal nocursorline',
   group = vim.api.nvim_create_augroup('CursorLine', { clear = false})
