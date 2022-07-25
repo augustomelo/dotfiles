@@ -12,7 +12,7 @@ vim.opt.list = true
 vim.opt.listchars = {
   eol = '¬',
   nbsp = '⦸',
-  tab = '▷⋯',
+  tab = '» ',
   trail = '•',
 }
 vim.opt.mouse = 'a'
