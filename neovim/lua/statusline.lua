@@ -1,5 +1,5 @@
 local git_branch = function()
-  local branch_name = vim.fn.system('git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d \'\n\'')
+  local branch_name = vim.fn.system("git branch --show-current 2> /dev/null | tr -d '\n'")
 
   if string.len(branch_name) > 0 then
     return '(' .. branch_name .. ')'
