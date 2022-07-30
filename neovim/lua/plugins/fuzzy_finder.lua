@@ -5,8 +5,7 @@ return {
     { 'nvim-lua/plenary.nvim' },
     { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
   },
-  config = function ()
-    require('telescope').setup {
+  config = function() require('telescope').setup {
       extensions = {
         fzf = {
           fuzzy = true,
@@ -52,7 +51,23 @@ return {
     vim.keymap.set('n', '<leader>ft', '<cmd>Telescope live_grep<cr>')
     vim.keymap.set('n', '<leader>fb', '<cmd>Telescope buffers<cr>')
     vim.keymap.set('n', '<leader>fc', function()
-      require('telescope.builtin').find_files({cwd = vim.fn.expand('~/workspace/dotfiles')})
+      local dotfiles = vim.fn.expand('~/workspace/dotfiles/')
+      require('telescope.builtin').find_files({
+        cwd = dotfiles,
+        attach_mappings = function(prompt_bufnr)
+          local actions = require("telescope.actions")
+          local action_state = require("telescope.actions.state")
+          actions.select_default:replace(function()
+            actions.close(prompt_bufnr)
+            local selection = action_state.get_selected_entry()
+
+            vim.api.nvim_command('tabnew ' .. dotfiles .. selection[1])
+            vim.api.nvim_command('tcd' .. dotfiles)
+          end)
+
+          return true
+        end,
+      })
     end)
   end
 }
