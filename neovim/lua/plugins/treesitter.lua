@@ -27,7 +27,13 @@ return {
         true
       }
     }
-    vim.opt.foldmethod = 'expr'
-    vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+
+    -- Fold is currently broken:
+    -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1424
+    -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1337
+    -- https://github.com/neovim/neovim/issues/14977
+    --vim.opt.foldmethod = 'expr'
+    --vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+    vim.opt.foldmethod = 'indent'
   end,
 }
