@@ -3,7 +3,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find -L ~/workspace ~/util -mindepth 1 -maxdepth 1 -type d | fzf)
+    selected=$(find -L ${PWD} ~/workspace ~/util -mindepth 1 -maxdepth 1 -type d | sort -u | fzf)
 fi
 
 if [[ -z $selected ]]; then
