@@ -63,7 +63,7 @@ local ignore = {
     '{}Properties/',
     '{}_references',
     '{}.git/',
-    '{}.git-crypt/',
+    '{}.git.crypt/',
     '{}.svn/',
     '{}node_modules/',
     '{}typings/',
