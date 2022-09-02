@@ -1,5 +1,8 @@
 return {
   'nvim-treesitter/nvim-treesitter',
+  requires = {
+    'nvim-treesitter/nvim-treesitter-context'
+  },
   run = ':TSUpdate',
   config = function()
     require'nvim-treesitter.configs'.setup {
