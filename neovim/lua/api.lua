@@ -18,6 +18,12 @@ vim.api.nvim_create_autocmd({'BufLeave', 'WinLeave', 'FocusLost'}, {
   group = vim.api.nvim_create_augroup('CursorLine', { clear = false})
 })
 
+vim.api.nvim_create_autocmd({'BufRead', 'BufNewFile'}, {
+  pattern = 'Jenkinsfile',
+  command = 'setfiletype groovy',
+  group = vim.api.nvim_create_augroup('JenkinsfileFileType', { clear = false})
+})
+
 vim.api.nvim_create_user_command('ReloadConfig',
 function (_)
   local init_file_location = vim.env.MYVIMRC
