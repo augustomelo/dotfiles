@@ -39,6 +39,7 @@ local ignore = {
     '.factorypath',
     '.code-workspace',
     '.DS_Store',
+    'package-lock.json',
   },
   folder = {
     '{}.mtj.tmp/',
