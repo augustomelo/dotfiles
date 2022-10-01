@@ -4,6 +4,7 @@ return {
   requires = {
     { 'nvim-lua/plenary.nvim' },
     { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+    { "nvim-telescope/telescope-file-browser.nvim" }
   },
   config = function() require('telescope').setup {
       extensions = {
@@ -12,7 +13,16 @@ return {
           override_generic_sorter = true,
           override_file_sorter = true,
           case_mode = "smart_case",
-        }
+        },
+        file_browser = {
+          hijack_netrw = true,
+          dir_icon = "",
+          mappings = {
+            ["i"] = {
+              ['<leader>cf'] = require('telescope').extensions.file_browser.actions.create
+            },
+          }
+        },
       },
       pickers = {
         find_files = {
@@ -69,5 +79,8 @@ return {
         end,
       })
     end)
+
+    require("telescope").load_extension "file_browser"
+    vim.keymap.set('n', '<C-n>', '<cmd>Telescope file_browser<cr>')
   end
 }
