@@ -17,15 +17,19 @@ Run as admin install.bat
 
 ## Todo
 ### General
-- [] use stow or other program to manage the dotfiles ([stow](https://www.gnu.org/software/stow/), [other utilities](https://dotfiles.github.io/utilities/) )
+- [ ] use stow or other program to manage the dotfiles ([stow](https://www.gnu.org/software/stow/), [other utilities](https://dotfiles.github.io/utilities/) )
 
 ### Neovim
-- [] Better file browser with telescope-file-browser.nvim
-- [] Better pairs highlight, for example when working with lua the function is not highlighted
-- [] Understand how to manage my words dictionary 
-- [] C-A is not working because Nerdcommenter
-- [] Add some keymaps for handling git
+- [X] Better file browser with telescope-file-browser.nvim
+- [ ] Better pairs highlight, for example when working with lua the function is not highlighted
+- [ ] Understand how to manage my words dictionary 
+- [ ] C-A is not working because Nerdcommenter
+- [ ] Add some keymaps for handling git
+- nvim 8
+  - [ ] vim.o.command_height: maybe use something like https://github.com/folke/noice.nvim for the commandline
+  - [ ] vim.o.winbar: move the file name from the status line to the top bar
+  - [ ] vim.lsp.buf.format(): when saving a file
+  - [ ] more cool stuff: https://github.com/neovim/neovim/releases/tag/v0.8.0
 
-- [] Add some keymaps for handling git
 ### ZSH
-- [] Integrate some useful scripts
+- [ ] Integrate some useful scripts
