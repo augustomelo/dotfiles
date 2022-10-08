@@ -23,7 +23,7 @@ Run as admin install.bat
 - [X] Better file browser with telescope-file-browser.nvim
 - [X] Better pairs highlight, for example when working with lua the function is not highlighted
 - [ ] Understand how to manage my words dictionary 
-- [ ] C-A is not working because Nerdcommenter
+- [X] C-A is not working because Nerdcommenter
 - [ ] Add some keymaps for handling git
 - nvim 8
   - [ ] vim.o.command_height: maybe use something like https://github.com/folke/noice.nvim for the commandline
