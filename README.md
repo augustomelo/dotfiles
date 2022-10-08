@@ -21,7 +21,7 @@ Run as admin install.bat
 
 ### Neovim
 - [X] Better file browser with telescope-file-browser.nvim
-- [ ] Better pairs highlight, for example when working with lua the function is not highlighted
+- [X] Better pairs highlight, for example when working with lua the function is not highlighted
 - [ ] Understand how to manage my words dictionary 
 - [ ] C-A is not working because Nerdcommenter
 - [ ] Add some keymaps for handling git

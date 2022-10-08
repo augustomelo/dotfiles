@@ -19,8 +19,6 @@ return require('packer').startup(function(use)
   use 'scrooloose/nerdcommenter'
   use 'kamykn/spelunker.vim'
   use 'tpope/vim-fugitive'
-  use 'lukas-reineke/indent-blankline.nvim'
-  use { 'tpope/vim-surround', requires = { 'tpope/vim-repeat' } }
 
   use(require('plugins.autocompletion'))
   use(require('plugins.autopairs'))
