@@ -25,6 +25,11 @@ Run as admin install.bat
 - [ ] Understand how to manage my words dictionary 
 - [X] C-A is not working because Nerdcommenter
 - [ ] Add some keymaps for handling git
+- [ ] I should have a look on the pugins for nvim-cmp they seem to have useful completion source, like:
+  - Plug 'hrsh7th/cmp-buffer': source buff words
+  - Plug 'hrsh7th/cmp-path': source for path
+  - Plug 'hrsh7th/cmp-cmdline' source vim's cmdline
+  - [more](https://github.com/topics/nvim-cmp) 
 - nvim 8
   - [ ] vim.o.command_height: maybe use something like https://github.com/folke/noice.nvim for the commandline
   - [ ] vim.o.winbar: move the file name from the status line to the top bar
