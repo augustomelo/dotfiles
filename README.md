@@ -30,11 +30,20 @@ Run as admin install.bat
   - Plug 'hrsh7th/cmp-path': source for path
   - Plug 'hrsh7th/cmp-cmdline' source vim's cmdline
   - [more](https://github.com/topics/nvim-cmp) 
+- [ ] vnip and cmp, how to jump to the next place holder
+- [ ] nvim-cpm display docs as well
+- [ ] improve startup time, maybe this could help: https://alpha2phi.medium.com/neovim-for-beginners-performance-95687714c236
 - nvim 8
   - [ ] vim.o.command_height: maybe use something like https://github.com/folke/noice.nvim for the commandline
   - [ ] vim.o.winbar: move the file name from the status line to the top bar
   - [ ] vim.lsp.buf.format(): when saving a file
   - [ ] more cool stuff: https://github.com/neovim/neovim/releases/tag/v0.8.0
+- [ ] Improve wildignore, for example .github is being hidden
 
 ### ZSH
 - [ ] Integrate some useful scripts
+- [ ] Add autocompletion missing
+  - [ ] kubernetes 
+
+### TMUX
+- [ ] Improve statusline
