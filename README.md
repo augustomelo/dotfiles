@@ -22,7 +22,7 @@ Run as admin install.bat
 ### Neovim
 - [X] Better file browser with telescope-file-browser.nvim
 - [X] Better pairs highlight, for example when working with lua the function is not highlighted
-- [ ] Understand how to manage my words dictionary 
+- [X] Understand how to manage my words dictionary - it seems that the only way is thru spelunker.vim [allowlist](https://github.com/kamykn/spelunker.vim#43-users-allowlist) 
 - [X] C-A is not working because Nerdcommenter
 - [ ] Add some keymaps for handling git
 - [ ] I should have a look on the pugins for nvim-cmp they seem to have useful completion source, like:
@@ -39,6 +39,8 @@ Run as admin install.bat
   - [ ] vim.lsp.buf.format(): when saving a file
   - [ ] more cool stuff: https://github.com/neovim/neovim/releases/tag/v0.8.0
 - [ ] Improve wildignore, for example .github is being hidden
+- [ ] Use markdown formatter
+- [X] Type errors should be displayed red
 
 ### ZSH
 - [ ] Integrate some useful scripts

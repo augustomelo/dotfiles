@@ -17,7 +17,6 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'editorconfig/editorconfig-vim'
   use 'scrooloose/nerdcommenter'
-  use 'kamykn/spelunker.vim'
   use 'tpope/vim-fugitive'
 
   use(require('plugins.autocompletion'))
@@ -26,6 +25,7 @@ return require('packer').startup(function(use)
   use(require('plugins.fuzzy_finder'))
   use(require('plugins.lsp'))
   use(require('plugins.treesitter'))
+  use(require('plugins.spellchecker'))
 
   if packer_bootstrap then
     require('packer').sync()
