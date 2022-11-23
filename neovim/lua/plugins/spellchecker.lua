@@ -5,8 +5,9 @@ return {
     vim.g.spelunker_complex_or_compound_word_group = "SpellRare"
 
     vim.g.spelunker_white_list_for_user = {
+      'bitwarden',
       'github',
-      'kuberenets',
+      'kubernetes',
     }
   end,
 }
