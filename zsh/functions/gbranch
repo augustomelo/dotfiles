@@ -1,0 +1,11 @@
+# vim: set filetype=bash:
+
+gbranch() {
+  if [[ -n "${1}" ]]; then
+    defaultbranch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')
+    git fetch origin $defaultbranch:$defaultbranch
+    git switch -c $1 $defaultbranch
+  else
+    echo "The branch name is mandatory"
+  fi
+}
