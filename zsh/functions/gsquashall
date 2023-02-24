@@ -1,0 +1,7 @@
+# vim: set filetype=bash:
+
+gsquashall() {
+  defaultbranch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')
+  currentbranch=$(git branch --show-current)
+  git rebase -i $(git merge-base $currentbranch $defaultbranch)
+}
