@@ -4,6 +4,7 @@ vim.opt.breakindent = true
 vim.opt.breakindentopt = 'shift:2'
 vim.opt.completeopt = 'menuone,preview,noinsert'
 vim.opt.expandtab = true
+vim.opt.foldenable = false
 vim.opt.ignorecase = true
 vim.opt.laststatus = 3
 vim.opt.lazyredraw = true
