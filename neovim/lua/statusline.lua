@@ -16,13 +16,26 @@ local buffer_encoding = function()
   end
 end
 
+-- colors based on nord color pallet
+-- https://www.nordtheme.com/docs/colors-and-palettes
+vim.api.nvim_set_hl(0, 'StatuslineEdge', {fg = '#3B4252', bg = '#88C0D0'})
+vim.api.nvim_set_hl(0, 'StatuslineSeparator', {fg = '#88C0D0', bg = '#3B4252'})
+vim.api.nvim_set_hl(0, 'StatuslineMiddle', {fg = '#ECEFF4', bg = '#3B4252'})
+
+
 local M = {}
+
 
 M.get_statusline = function ()
   return table.concat {
+    '%#StatuslineEdge#',
     ' ',
     '%(',
     git_branch(),
+    ' ',
+    '%#StatuslineSeparator#',
+    '',
+    '%#StatuslineMiddle#',
     '%)',
     '%=',
     '%<',
@@ -32,6 +45,9 @@ M.get_statusline = function ()
     '%)',
     '%=',
     ' ',
+    '%#StatuslineSeparator#',
+    '',
+    '%#StatuslineEdge#',
     '%3v',
     ':',
     '%{v:lua.vim.fn.line(\'.\')}',
