@@ -27,12 +27,13 @@ vim.opt.showmode = false
 vim.opt.smartcase = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.statusline='%!v:lua.require(\'statusline\').statusline()'
+vim.opt.statusline = '%!v:lua.require(\'statusline\').statusline()'
 vim.opt.swapfile = false
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.termguicolors = true
+vim.opt.winbar = '%<» %-0.120f'
 vim.opt.wildignorecase = true
 vim.opt.wildignore = table.concat(require('wildignore').as_glob(), ',')
 if vim.fn.executable('rg') then
