@@ -1,5 +1,6 @@
 require('wildignore')
 
+vim.opt.cmdheight = 0
 vim.opt.breakindent = true
 vim.opt.breakindentopt = 'shift:2'
 vim.opt.completeopt = 'menuone,preview,noinsert'
@@ -22,6 +23,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 3
 vim.opt.showbreak = '⤷ '
+vim.opt.showmode = false
 vim.opt.smartcase = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
