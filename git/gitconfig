@@ -1,12 +1,12 @@
 # vim: set filetype=gitconfig:
-#
+
 [advice]
   addEmptyPathspec = false
 
 [pull]
-	ff = only
+  ff = only
 [core]
-	editor = nvim
+ editor = nvim
 
 [alias]
   a = "!f() { \

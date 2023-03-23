@@ -1,7 +1,0 @@
-# vim: set filetype=bash:
-
-gclean() {
-  defaultbranch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')
-  git switch $defaultbranch
-  git branch | grep -v $defaultbranch | xargs git branch -D
-}
