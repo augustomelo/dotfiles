@@ -1,4 +1,13 @@
-# vim: set filetype=gitconfig
+# vim: set filetype=gitconfig:
+#
+[advice]
+  addEmptyPathspec = false
+
+[pull]
+	ff = only
+[core]
+	editor = nvim
+
 [alias]
   a = "!f() { \
         git add $(git ls-files --modified --others --exclude-standard | fzf --multi --padding 15% --border  --preview 'bat --color=always {}'); \
