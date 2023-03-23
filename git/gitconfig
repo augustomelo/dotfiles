@@ -1,0 +1,55 @@
+# vim: set filetype=gitconfig
+[alias]
+  a = "!f() { \
+        git add $(git ls-files --modified --others --exclude-standard | fzf --multi --padding 15% --border  --preview 'bat --color=always {}'); \
+  }; f"
+
+  cb = "!f() {\
+    if [ $# -eq 0 ]; then \
+      echo \"You need to provide a branch name\"; \
+    else\
+      defaultbranch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p'); \
+      git fetch origin $defaultbranch:$defaultbranch; \
+      git switch -c $1 $defaultbranch; \
+    fi \
+  }; f"
+
+  cm = commit -m
+
+  co = "!f() {\
+    if [ $# -eq 0 ]; then \
+      defaultbranch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p'); \
+      git switch $defaultbranch; \
+      git pull origin $defaultbranch; \
+    else\
+      git switch $1; \
+      git pull origin $1; \
+    fi \
+  }; f"
+
+  default = "!git remote show origin | sed -n '/HEAD branch/s/.*: //p'"
+
+  find = "!git fetch && git switch $(git branch -a | grep -v $(git rev-parse --abbrev-ref HEAD) | fzf --padding 15% | sed 's|remotes/origin/||')"
+
+  pl = "!git pull origin "$(git symbolic-ref --short HEAD)""
+
+  ps = "!git push origin "$(git symbolic-ref --short HEAD)""
+
+  rebaseall = "!f() {\
+    currbranch=$(git symbolic-ref --short HEAD); \
+    defaultbranch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p'); \
+    git rebase -i $(git merge-base $currbranch $defaultbranch); \
+  }; f"
+
+  root = rev-parse --show-toplevel
+
+  tidy = "!f() {\
+    defaultbranch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p'); \
+    git switch $1 $defaultbranch; \
+    git branch | grep -v $defaultbranch | xargs git branch -D; \
+  }; f"
+
+  unstage = reset HEAD --
+
+[format]
+  pretty = %C(auto)%h %as | %s - %aN<%aE> %d
