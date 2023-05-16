@@ -5,27 +5,18 @@ return {
 
     require('lspconfig').jdtls.setup {
       cmd = {
-        "java",
-        "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-        "-Dosgi.bundles.defaultStartLevel=4",
-        "-Declipse.product=org.eclipse.jdt.ls.core.product",
-        "-Dlog.protocol=true",
-        "-Dlog.level=ALL",
-        "-Xms1g",
-        "-Xmx2g",
-        "-jar",
-        "/Users/meloaugu/util/ls/jdt/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar",
+        vim.env.HOME .."/util/ls/jdt/bin/jdtls",
         "-configuration",
-        "/Users/meloaugu/util/ls/jdt/config_mac",
+        vim.env.HOME .. "/util/ls/jdt/config_mac",
         "-data",
-        "/tmp",
-        "--add-modules=ALL-SYSTEM",
-        "--add-opens java.base/java.util=ALL-UNNAMED",
-        "--add-opens java.base/java.lang=ALL-UNNAMED",
-      },
+        vim.env.XDG_CACHE_HOME .. "/jdtls/workspace"
+
+      }
     }
 
-    require('lspconfig').sumneko_lua.setup {
+    require('lspconfig').tsserver.setup{}
+
+    require('lspconfig').lua_ls.setup {
       settings = {
         Lua = {
           runtime = {
@@ -45,5 +36,20 @@ return {
     }
 
     require('lspconfig').terraformls.setup{}
+
+    require('lspconfig').yamlls.setup {
+      on_attach = function(client, _)
+        client.server_capabilities.documentFormattingProvider = true
+      end,
+      settings = {
+        yaml = {
+          format = {
+            enable = true,
+          },
+          validate = true,
+          completion = true
+        }
+      }
+    }
   end,
 }
