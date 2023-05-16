@@ -33,7 +33,7 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.termguicolors = true
-vim.opt.winbar = '%<» %-0.120f'
+vim.opt.winbar = '%<» %-0.120f%m'
 vim.opt.wildignorecase = true
 vim.opt.wildignore = table.concat(require('wildignore').as_glob(), ',')
 if vim.fn.executable('rg') then
