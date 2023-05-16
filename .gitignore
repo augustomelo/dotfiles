@@ -1,2 +1,4 @@
 .DS_Store
 **/themes
+.luarc.json
+confipicker.lua
