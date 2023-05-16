@@ -73,6 +73,7 @@ alias k='kubectl'
 export PATH="${PATH}:${HOME}/.krew/bin:${HOME}/go/bin:${HOME}/.nvm/versions/node/v14.21.1/bin/"
 export KUBECONFIG="${HOME}/.kube/config"
 export SDKMAN_DIR="$HOME/.sdkman"
+export BAT_THEME="Nord"
 
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
