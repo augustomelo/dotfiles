@@ -1,33 +1,44 @@
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-local packer_bootstrap = false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  packer_bootstrap = vim.fn.system({
-    'git',
-    'clone',
-    '--depth',
-    '1',
-    'https://github.com/wbthomason/packer.nvim',
-    install_path
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
   })
-  print("Installing packer...")
 end
 
-return require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
-  use 'editorconfig/editorconfig-vim'
-  use 'scrooloose/nerdcommenter'
-  use 'tpope/vim-fugitive'
+vim.opt.rtp:prepend(lazypath)
 
-  use(require('plugins.autocompletion'))
-  use(require('plugins.autopairs'))
-  use(require('plugins.colorscheme'))
-  use(require('plugins.fuzzy_finder'))
-  use(require('plugins.lsp'))
-  use(require('plugins.treesitter'))
-  use(require('plugins.spellchecker'))
-
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
+require("lazy").setup({
+  spec = {
+    { 'editorconfig/editorconfig-vim' },
+    { 'scrooloose/nerdcommenter' },
+    { 'tpope/vim-fugitive' },
+    { import = 'plugins.autocompletion' },
+    { import = 'plugins.autopairs' },
+    { import = 'plugins.colorscheme' },
+    { import = 'plugins.fuzzy_finder' },
+    { import = 'plugins.lsp' },
+    { import = 'plugins.treesitter' },
+    { import = 'plugins.spellchecker' },
+  },
+  --defaults = { lazy = true },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
+})

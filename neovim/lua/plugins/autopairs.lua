@@ -1,8 +1,8 @@
 return {
   'windwp/nvim-autopairs',
-  requires = {
+  dependencies = {
     { 'lukas-reineke/indent-blankline.nvim' },
-    { 'tpope/vim-surround', requires = { 'tpope/vim-repeat' } },
+    { 'tpope/vim-surround', dependencies = { 'tpope/vim-repeat' } },
   },
 
   config = function ()
