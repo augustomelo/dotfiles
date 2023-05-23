@@ -1,6 +1,6 @@
 return {
   'gbprod/nord.nvim',
-    config = function()
+  config = function()
     vim.cmd[[colorscheme nord]]
   end,
 }

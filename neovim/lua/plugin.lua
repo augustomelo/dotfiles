@@ -15,18 +15,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = {
-    { 'editorconfig/editorconfig-vim' },
-    { 'scrooloose/nerdcommenter' },
-    { 'tpope/vim-fugitive' },
-    { import = 'plugins.autocompletion' },
-    { import = 'plugins.autopairs' },
-    { import = 'plugins.colorscheme' },
-    { import = 'plugins.fuzzy_finder' },
-    { import = 'plugins.lsp' },
-    { import = 'plugins.treesitter' },
-    { import = 'plugins.spellchecker' },
+    { import = 'plugins' },
   },
-  --defaults = { lazy = true },
   performance = {
     rtp = {
       disabled_plugins = {

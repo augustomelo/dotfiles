@@ -38,7 +38,7 @@ vim.keymap.set('n', '<C-w-w>', '<Cmd>set wrap!<CR>', opts)
 vim.keymap.set({ 'n', 'i' }, '<f1>', '<nop>', opts)
 
 
-if package.loaded["plugins.fuzzy_finder"] then
+if package.loaded.telescope then
   vim.keymap.set('n', '<leader>ff', '<Cmd>Telescope find_files<CR>')
   vim.keymap.set('n', '<leader>ft', '<Cmd>Telescope live_grep<CR>')
   vim.keymap.set('n', '<leader>fb', '<Cmd>Telescope buffers<CR>')
@@ -62,7 +62,7 @@ if package.loaded["plugins.fuzzy_finder"] then
     })
   end)
 
-  if package.loaded["plugins.fuzzy_finder"] then
+  if package.loaded.telescope.extensions.file_browser then
     vim.keymap.set('n', '<C-n>', '<Cmd>Telescope file_browser<CR>')
   end
 end
