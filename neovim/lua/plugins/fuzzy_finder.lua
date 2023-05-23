@@ -1,6 +1,6 @@
 return {
   'nvim-telescope/telescope.nvim',
-  tag = '0.1.0',
+  tag = '0.1.1',
   dependencies = {
     { 'nvim-lua/plenary.nvim' },
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
@@ -8,12 +8,6 @@ return {
   },
   config = function() require('telescope').setup {
       extensions = {
-        fzf = {
-          fuzzy = true,
-          override_generic_sorter = true,
-          override_file_sorter = true,
-          case_mode = "smart_case",
-        },
         file_browser = {
           hijack_netrw = true,
           dir_icon = "",
@@ -34,7 +28,6 @@ return {
         },
       },
       defaults = {
-        file_ignore_patterns = require('wildignore').as_lua_regex(),
         vimgrep_arguments = {
           'rg',
           '--follow',
@@ -44,7 +37,7 @@ return {
           '--line-number',
           '--column',
           '--smart-case',
-          '--no-ignore',
+          '--hidden',
           '--trim',
         },
         mappings = {

@@ -1,5 +1,3 @@
-require('wildignore')
-
 vim.opt.cmdheight = 0
 vim.opt.breakindent = true
 vim.opt.breakindentopt = 'shift:2'
@@ -34,7 +32,6 @@ vim.opt.softtabstop = 2
 vim.opt.termguicolors = true
 vim.opt.winbar = '%<» %-0.120f%m'
 vim.opt.wildignorecase = true
-vim.opt.wildignore = table.concat(require('wildignore').as_glob(), ',')
 if vim.fn.executable('rg') then
   vim.opt.grepprg = 'rg --vimgrep --no-heading --smart-case'
   vim.opt.grepformat = '%f:%l:%c:%m,%f:%l:%m'
