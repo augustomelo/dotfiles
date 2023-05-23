@@ -5,8 +5,10 @@
 
 [pull]
   ff = only
+
 [core]
- editor = nvim
+  editor = nvim
+  excludesFile = ~/.config/git/ignore
 
 [alias]
   a = "!f() { \
