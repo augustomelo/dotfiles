@@ -1,9 +1,18 @@
 return {
   'neovim/nvim-lspconfig',
   config = function()
-    require('lspconfig').gopls.setup{}
+    local capabilities = vim.tbl_deep_extend(
+      'force',
+      vim.lsp.protocol.make_client_capabilities(),
+      require('cmp_nvim_lsp').default_capabilities()
+    )
+
+    require('lspconfig').gopls.setup{
+      capabilities = capabilities,
+    }
 
     require('lspconfig').jdtls.setup {
+      capabilities = capabilities,
       cmd = {
         vim.env.HOME .."/util/ls/jdt/bin/jdtls",
         "-configuration",
@@ -14,9 +23,12 @@ return {
       }
     }
 
-    require('lspconfig').tsserver.setup{}
+    require('lspconfig').tsserver.setup{
+      capabilities = capabilities,
+    }
 
     require('lspconfig').lua_ls.setup {
+      capabilities = capabilities,
       settings = {
         Lua = {
           runtime = {
@@ -35,12 +47,15 @@ return {
       },
     }
 
-    require('lspconfig').terraformls.setup{}
+    require('lspconfig').terraformls.setup{
+      capabilities = capabilities,
+    }
 
     require('lspconfig').yamlls.setup {
       on_attach = function(client, _)
         client.server_capabilities.documentFormattingProvider = true
       end,
+      capabilities = capabilities,
       settings = {
         yaml = {
           format = {
