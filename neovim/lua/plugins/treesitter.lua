@@ -6,8 +6,22 @@ return {
   build = ':TSUpdate',
   config = function()
     require'nvim-treesitter.configs'.setup {
-      ensure_installed = 'all',
-      ignore_install = { 'phpdoc' },
+      ensure_installed = {
+        "c",
+        "go",
+        "gomod",
+        "java",
+        "javascript",
+        "json",
+        "lua",
+        "markdown",
+        "markdown_inline",
+        "python",
+        "query",
+        "vim",
+        "vimdoc",
+        "yaml",
+      },
 
       sync_install = false,
       auto_install = true,
