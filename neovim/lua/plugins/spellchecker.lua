@@ -1,13 +1,26 @@
 return {
-  'kamykn/spelunker.vim',
-  config = function()
-    vim.g.spelunker_spell_bad_group = "SpellBad"
-    vim.g.spelunker_complex_or_compound_word_group = "SpellRare"
+  'jose-elias-alvarez/null-ls.nvim',
+  config = function() require('null-ls').setup {
+      ft = { 'gitcommit', 'markdown', 'text' },
+      sources = {
+        require('null-ls').builtins.diagnostics.vale.with({
+          filetypes = { 'gitcommit', 'markdown', 'text' },
+          args = function ()
+            local vale_config = vim.fn.findfile('.vale.ini', '.;')
 
-    vim.g.spelunker_white_list_for_user = {
-      'bitwarden',
-      'github',
-      'kubernetes',
+            if vale_config == '' then
+              vale_config = vim.env.XDG_CONFIG_HOME .. '/vale/vale.ini'
+            end
+
+            return {
+              '--no-exit',
+              '--output=JSON',
+              '--config=' .. vale_config,
+              '$FILENAME',
+            }
+          end
+        })
+      }
     }
-  end,
+  end
 }
