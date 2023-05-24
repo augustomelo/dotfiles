@@ -8,7 +8,6 @@ return {
     'hrsh7th/cmp-vsnip',
     'hrsh7th/vim-vsnip',
     'rafamadriz/friendly-snippets',
-    'uga-rosa/cmp-dictionary',
   },
   config = function()
     local has_words_before = function()
@@ -69,9 +68,8 @@ return {
         {
           { name = 'nvim_lsp' },
           { name = 'vsnip' },
-        },
-        {
           { name = 'buffer' },
+          { name = 'path' },
         }
       )
     })
@@ -86,9 +84,8 @@ return {
     cmp.setup.cmdline(':', {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
-        { name = 'path' }
-      }, {
-        { name = 'cmdline' }
+        { name = 'path' },
+        { name = 'cmdline' },
       })
     })
   end,
