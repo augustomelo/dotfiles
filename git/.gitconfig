@@ -1,0 +1,7 @@
+[user]
+  name = Augusto Melo
+  email = 4723788+augustomelo@users.noreply.github.com
+[include]
+  path = ~/.config/git/config
+[includeIf "gitdir:~/workspace/work/"]
+  path = ~/workspace/work/.gitconfig
