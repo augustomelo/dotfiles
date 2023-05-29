@@ -19,4 +19,4 @@ After downloading them, needs to be copied to tmux and kitty respectively.
 
 ## Install
 
-Just need to run the following command: `stow --target $HOME */`
+Just need to run the following command: `stow --target=$HOME */`
