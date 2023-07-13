@@ -1,6 +1,15 @@
 return {
   'neovim/nvim-lspconfig',
+  dependencies = {
+    'williamboman/mason-lspconfig.nvim',
+  },
   config = function()
+    require('mason').setup()
+
+    require('mason-lspconfig').setup{
+      automatic_installation = true,
+    }
+
     local capabilities = vim.tbl_deep_extend(
       'force',
       vim.lsp.protocol.make_client_capabilities(),
@@ -13,14 +22,6 @@ return {
 
     require('lspconfig').jdtls.setup {
       capabilities = capabilities,
-      cmd = {
-        vim.env.HOME .."/util/ls/jdt/bin/jdtls",
-        "-configuration",
-        vim.env.HOME .. "/util/ls/jdt/config_mac",
-        "-data",
-        vim.env.XDG_CACHE_HOME .. "/jdtls/workspace"
-
-      }
     }
 
     require('lspconfig').tsserver.setup{
