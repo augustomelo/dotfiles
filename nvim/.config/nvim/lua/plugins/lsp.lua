@@ -3,8 +3,8 @@ return {
   dependencies = {
     'williamboman/mason-lspconfig.nvim',
   },
-  config = function()
-    require('mason').setup()
+  config = function ()
+    require('mason').setup{}
 
     require('mason-lspconfig').setup{
       automatic_installation = true,
@@ -28,7 +28,7 @@ return {
       capabilities = capabilities,
     }
 
-    require('lspconfig').lua_ls.setup {
+    require('lspconfig').lua_ls.setup{
       capabilities = capabilities,
       settings = {
         Lua = {
@@ -52,8 +52,34 @@ return {
       capabilities = capabilities,
     }
 
-    require('lspconfig').yamlls.setup {
-      on_attach = function(client, _)
+    -- Disbaled until fixed:
+    -- https://github.com/errata-ai/vale-ls/issues/4
+    require('lspconfig').vale_ls.setup{
+      capabilities = capabilities,
+      filetypes = { 'gitcommit', 'markdown', 'text' },
+      init_options = {
+        --configPath = '/Users/meloaugu/.config/vale/vale.ini',
+        installVale = false,
+        syncOnStartup = false,
+      },
+      root_dir = function (_)
+        return vim.fn.getcwd()
+      end,
+      on_new_config = function(new_config, _)
+        local config_path = vim.fn.findfile('.vale.ini', '.;')
+
+        if config_path == '' then
+          config_path = vim.env.XDG_CONFIG_HOME .. '/vale/vale.ini'
+        else
+          config_path = vim.fn.getcwd() .. '/.vale.ini'
+        end
+
+        new_config.init_options.configPath = config_path
+      end,
+    }
+
+    require('lspconfig').yamlls.setup{
+      on_attach = function (client, _)
         client.server_capabilities.documentFormattingProvider = true
       end,
       capabilities = capabilities,
