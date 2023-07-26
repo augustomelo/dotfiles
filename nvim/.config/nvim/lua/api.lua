@@ -32,6 +32,6 @@ function (_)
   end
 
   dofile(init_file_location)
-  vim.cmd('PackerCompile')
+  --vim.cmd('PackerCompile')
 end,
 { nargs = 0 })
