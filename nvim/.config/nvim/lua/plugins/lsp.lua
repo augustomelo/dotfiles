@@ -7,7 +7,7 @@ return {
     require('mason').setup{}
 
     require('mason-lspconfig').setup{
-      automatic_installation = true,
+      automatic_installation = { exclude = { "vale_ls" } },
     }
 
     local capabilities = vim.tbl_deep_extend(
