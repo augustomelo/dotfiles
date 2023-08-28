@@ -40,7 +40,7 @@ vim.keymap.set({ 'n', 'i' }, '<f1>', '<nop>', opts)
 
 if package.loaded.telescope then
   vim.keymap.set('n', '<leader>ff', '<Cmd>Telescope find_files<CR>')
-  vim.keymap.set('n', '<leader>ft', '<Cmd>Telescope live_grep<CR>')
+  vim.keymap.set('n', '<leader>fs', '<Cmd>Telescope live_grep<CR>')
   vim.keymap.set('n', '<leader>fb', '<Cmd>Telescope buffers<CR>')
   vim.keymap.set('n', '<leader>fc', function()
     local dotfiles = vim.fn.expand('~/workspace/dotfiles/')
