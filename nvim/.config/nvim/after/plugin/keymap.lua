@@ -22,6 +22,7 @@ vim.keymap.set('n', '<leader><leader>', '<c-^>', opts)
 vim.keymap.set('n', '<leader>n', '<Cmd>nohlsearch<CR>', opts)
 vim.keymap.set('n', '<leader>q', '<Cmd>quit<CR>', opts)
 vim.keymap.set('n', '<leader>w', '<Cmd>write<CR>', opts)
+vim.keymap.set('n', '<leader>cfn', '<Cmd>let @* = expand("%:p")<CR>', opts)
 
 vim.keymap.set('n', 'j', function() if vim.v.count == 0 then return 'gj' end return 'j' end, { expr = true }, opts)
 vim.keymap.set('n', 'k', function() if vim.v.count == 0 then return 'gk' end return 'k' end, { expr = true }, opts)
