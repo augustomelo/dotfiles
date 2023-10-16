@@ -7,8 +7,8 @@ return {
 
   config = function ()
     require("nvim-autopairs").setup { }
-    require("indent_blankline").setup {
-      show_current_context = true
+    require("ibl").setup {
+      scope = { enabled = false },
     }
   end,
 }
