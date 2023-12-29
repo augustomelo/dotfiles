@@ -34,7 +34,6 @@ vim.keymap.set('n', '<C-k>', '<c-w>k', opts)
 vim.keymap.set('n', '<C-l>', '<c-w>l', opts)
 vim.keymap.set('n', '<C-Tab>', 'gt', opts)
 vim.keymap.set('n', '<C-S-tab>', 'gT', opts)
-vim.keymap.set('n', '<C-w-w>', '<Cmd>set wrap!<CR>', opts)
 
 vim.keymap.set({ 'n', 'i' }, '<f1>', '<nop>', opts)
 
