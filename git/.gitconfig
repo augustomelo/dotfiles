@@ -5,3 +5,6 @@
   path = ~/.config/git/config
 [includeIf "gitdir:~/workspace/work/"]
   path = ~/workspace/work/.gitconfig
+
+[init]
+  defaultBranch = main
