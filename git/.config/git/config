@@ -12,10 +12,10 @@
 
 [alias]
   a = "!f() { \
-        git add $(git ls-files --modified --others --exclude-standard | fzf --multi --padding 15% --border  --preview 'bat --color=always {}'); \
+        git add $(git ls-files --modified --others --exclude-standard | fzf --multi --preview 'bat --color=always {}'); \
   }; f"
 
-  cb = "!f() {\
+  cb = "!f() { \
     if [ $# -eq 0 ]; then \
       echo \"You need to provide a branch name\"; \
     else\
@@ -27,7 +27,7 @@
 
   cm = commit -m
 
-  co = "!f() {\
+  co = "!f() { \
     if [ $# -eq 0 ]; then \
       defaultbranch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p'); \
       git switch $defaultbranch; \
@@ -38,15 +38,19 @@
     fi \
   }; f"
 
+  commitsAtDate = "!f() { \
+    git log --after=\"$1 0:00\" --before=\"$1 23:59\"; \
+  }; f"
+
   default = "!git remote show origin | sed -n '/HEAD branch/s/.*: //p'"
 
-  find = "!git fetch && git switch $(git branch -a | grep -v $(git rev-parse --abbrev-ref HEAD) | fzf --padding 15% | sed 's|remotes/origin/||')"
+  find = "!git fetch && git switch $(git branch -a | grep -v $(git rev-parse --abbrev-ref HEAD) | fzf | sed 's|remotes/origin/||')"
 
   pl = "!git pull origin "$(git symbolic-ref --short HEAD)""
 
   ps = "!git push origin "$(git symbolic-ref --short HEAD)""
 
-  rebaseall = "!f() {\
+  rebaseall = "!f() { \
     currbranch=$(git symbolic-ref --short HEAD); \
     defaultbranch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p'); \
     git rebase -i $(git merge-base $currbranch $defaultbranch); \
@@ -54,7 +58,7 @@
 
   root = rev-parse --show-toplevel
 
-  tidy = "!f() {\
+  tidy = "!f() { \
     defaultbranch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p'); \
     git switch $1 $defaultbranch; \
     git branch | grep -v $defaultbranch | xargs git branch -D; \
