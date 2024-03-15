@@ -37,7 +37,6 @@ vim.keymap.set('n', '<C-S-tab>', 'gT', opts)
 
 vim.keymap.set({ 'n', 'i' }, '<f1>', '<nop>', opts)
 
-
 if package.loaded.telescope then
   vim.keymap.set('n', '<leader>ff', '<Cmd>Telescope find_files<CR>')
   vim.keymap.set('n', '<leader>fs', '<Cmd>Telescope live_grep<CR>')
