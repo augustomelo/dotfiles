@@ -68,3 +68,7 @@
 
 [format]
   pretty = %C(auto)%h %as | %s - %aN<%aE> %d
+
+[maintenance]
+  auto = false
+  strategy = incremental
