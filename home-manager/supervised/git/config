@@ -1,14 +1,11 @@
 # vim: set filetype=gitconfig:
 
+[user]
+  name = Augusto Melo
+  email = 4723788+augustomelo@users.noreply.github.com
+
 [advice]
   addEmptyPathspec = false
-
-[pull]
-  ff = only
-
-[core]
-  editor = nvim
-  excludesFile = ~/.config/git/ignore
 
 [alias]
   a = "!f() { \
@@ -66,9 +63,22 @@
 
   unstage = reset HEAD --
 
+[core]
+  editor = nvim
+  excludesFile = ~/.config/git/ignore
+
 [format]
   pretty = %C(auto)%h %as | %s - %aN<%aE> %d
+
+[includeIf "gitdir:~/workspace/work/"]
+  path = ~/workspace/work/.gitconfig
+
+[init]
+  defaultBranch = main
 
 [maintenance]
   auto = false
   strategy = incremental
+
+[pull]
+  ff = only

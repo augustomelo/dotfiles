@@ -3,7 +3,6 @@
   # git fetch origin $default_git_branch:$default_git_branch
   # git switch -c $1 $default_git_branch
 
-export fpath=($ZDOTDIR/functions $fpath)
 for func in $ZDOTDIR/functions/*(N:t); autoload $func
 
 #typeset -U path cdpath fpath manpath
@@ -65,22 +64,16 @@ prompt() {
     printf '%*s\r%s\n%s%s' "$(($TERMWIDTH))" "$RIGHT" "$LEFT" "$MAIN" $BRANCH_INFO
 }
 
-PROMPT='$(prompt) '
+PROMPT=$'\n''$(prompt) '
 
 # alias
 alias k='kubectl'
+alias k9s="k9s -c context"
 
-export PATH="${PATH}:${HOME}/.krew/bin:${HOME}/go/bin:${HOME}/.nvm/versions/node/v14.21.1/bin/"
-export KUBECONFIG="${HOME}/.kube/config"
-export SDKMAN_DIR="$HOME/.sdkman"
-export BAT_THEME="Nord"
 
+# sdkman
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # nvm
-export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
-
-
-alias k9s="k9s -c context"
