@@ -20,7 +20,12 @@
     defaultPackage.${system} = home-manager.defaultPackage.${system};
 
     homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs =  import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
       modules = [ ./home.nix ];
       extraSpecialArgs = {
         inherit username;

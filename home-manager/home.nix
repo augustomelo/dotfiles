@@ -11,17 +11,55 @@
   };
 
   home.packages = [
+    pkgs.colima 
+    pkgs.dasel
+    pkgs.dbeaver
+    pkgs.docker
+    pkgs.docker-buildx
+    pkgs.docker-compose
+    pkgs.git
+    pkgs.go
+    pkgs.home-manager
+    pkgs.hurl
+    pkgs.kubectl
+    pkgs.neovim
+    pkgs.ripgrep
+    pkgs.spotify
+    pkgs.obsidian
+    pkgs.temurin-bin-17
     pkgs.vale
   ];
 
   programs = {
-    #fzf = {
-      #enable = true;
-    #};
+    bat = {
+      enable = true;
+      config = {
+        theme = "Nord";
+      };
+    };
 
-    git.enable = true;
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
 
-    home-manager.enable = true;
+    fzf = {
+      enable = true;
+      defaultOptions = [
+        "--margin 15%"
+        "--border rounded" 
+        "--bind 'tab:toggle-up,btab:toggle-down,ctrl-u:preview-up,ctrl-d:preview-down'"
+      ];
+    };
+
+    k9s = {
+      enable = true;
+      settings = {
+        k9s = {
+          ui.skin = "nord";
+        };
+      };
+    };
 
     kitty = {
       enable = true;
@@ -35,8 +73,6 @@
       shellIntegration.enableBashIntegration = true;
       theme = "Nord";
     };
-
-    neovim.enable = true;
 
     tmux = {
       enable = true;
