@@ -10,24 +10,24 @@
     username = username;
   };
 
-  home.packages = [
-    pkgs.colima 
-    pkgs.dasel
-    pkgs.dbeaver
-    pkgs.docker
-    pkgs.docker-buildx
-    pkgs.docker-compose
-    pkgs.git
-    pkgs.go
-    pkgs.home-manager
-    pkgs.hurl
-    pkgs.kubectl
-    pkgs.neovim
-    pkgs.ripgrep
-    pkgs.spotify
-    pkgs.obsidian
-    pkgs.temurin-bin-17
-    pkgs.vale
+  home.packages = with pkgs; [
+    colima 
+    dasel
+    dbeaver
+    docker
+    docker-buildx
+    docker-compose
+    git
+    go
+    home-manager
+    hurl
+    kubectl
+    neovim
+    ripgrep
+    spotify
+    obsidian
+    temurin-bin-17
+    vale
   ];
 
   programs = {
