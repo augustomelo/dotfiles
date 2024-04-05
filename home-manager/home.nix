@@ -46,8 +46,6 @@
     fzf = {
       enable = true;
       defaultOptions = [
-        "--margin 15%"
-        "--border rounded" 
         "--bind 'tab:toggle-up,btab:toggle-down,ctrl-u:preview-up,ctrl-d:preview-down'"
       ];
     };
