@@ -54,7 +54,7 @@ prompt() {
     local TERMWIDTH=$(($COLUMNS + 2))
     local RIGHT='(%D{%a %b %d})'
     local LEFT='┌─[%B%n@%m%b] (%B%F{green}%~%f%b)'
-    local MAIN='└─(%D{%I:%M})─(%#)─'
+    local MAIN='└─(%D{%H:%M})─(%#)─'
     local BRANCH_INFO=''
 
     if [[ ! -z ${vcs_info_msg_0_} ]]; then
