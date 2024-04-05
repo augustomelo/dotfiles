@@ -1,10 +1,9 @@
 #!/bin/zsh
 
-export SHELL="$HOME/.nix-profile/bin/zsh"
+# https://nix-community.github.io/home-manager/index.xhtml#_why_are_the_session_variables_not_set
+. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_DATA_HOME=$HOME/.local/share
+export SHELL="$HOME/.nix-profile/bin/zsh"
 
 export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 export fpath=($ZDOTDIR/functions $fpath)
