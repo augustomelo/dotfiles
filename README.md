@@ -2,8 +2,6 @@
 
 ## Install
 
-Just need to run the following command: `stow --target=$HOME */`
-
 This configuration relies on nix and home-manager, to install you will need to install using the determina installer: 
 
 1. `curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install`
