@@ -68,7 +68,7 @@
         name = "Monaspace Neon Var";
         size = 10;
       };
-      shellIntegration.enableBashIntegration = true;
+      shellIntegration.enableZshIntegration = true;
       theme = "Nord";
     };
 
