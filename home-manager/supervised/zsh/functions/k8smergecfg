@@ -1,4 +1,4 @@
-# vim: set filetype=bash:
+# vim: set filetype=zsh:
 
 k8smergecfg() {
   if [[ -n "${1}" ]]; then

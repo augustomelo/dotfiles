@@ -1,0 +1,4 @@
+# vim: set filetype=zsh:
+
+alias k='kubectl'
+alias k9s="k9s -c context"
