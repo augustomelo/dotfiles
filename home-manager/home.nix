@@ -32,6 +32,7 @@
     obsidian
     temurin-bin-17
     vale
+    zoxide
   ];
 
   programs = {

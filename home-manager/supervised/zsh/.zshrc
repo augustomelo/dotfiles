@@ -15,3 +15,5 @@ export SAVEHIST=50000
 bindkey -e
 
 source $ZDOTDIR/.fzf
+
+eval "$(zoxide init --cmd cd zsh)"
