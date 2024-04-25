@@ -66,6 +66,14 @@
 [core]
   editor = nvim
   excludesFile = ~/.config/git/ignore
+  pager = delta
+
+[delta]
+  navigate = true
+  side-by-side = true
+
+[diff]
+  colorMoved = default
 
 [format]
   pretty = %C(auto)%h %as | %s - %aN<%aE> %d
@@ -76,9 +84,15 @@
 [init]
   defaultBranch = main
 
+[interactive]
+  diffFilter = delta --color-only
+
 [maintenance]
   auto = false
   strategy = incremental
+
+[merge]
+  conflictstyle = diff3
 
 [pull]
   ff = only

@@ -14,6 +14,7 @@
     colima 
     dasel
     dbeaver
+    delta
     docker
     docker-buildx
     docker-compose
