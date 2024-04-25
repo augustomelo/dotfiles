@@ -13,3 +13,6 @@ export SAVEHIST=50000
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -e
+
+eval "$(fzf --zsh)"
+source "$HOME/.nix-profile/share/fzf-git-sh/fzf-git.sh"
