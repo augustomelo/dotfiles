@@ -16,4 +16,5 @@ bindkey -e
 
 source $ZDOTDIR/.fzf
 
+eval "$(direnv hook zsh)"
 eval "$(zoxide init --cmd cd zsh)"
