@@ -94,7 +94,7 @@
       font = {
         package = pkgs.monaspace;
         name = "Monaspace Neon Var";
-        size = 10;
+        size = 11;
       };
       shellIntegration.enableZshIntegration = true;
       theme = "Nord";
