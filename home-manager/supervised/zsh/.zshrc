@@ -1,20 +1,19 @@
 for func in $ZDOTDIR/functions/*(N:t); autoload $func
 
-source $ZDOTDIR/.prompt
-source $ZDOTDIR/.completion
-source $ZDOTDIR/.aliases
+source "$ZDOTDIR/.aliases"
+source "$ZDOTDIR/.completion"
+source "$ZDOTDIR/.fzf"
+source "$ZDOTDIR/.prompt"
+source "$HOME/.nix-profile/share/zsh-vi-mode/zsh-vi-mode.zsh"
 
-setopt extendedhistory incappendhistory sharehistory histsavenodups histreduceblanks
+# https://zsh.sourceforge.io/Doc/Release/Options.html
+setopt extendedhistory histreduceblanks histsavenodups incappendhistory sharehistory
+
 # The history configuration needs to be here, if the env varibles are on
 # .zshenv they are rolled back to the default values
 export HISTFILE="$XDG_CACHE_HOME/zsh/history"
 export HISTSIZE=50000
 export SAVEHIST=50000
-
-# Use emacs keybindings even if our EDITOR is set to vi
-bindkey -e
-
-source $ZDOTDIR/.fzf
 
 eval "$(direnv hook zsh)"
 eval "$(zoxide init --cmd cd zsh)"
