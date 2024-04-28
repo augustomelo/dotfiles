@@ -33,7 +33,6 @@
     temurin-bin-17
     vale
     zoxide
-    zsh-vi-mode
   ];
 
   programs = {

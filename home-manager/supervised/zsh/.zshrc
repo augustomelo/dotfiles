@@ -4,10 +4,10 @@ source "$ZDOTDIR/.aliases"
 source "$ZDOTDIR/.completion"
 source "$ZDOTDIR/.fzf"
 source "$ZDOTDIR/.prompt"
-source "$HOME/.nix-profile/share/zsh-vi-mode/zsh-vi-mode.zsh"
 
 # https://zsh.sourceforge.io/Doc/Release/Options.html
 setopt extendedhistory histreduceblanks histsavenodups incappendhistory sharehistory
+setopt emacs
 
 # The history configuration needs to be here, if the env varibles are on
 # .zshenv they are rolled back to the default values
