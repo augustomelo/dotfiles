@@ -93,6 +93,7 @@
 
 [merge]
   conflictstyle = diff3
+  tool = nvimdiff
 
 [pull]
   ff = only
