@@ -1,3 +1,5 @@
+vim.loader.enable()
+
 vim.opt.breakindent = true
 vim.opt.breakindentopt = 'shift:2'
 vim.opt.cmdheight = 0
