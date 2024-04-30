@@ -16,7 +16,6 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '<leader>gn', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', '<leader>gp', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<leader>sl', vim.diagnostic.setloclist, opts)
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, opts)
 
 vim.keymap.set('n', '<leader><leader>', '<c-^>', opts)
 vim.keymap.set('n', '<leader>n', '<Cmd>nohlsearch<CR>', opts)
