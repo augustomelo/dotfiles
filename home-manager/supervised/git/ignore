@@ -1,6 +1,7 @@
 *.log
 .git/
 log/
+.direnv/
 
 ## https://github.com/github/gitignore/blob/main/Global/Vim.gitignore
 # Swap
