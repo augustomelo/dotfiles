@@ -6,7 +6,7 @@
 export SHELL="$HOME/.nix-profile/bin/zsh"
 
 export ZDOTDIR=$XDG_CONFIG_HOME/zsh
-export fpath=($ZDOTDIR/functions $fpath)
+export fpath=($XDG_DATA_HOME/zsh/completion $ZDOTDIR/functions $fpath)
 
 export DICPATH=$XDG_DATA_HOME/dictionaries # used by vale as other resources to dictionaries
 export EDITOR="nvim"
