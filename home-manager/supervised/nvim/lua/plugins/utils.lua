@@ -1,5 +1,5 @@
 return {
-  { 'scrooloose/nerdcommenter' },
+  { "scrooloose/nerdcommenter" },
   {
     "jellydn/hurl.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
@@ -37,7 +37,7 @@ return {
       })
     end,
     init = function()
-      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+      vim.o.formatexpr = "v:lua.require(\"conform\").formatexpr()"
     end,
   },
   {

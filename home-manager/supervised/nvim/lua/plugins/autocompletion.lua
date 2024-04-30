@@ -1,13 +1,13 @@
 return {
-  'hrsh7th/nvim-cmp',
+  "hrsh7th/nvim-cmp",
   dependencies = {
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-cmdline',
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-vsnip',
-    'hrsh7th/vim-vsnip',
-    'rafamadriz/friendly-snippets',
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-cmdline",
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-vsnip",
+    "hrsh7th/vim-vsnip",
+    "rafamadriz/friendly-snippets",
   },
   config = function()
     local has_words_before = function()
@@ -19,7 +19,7 @@ return {
       vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
     end
 
-    local cmp = require('cmp')
+    local cmp = require("cmp")
 
     cmp.setup({
       snippet = {
@@ -34,11 +34,11 @@ return {
       },
 
       mapping = {
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-e>'] = cmp.mapping.abort(),
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-e>"] = cmp.mapping.abort(),
 
-        ['<CR>'] = cmp.mapping.confirm {
+        ["<CR>"] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,
         },
@@ -51,7 +51,7 @@ return {
           elseif has_words_before() then
             cmp.complete()
           else
-            fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+            fallback() -- The fallback function sends a already mapped key. In this case, it"s probably `<Tab>`.
           end
         end, { "i", "s" }),
 
@@ -66,26 +66,26 @@ return {
 
       sources = cmp.config.sources(
         {
-          { name = 'nvim_lsp' },
-          { name = 'vsnip' },
-          { name = 'buffer' },
-          { name = 'path' },
+          { name = "nvim_lsp" },
+          { name = "vsnip" },
+          { name = "buffer" },
+          { name = "path" },
         }
       )
     })
 
-    cmp.setup.cmdline({ '/', '?' }, {
+    cmp.setup.cmdline({ "/", "?" }, {
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
-        { name = 'buffer' }
+        { name = "buffer" }
       }
     })
 
-    cmp.setup.cmdline(':', {
+    cmp.setup.cmdline(":", {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
-        { name = 'path' },
-        { name = 'cmdline' },
+        { name = "path" },
+        { name = "cmdline" },
       })
     })
   end,

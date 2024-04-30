@@ -1,11 +1,11 @@
 return {
-  'nvim-treesitter/nvim-treesitter',
+  "nvim-treesitter/nvim-treesitter",
   dependencies = {
-    'nvim-treesitter/nvim-treesitter-context'
+    "nvim-treesitter/nvim-treesitter-context"
   },
-  build = ':TSUpdate',
+  build = ":TSUpdate",
   config = function()
-    require'nvim-treesitter.configs'.setup {
+    require "nvim-treesitter.configs".setup {
       ensure_installed = {
         "c",
         "go",
@@ -39,8 +39,8 @@ return {
     -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1424
     -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1337
     -- https://github.com/neovim/neovim/issues/14977
-    --vim.opt.foldmethod = 'expr'
-    --vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-    vim.opt.foldmethod = 'indent'
+    --vim.opt.foldmethod = "expr"
+    --vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+    vim.opt.foldmethod = "indent"
   end,
 }

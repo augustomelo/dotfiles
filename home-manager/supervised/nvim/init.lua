@@ -1,4 +1,4 @@
-require('api')
-require('global')
-require('option')
-require('plugin')
+require("api")
+require("global")
+require("option")
+require("plugin")
