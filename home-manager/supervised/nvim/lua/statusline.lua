@@ -58,6 +58,16 @@ local buffer_encoding = function()
   end
 end
 
+local recording_info = function()
+  local register = vim.fn.reg_recording()
+
+  if register ~= nil and register ~= "" then
+    return string.format('recording @%s', register)
+  else
+    return ''
+  end
+end
+
 local pos_info = function()
   local v_column_number = '%3v'
   --local current_line = '%{v:lua.vim.fn.line(\'.\')}'
@@ -85,15 +95,16 @@ M.statusline = function()
   init_colors()
 
   local parts = {
-    { left = '',  info = base_color,       right = '' },
-    { left = '',  info = cwd,              right = '▊' },
-    { left = '',  info = git_branch,       right = '▊' },
-    { left = '',  info = create_group,     right = '' },
-    { left = '',  info = create_group,     right = '' },
-    { left = '▊', info = lsp_name,         right = '' },
-    { left = '▊', info = file_format,      right = '' },
-    { left = '▊', info = buffer_encoding,  right = '' },
-    { left = '▊', info = pos_info,         right = '' },
+    { left = '', info = base_color, right = '' },
+    { left = '', info = cwd, right = '▊' },
+    { left = '', info = git_branch, right = '▊' },
+    { left = '', info = recording_info, right = '' },
+    { left = '', info = create_group, right = '' },
+    { left = '', info = create_group, right = '' },
+    { left = '▊', info = lsp_name, right = '' },
+    { left = '▊', info = file_format, right = '' },
+    { left = '▊', info = buffer_encoding, right = '' },
+    { left = '▊', info = pos_info, right = '' },
   }
 
   local statusline = ''
