@@ -11,7 +11,6 @@ vim.opt.laststatus = 3
 vim.opt.linebreak = true
 vim.opt.list = true
 vim.opt.listchars = {
-  eol = "¬",
   nbsp = "⦸",
   tab = "» ",
   trail = "•",
