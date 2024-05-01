@@ -1,9 +1,3 @@
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "gitcommit",
-  command = "setlocal textwidth=120",
-  group = vim.api.nvim_create_augroup("GitCommitMessage", { clear = true })
-})
-
 vim.api.nvim_create_autocmd({ "BufEnter", "WinEnter" }, {
   pattern = "*",
   command = "setlocal cursorline",
@@ -14,10 +8,4 @@ vim.api.nvim_create_autocmd({ "BufLeave", "WinLeave" }, {
   pattern = "*",
   command = "setlocal nocursorline",
   group = vim.api.nvim_create_augroup("CursorLine", { clear = false })
-})
-
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = "Jenkinsfile",
-  command = "setfiletype groovy",
-  group = vim.api.nvim_create_augroup("JenkinsfileFileType", { clear = false })
 })
