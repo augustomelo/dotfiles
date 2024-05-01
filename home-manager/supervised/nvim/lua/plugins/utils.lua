@@ -1,15 +1,4 @@
 return {
-  { "scrooloose/nerdcommenter" },
-  {
-    "jellydn/hurl.nvim",
-    dependencies = { "MunifTanjim/nui.nvim" },
-    ft = "hurl",
-    opts = {
-      debug = false,
-      mode = "split",
-      formatters = {}
-    },
-  },
   {
     "stevearc/conform.nvim",
     event = { "BufWritePre" },
@@ -40,6 +29,24 @@ return {
       vim.o.formatexpr = "v:lua.require(\"conform\").formatexpr()"
     end,
   },
+  {
+    "j-hui/fidget.nvim",
+    tag = "v1.4.1",
+    config = function()
+      require("fidget").setup {}
+    end
+  },
+  {
+    "jellydn/hurl.nvim",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    ft = "hurl",
+    opts = {
+      debug = false,
+      mode = "split",
+      formatters = {}
+    },
+  },
+  { "scrooloose/nerdcommenter" },
   {
     "epwalsh/obsidian.nvim",
     version = "3.7.5",
