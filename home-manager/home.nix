@@ -9,35 +9,10 @@
     homeDirectory = "/Users/${username}";
     stateVersion = "23.11";
     username = username;
-  };
 
-  home.packages = with pkgs; [
-    colima 
-    dasel
-    dbeaver
-    delta
-    docker
-    docker-buildx
-    docker-compose
-    eza
-    fd
-    fzf-git-sh
-    git
-    go
-    home-manager
-    hurl
-    kubectl
-    neovim
-    ripgrep
-    spotify
-    obsidian
-    temurin-bin-17
-    vale
-    zoxide
-  ];
     # https://github.com/nix-community/home-manager/issues/1341
     # Comment used as solution: https://github.com/nix-community/home-manager/issues/1341#issuecomment-901513436
-    home.activation = {
+    activation = {
       aliasApplications = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         app_folder=$(echo ~/Applications);
         for app in $(find "$newGenPath/home-path/Applications" -type l); do
@@ -47,6 +22,31 @@
       '';
     };
 
+    packages = with pkgs; [
+      colima 
+      dasel
+      dbeaver
+      delta
+      docker
+      docker-buildx
+      docker-compose
+      eza
+      fd
+      fzf-git-sh
+      git
+      go
+      home-manager
+      hurl
+      kubectl
+      neovim
+      ripgrep
+      spotify
+      obsidian
+      temurin-bin-17
+      vale
+      zoxide
+    ];
+  };
 
   programs = {
     bat = {
