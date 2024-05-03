@@ -42,7 +42,6 @@
       ripgrep
       spotify
       obsidian
-      temurin-bin-17
       vale
       zoxide
     ];
