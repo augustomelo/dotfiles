@@ -25,3 +25,5 @@ source "$ZDOTDIR/.aliases"
 source "$ZDOTDIR/.fzf"
 source "$ZDOTDIR/.prompt"
 source "$ZDOTDIR/.zshcompletion"
+
+bindkey -s '^Z' 'fg^M'
