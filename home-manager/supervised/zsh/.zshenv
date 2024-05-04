@@ -10,7 +10,4 @@ export fpath=($XDG_DATA_HOME/zsh/completion $ZDOTDIR/functions $fpath)
 
 export DICPATH=$XDG_DATA_HOME/dictionaries # used by vale as other resources to dictionaries
 export EDITOR="nvim"
-export JDTLS_JVM_ARGS="-javaagent:$XDG_DATA_HOME/nvim/mason/packages/jdtls/lombok.jar"
 export KUBECONFIG="$HOME/.kube/config"
-
-export PATH="$PATH:$HOME/.krew/bin:$HOME/go/bin"
