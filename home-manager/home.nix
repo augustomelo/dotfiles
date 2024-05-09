@@ -38,6 +38,7 @@
       home-manager
       hurl
       kubectl
+      kubelogin-oidc
       neovim
       ripgrep
       spotify
