@@ -13,6 +13,18 @@ require('mason-lspconfig').setup({
   handlers = {
     default_setup,
 
+    helm_ls = function()
+      require('lspconfig').helm_ls.setup {
+        settings = {
+          ['helm-ls'] = {
+            yamlls = {
+              path = "yaml-language-server",
+            }
+          }
+        }
+      }
+    end,
+
     lua_ls = function()
       require("lspconfig").lua_ls.setup {
         capabilities = cmp_default_capabilities,

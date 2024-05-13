@@ -5,4 +5,8 @@ vim.filetype.add {
   filename = {
     ["Jenkinsfile"] = "groovy"
   },
+  pattern = {
+    [".*/templates/.*%.yaml"] = "helm",
+    [".*/templates/.*%.yml"] = "helm",
+  },
 }
