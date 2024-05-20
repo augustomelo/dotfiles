@@ -1,0 +1,21 @@
+name: update-flake-lock
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  lockfile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v11
+      - name: Update flake.lock
+        uses: DeterminateSystems/update-flake-lock@v21
+        with:
+          path-to-flake-dir: ./home-manager
+          commit-msg: "build: update flake.lock"
+          pr-title: "build: update flake.lock"
