@@ -1,57 +1,125 @@
-local cmp_default_capabilities = require('cmp_nvim_lsp').default_capabilities()
+local cmp_default_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local default_setup            = function(server)
-  require('lspconfig')[server].setup({
+  require("lspconfig")[server].setup({
     capabilities = cmp_default_capabilities,
   })
 end
 
-require('mason').setup({})
+require("mason").setup({})
 
-require('mason-lspconfig').setup({
+require("mason-lspconfig").setup {
   ensure_installed = {},
   handlers = {
     default_setup,
 
-    helm_ls = function()
-      require('lspconfig').helm_ls.setup {
+    -- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
+    gopls = function()
+      require("lspconfig").gopls.setup {
         settings = {
-          ['helm-ls'] = {
-            yamlls = {
-              path = "yaml-language-server",
-            }
+          gopls = {
+            hints = {
+              assignVariableTypes = true,
+              compositeLiteralFields = true,
+              compositeLiteralTypes = true,
+              constantValues = true,
+              functionTypeParameters = true,
+              parameterNames = true,
+              rangeVariableTypes = true,
+            },
           }
-        }
+        },
       }
     end,
 
-    lua_ls = function()
-      require("lspconfig").lua_ls.setup {
-        capabilities = cmp_default_capabilities,
+    -- https://github.com/mrjosh/helm-ls?tab=readme-ov-file#configuration-options
+    helm_ls = function()
+      require("lspconfig").helm_ls.setup {
         settings = {
-          Lua = {
-            runtime = {
-              version = "LuaJIT",
-            },
-            diagnostics = {
-              globals = { "vim" },
-            },
-            workspace = {
-              library = {
-                vim.env.VIMRUNTIME,
-              }
-            },
-            telemetry = {
-              enable = false,
+          ["helm-ls"] = {
+            yamlls = {
+              path = "yaml-language-server",
             },
           },
         },
       }
     end,
 
+    -- https://github.com/eclipse-jdtls/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
+    jdtls = function()
+      require("lspconfig").jdtls.setup {
+        settings = {
+          java = {
+            inlayHints = {
+              parameterNames = {
+                enabled = "all",
+              },
+            },
+          },
+        },
+      }
+    end,
+
+    -- https://github.com/LuaLS/lua-language-server/wiki/Settings#settings
+    lua_ls = function()
+      require("lspconfig").lua_ls.setup {
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" },
+            },
+            hint = {
+              enable = true
+            },
+            runtime = {
+              version = "LuaJIT",
+            },
+            telemetry = {
+              enable = false,
+            },
+            workspace = {
+              library = {
+                vim.env.VIMRUNTIME,
+              }
+            },
+          },
+        },
+      }
+    end,
+
+    -- https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
+    tsserver = function()
+      require("lspconfig").tsserver.setup {
+        settings = {
+          javascript = {
+            inlayHints = {
+              includeInlayEnumMemberValueHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayParameterNameHints = 'all',
+              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayVariableTypeHints = false,
+            },
+          },
+          typescript = {
+            inlayHints = {
+              includeInlayEnumMemberValueHints = true,
+              includeInlayFunctionLikeReturnTypeHints = true,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayParameterNameHints = "all",
+              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+              includeInlayPropertyDeclarationTypeHints = true,
+              includeInlayVariableTypeHints = false,
+            },
+          },
+        },
+      }
+    end,
+
+    -- https://github.com/errata-ai/vale-ls/tree/main/doc/yml
     vale_ls = function()
       require("lspconfig").vale_ls.setup {
-        capabilities = cmp_default_capabilities,
         filetypes = { "gitcommit", "markdown", "text" },
         init_options = {
           installVale = false,
@@ -74,12 +142,12 @@ require('mason-lspconfig').setup({
       }
     end,
 
+    -- https://github.com/redhat-developer/yaml-language-server?tab=readme-ov-file#language-server-settings
     yamlls = function()
       require("lspconfig").yamlls.setup {
         on_attach = function(client, _)
           client.server_capabilities.documentFormattingProvider = true
         end,
-        capabilities = cmp_default_capabilities,
         settings = {
           yaml = {
             format = {
@@ -92,4 +160,4 @@ require('mason-lspconfig').setup({
       }
     end
   },
-})
+}

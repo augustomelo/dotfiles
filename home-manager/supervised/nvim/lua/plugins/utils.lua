@@ -5,7 +5,7 @@ return {
   },
   {
     "j-hui/fidget.nvim",
-    tag = "v1.4.1",
+    tag = "v1.4.5",
   },
   {
     "jellydn/hurl.nvim",
@@ -16,7 +16,6 @@ return {
     },
     ft = "hurl",
   },
-  { "scrooloose/nerdcommenter" },
   {
     "epwalsh/obsidian.nvim",
     version = "3.7.5",

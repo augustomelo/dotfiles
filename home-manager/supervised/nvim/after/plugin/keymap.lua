@@ -3,15 +3,6 @@ local default_opts = { noremap = true, silent = true }
 vim.keymap.set("c", "<C-a>", "<home>", { unpack(default_opts), desc = "Move cursor to the beginning of the line." })
 vim.keymap.set("c", "<C-e>", "<end>", { unpack(default_opts), desc = "Move cursor to the ending of the line." })
 
-vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float,
-  { unpack(default_opts), desc = "Show diagnostics in a floating window" })
-vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev,
-  { unpack(default_opts), desc = "Move to the previous diagnostic." })
-vim.keymap.set("n", "<leader>dn", vim.diagnostic.goto_next,
-  { unpack(default_opts), desc = "Move to the next diagnostic." })
-vim.keymap.set("n", "<leader>da", vim.diagnostic.setloclist,
-  { unpack(default_opts), desc = "Add buffer diagnostics to the location list." })
-
 vim.keymap.set("n", "<leader><leader>", "<C-^>",
   { unpack(default_opts), desc = "Edit the alternate file." })
 vim.keymap.set("n", "<leader>n", "<Cmd>nohlsearch<CR>",
