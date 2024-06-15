@@ -25,7 +25,6 @@
     packages = with pkgs; [
       colima 
       dasel
-      dbeaver
       delta
       docker
       docker-buildx
