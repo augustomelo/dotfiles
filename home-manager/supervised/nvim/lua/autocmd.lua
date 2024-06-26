@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.lsp.inlay_hint.enable() -- start enabled
 
     vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration,
-      { unpack(default_opts), desc = "Jumps to decalation." })
+      { unpack(default_opts), desc = "Jumps to declaration." })
     vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition,
       { unpack(default_opts), desc = "Jumps to definition." })
     vim.keymap.set("n", "<leader>fi", vim.lsp.buf.implementation,
