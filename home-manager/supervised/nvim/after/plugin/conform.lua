@@ -7,5 +7,8 @@ require("conform").setup({
 vim.o.formatexpr = "v:lua.require(\"conform\").formatexpr()"
 
 vim.keymap.set("n", "<leader>f", function()
-  require("conform").format({ async = true, lsp_fallback = true })
-end, { noremap = true, silent = true, desc = "Move cursor to the beginning of the line." })
+  require("conform").format({
+    async = true,
+    lsp_format = "fallback",
+  })
+end, { noremap = true, silent = true, desc = "Format buffer, defaults to lsp format." })
