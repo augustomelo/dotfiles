@@ -15,8 +15,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local default_opts = { noremap = true, silent = true, buffer = args.buf }
 
-    vim.lsp.inlay_hint.enable() -- start enabled
-
     vim.keymap.set("n", "<leader>gD", vim.lsp.buf.declaration,
       { unpack(default_opts), desc = "Jumps to declaration." })
     vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition,
