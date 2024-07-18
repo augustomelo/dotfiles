@@ -10,17 +10,6 @@ end
 local cmp = require("cmp")
 
 cmp.setup({
-  snippet = {
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
-    end,
-  },
-
-  window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
-  },
-
   mapping = {
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -54,6 +43,12 @@ cmp.setup({
 
   preselect = cmp.PreselectMode.None,
 
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+
   sources = cmp.config.sources(
     {
       { name = "nvim_lsp" },
@@ -61,7 +56,13 @@ cmp.setup({
       { name = "buffer" },
       { name = "path" },
     }
-  )
+  ),
+
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+
 })
 
 cmp.setup.cmdline({ "/", "?" }, {
