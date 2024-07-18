@@ -52,6 +52,8 @@ cmp.setup({
     end, { "i", "s" }),
   },
 
+  preselect = cmp.PreselectMode.None,
+
   sources = cmp.config.sources(
     {
       { name = "nvim_lsp" },
