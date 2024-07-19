@@ -18,6 +18,10 @@ require("mason-lspconfig").setup {
       require("lspconfig").gopls.setup {
         settings = {
           gopls = {
+            analyses = {
+              unusedparams = true,
+            },
+            gofumpt = true,
             hints = {
               assignVariableTypes = true,
               compositeLiteralFields = true,
@@ -27,7 +31,8 @@ require("mason-lspconfig").setup {
               parameterNames = true,
               rangeVariableTypes = true,
             },
-          }
+            staticcheck = true,
+          },
         },
       }
     end,
