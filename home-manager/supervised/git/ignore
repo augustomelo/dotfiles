@@ -1,6 +1,8 @@
 *.log
-.git/ # needed by nvim telescope to ignore it
 log/
+
+# Needed by nvim telescope to ignore it
+.git/
 
 # Swap https://github.com/github/gitignore/blob/main/Global/Vim.gitignore
 [._]*.s[a-v][a-z]
