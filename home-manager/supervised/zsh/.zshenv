@@ -12,4 +12,5 @@ export BAT_THEME="Nord" # this is needed for delta when running the command git 
 export DICPATH=$XDG_DATA_HOME/dictionaries # used by vale as other resources to dictionaries
 export EDITOR="nvim"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT="-c"
 export KUBECONFIG="$HOME/.kube/config"
