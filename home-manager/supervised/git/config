@@ -22,7 +22,7 @@
     fi \
   }; f"
 
-  cm = commit -m
+  cm = commit
 
   co = "!f() { \
     if [ $# -eq 0 ]; then \
