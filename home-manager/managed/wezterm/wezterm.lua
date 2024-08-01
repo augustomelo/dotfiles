@@ -34,36 +34,34 @@ return {
   window_decorations = "RESIZE",
 
   keys = {
-    { key = "a", mods = "LEADER", action = wezterm.action.AttachDomain("unix"), },
-    { key = "c", mods = "LEADER", action = wezterm.action.SpawnTab("CurrentPaneDomain"), },
-    { key = "d", mods = "LEADER", action = wezterm.action.DetachDomain("CurrentPaneDomain"), },
-    { key = "g", mods = "LEADER", action = wezterm.action.ShowTabNavigator, },
-    { key = "h", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Left") },
-    { key = "j", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Down") },
-    { key = "k", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Up") },
-    { key = "l", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Right") },
-    { key = "n", mods = "LEADER", action = wezterm.action.ActivateTabRelative(1), },
-    { key = "p", mods = "LEADER", action = wezterm.action.ActivateTabRelative(-1), },
-    { key = "s", mods = "LEADER", action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }), },
-    { key = "x", mods = "LEADER", action = wezterm.action.CloseCurrentTab({ confirm = true }) },
-    { key = "z", mods = "LEADER", action = wezterm.action.TogglePaneZoomState, },
-    { key = "|", mods = "LEADER|SHIFT", action = wezterm.action.SplitPane({ direction = "Right", size = { Percent = 50 }, }), },
-    { key = "-", mods = "LEADER", action = wezterm.action.SplitPane({ direction = "Down", size = { Percent = 50 }, }), },
-    { key = "{", mods = "LEADER|SHIFT", action = wezterm.action.PaneSelect({ mode = "SwapWithActiveKeepFocus" }) },
-    { key = '!', mods = 'LEADER | SHIFT', action = wezterm.action_callback(function(_, pane) pane:move_to_new_tab() end), },
+    { key = "a", mods = "LEADER",         action = wezterm.action.AttachDomain("unix"), },
+    { key = "c", mods = "LEADER",         action = wezterm.action.SpawnTab("CurrentPaneDomain"), },
+    { key = "d", mods = "LEADER",         action = wezterm.action.DetachDomain("CurrentPaneDomain"), },
+    { key = "g", mods = "LEADER",         action = wezterm.action.ShowTabNavigator, },
+    { key = "h", mods = "ALT",            action = wezterm.action.ActivatePaneDirection("Left") },
+    { key = "j", mods = "ALT",            action = wezterm.action.ActivatePaneDirection("Down") },
+    { key = "k", mods = "ALT",            action = wezterm.action.ActivatePaneDirection("Up") },
+    { key = "l", mods = "ALT",            action = wezterm.action.ActivatePaneDirection("Right") },
+    { key = "n", mods = "LEADER",         action = wezterm.action.ActivateTabRelative(1), },
+    { key = "p", mods = "LEADER",         action = wezterm.action.ActivateTabRelative(-1), },
+    { key = "s", mods = "LEADER",         action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY | WORKSPACES" }), },
+    { key = "x", mods = "LEADER",         action = wezterm.action.CloseCurrentTab({ confirm = true }) },
+    { key = "z", mods = "LEADER",         action = wezterm.action.TogglePaneZoomState, },
+    { key = "|", mods = "LEADER | SHIFT", action = wezterm.action.SplitPane({ direction = "Right", size = { Percent = 50 }, }), },
+    { key = "-", mods = "LEADER",         action = wezterm.action.SplitPane({ direction = "Down", size = { Percent = 50 }, }), },
+    { key = "{", mods = "LEADER | SHIFT", action = wezterm.action.PaneSelect({ mode = "SwapWithActiveKeepFocus" }) },
+    { key = "!", mods = "LEADER | SHIFT", action = wezterm.action_callback(function(_, pane) pane:move_to_new_tab() end), },
     {
       key = ",",
       mods = "LEADER",
-      action = wezterm.action.PromptInputLine {
+      action = wezterm.action.PromptInputLine({
         description = "Enter new name for tab",
-        action = wezterm.action_callback(
-          function(window, _, line)
-            if line then
-              window:active_tab():set_title(line)
-            end
+        action = wezterm.action_callback(function(window, _, line)
+          if line then
+            window:active_tab():set_title(line)
           end
-        ),
-      },
+        end),
+      }),
     },
   },
 }
