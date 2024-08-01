@@ -100,14 +100,6 @@
       };
     };
 
-    tmux = {
-      enable = true;
-      extraConfig = builtins.readFile ./managed/tmux/tmux.conf;
-      plugins =  with pkgs; [
-        tmuxPlugins.nord
-      ];
-    };
-
     wezterm = {
       enable = true;
       enableZshIntegration = true;

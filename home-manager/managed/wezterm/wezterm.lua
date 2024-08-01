@@ -2,10 +2,16 @@
 
 local wezterm = require("wezterm")
 
+wezterm.on("update-right-status", function(window, _)
+  window:set_right_status(window:active_workspace() .. "  ")
+end)
+
 return {
   color_scheme = "nord",
+  default_cwd = wezterm.home_dir .. "workspace/personal",
+  default_gui_startup_args = { "connect", "unix" },
+  default_workspace = "personal",
 
-  -- https://gist.github.com/ErebusBat/9744f25f3735c1e0491f6ef7f3a9ddc3
   font = wezterm.font({
     family = "Monaspace Neon Var",
     weight = "Bold",
@@ -13,7 +19,51 @@ return {
   }),
 
   font_size = 11,
+  initial_cols = 800,
+  initial_rows = 240,
 
-  hide_tab_bar_if_only_one_tab = true,
+  leader = {
+    key = "s",
+    mods = "CTRL",
+    timeout_milliseconds = 2000,
+  },
+
+  pane_focus_follows_mouse = true,
+  unix_domains = { { name = "unix", }, },
+  use_fancy_tab_bar = false,
   window_decorations = "RESIZE",
+
+  keys = {
+    { key = "a", mods = "LEADER", action = wezterm.action.AttachDomain("unix"), },
+    { key = "c", mods = "LEADER", action = wezterm.action.SpawnTab("CurrentPaneDomain"), },
+    { key = "d", mods = "LEADER", action = wezterm.action.DetachDomain("CurrentPaneDomain"), },
+    { key = "g", mods = "LEADER", action = wezterm.action.ShowTabNavigator, },
+    { key = "h", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Left") },
+    { key = "j", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Down") },
+    { key = "k", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Up") },
+    { key = "l", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Right") },
+    { key = "n", mods = "LEADER", action = wezterm.action.ActivateTabRelative(1), },
+    { key = "p", mods = "LEADER", action = wezterm.action.ActivateTabRelative(-1), },
+    { key = "s", mods = "LEADER", action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }), },
+    { key = "x", mods = "LEADER", action = wezterm.action.CloseCurrentTab({ confirm = true }) },
+    { key = "z", mods = "LEADER", action = wezterm.action.TogglePaneZoomState, },
+    { key = "|", mods = "LEADER|SHIFT", action = wezterm.action.SplitPane({ direction = "Right", size = { Percent = 50 }, }), },
+    { key = "-", mods = "LEADER", action = wezterm.action.SplitPane({ direction = "Down", size = { Percent = 50 }, }), },
+    { key = "{", mods = "LEADER|SHIFT", action = wezterm.action.PaneSelect({ mode = "SwapWithActiveKeepFocus" }) },
+    { key = '!', mods = 'LEADER | SHIFT', action = wezterm.action_callback(function(_, pane) pane:move_to_new_tab() end), },
+    {
+      key = ",",
+      mods = "LEADER",
+      action = wezterm.action.PromptInputLine {
+        description = "Enter new name for tab",
+        action = wezterm.action_callback(
+          function(window, _, line)
+            if line then
+              window:active_tab():set_title(line)
+            end
+          end
+        ),
+      },
+    },
+  },
 }
