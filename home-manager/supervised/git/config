@@ -55,6 +55,8 @@
 
   root = rev-parse --show-toplevel
 
+  st = status
+
   tidy = "!f() { \
     defaultbranch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p'); \
     git switch $1 $defaultbranch; \
