@@ -38,10 +38,11 @@
       hurl
       kubectl
       kubelogin-oidc
+      monaspace
       neovim
+      obsidian
       ripgrep
       spotify
-      obsidian
       vale
       zoxide
     ];
@@ -99,25 +100,18 @@
       };
     };
 
-    kitty = {
-      enable = true;
-      extraConfig = builtins.readFile ./managed/kitty/kitty.conf +
-        builtins.readFile ./managed/kitty/add-font-features-monaspace.conf;
-      font = {
-        package = pkgs.monaspace;
-        name = "Monaspace Neon Var";
-        size = 11;
-      };
-      shellIntegration.enableZshIntegration = true;
-      theme = "Nord";
-    };
-
     tmux = {
       enable = true;
       extraConfig = builtins.readFile ./managed/tmux/tmux.conf;
       plugins =  with pkgs; [
         tmuxPlugins.nord
       ];
+    };
+
+    wezterm = {
+      enable = true;
+      enableZshIntegration = true;
+      extraConfig = builtins.readFile ./managed/wezterm/wezterm.lua;
     };
 
     zsh = {
