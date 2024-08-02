@@ -8,7 +8,7 @@ end)
 
 return {
   color_scheme = "nord",
-  default_cwd = wezterm.home_dir .. "workspace/personal",
+  default_cwd = wezterm.home_dir .. "/workspace/personal",
   default_gui_startup_args = { "connect", "unix" },
   default_workspace = "personal",
 
@@ -19,8 +19,8 @@ return {
   }),
 
   font_size = 11,
-  initial_cols = 800,
-  initial_rows = 240,
+  initial_cols = 160,
+  initial_rows = 48,
 
   leader = {
     key = "s",
