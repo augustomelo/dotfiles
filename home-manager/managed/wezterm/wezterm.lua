@@ -42,6 +42,7 @@ return {
     { key = "j", mods = "ALT",            action = wezterm.action.ActivatePaneDirection("Down") },
     { key = "k", mods = "ALT",            action = wezterm.action.ActivatePaneDirection("Up") },
     { key = "l", mods = "ALT",            action = wezterm.action.ActivatePaneDirection("Right") },
+    { key = "l", mods = "LEADER",         action = wezterm.action.ActivateLastTab },
     { key = "n", mods = "LEADER",         action = wezterm.action.ActivateTabRelative(1), },
     { key = "p", mods = "LEADER",         action = wezterm.action.ActivateTabRelative(-1), },
     { key = "s", mods = "LEADER",         action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY | WORKSPACES" }), },
