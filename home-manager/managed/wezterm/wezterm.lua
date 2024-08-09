@@ -7,6 +7,7 @@ wezterm.on("update-right-status", function(window, _)
 end)
 
 return {
+  adjust_window_size_when_changing_font_size = false,
   color_scheme = "nord",
   default_cwd = wezterm.home_dir .. "/workspace/personal",
   default_gui_startup_args = { "connect", "unix" },
