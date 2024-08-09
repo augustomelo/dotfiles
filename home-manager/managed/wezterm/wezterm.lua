@@ -10,7 +10,6 @@ return {
   adjust_window_size_when_changing_font_size = false,
   color_scheme = "nord",
   default_cwd = wezterm.home_dir .. "/workspace/personal",
-  default_gui_startup_args = { "connect", "unix" },
   default_workspace = "personal",
 
   font = wezterm.font({
