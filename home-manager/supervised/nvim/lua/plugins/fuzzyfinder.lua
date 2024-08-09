@@ -1,6 +1,6 @@
 return {
   "nvim-telescope/telescope.nvim",
-  tag = "0.1.8",
+  tag = "0.1.x",
   dependencies = {
     { "nvim-lua/plenary.nvim" },
   },
@@ -8,5 +8,6 @@ return {
   {
     "nvim-telescope/telescope-file-browser.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-  }
+  },
+  { "nvim-tree/nvim-web-devicons" },
 }

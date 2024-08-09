@@ -54,8 +54,6 @@ vim.keymap.set("n", "<leader>*", builtin.grep_string,
 vim.keymap.set("n", "<leader>fb", builtin.buffers,
   { unpack(default_opts), desc = "Find open buffers." })
 
-
-
 vim.keymap.set("n", "<C-n>", function()
   require("telescope").extensions.file_browser.file_browser({ path = "%:p:h", select_buffer = true })
 end, { unpack(default_opts), desc = "File browser based on the selected buffer" })
