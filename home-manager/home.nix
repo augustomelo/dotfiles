@@ -83,7 +83,7 @@
       };
       defaultCommand = "fd --hidden --strip-cwd-prefix --exclude .git";
       defaultOptions = [
-        "--bind 'tab:toggle-up,btab:toggle-down,ctrl-u:preview-up,ctrl-d:preview-down'"
+        "--bind 'ctrl-u:preview-up,ctrl-d:preview-down'"
       ];
       fileWidgetCommand = "fd --type=f --hidden --strip-cwd-prefix --exclude .git";
       fileWidgetOptions = [

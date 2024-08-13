@@ -8,10 +8,6 @@
   addEmptyPathspec = false
 
 [alias]
-  a = "!f() { \
-        git add $(git ls-files --modified --others --exclude-standard | fzf --multi --preview 'bat --color=always {}'); \
-  }; f"
-
   cb = "!f() { \
     if [ $# -eq 0 ]; then \
       echo \"You need to provide a branch name\"; \
