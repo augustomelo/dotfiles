@@ -67,6 +67,7 @@
   pager = delta
 
 [delta]
+  blame-timestamp-output-format = %D %R
   navigate = true
   side-by-side = true
 
