@@ -29,6 +29,10 @@ return {
   },
 
   pane_focus_follows_mouse = true,
+  set_environment_variables = {
+    TERMINFO_DIRS = os.getenv("HOME") .. "/.nix-profile/share/terminfo",
+  },
+  term = "wezterm",
   unix_domains = { { name = "unix", }, },
   use_fancy_tab_bar = false,
   window_decorations = "RESIZE",
