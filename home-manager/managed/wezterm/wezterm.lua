@@ -19,6 +19,7 @@ return {
   }),
 
   font_size = 11,
+  front_end = "WebGpu",
   initial_cols = 160,
   initial_rows = 48,
 
