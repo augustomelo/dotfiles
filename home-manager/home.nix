@@ -103,7 +103,6 @@
 
     wezterm = {
       enable = true;
-      enableZshIntegration = true;
       extraConfig = builtins.readFile ./managed/wezterm/wezterm.lua;
     };
 
