@@ -5,7 +5,7 @@
   ...
 }: {
   home = {
-    file.".config" = { source = ./supervised; recursive = true; };
+    file.".config" = { source = ./config; recursive = true; };
     homeDirectory = "/Users/${username}";
     stateVersion = "23.11";
     username = username;
