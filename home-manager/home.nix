@@ -45,6 +45,7 @@
       spotify
       starship
       vale
+      wezterm
       zoxide
     ];
   };
@@ -99,11 +100,6 @@
           ui.skin = "nord";
         };
       };
-    };
-
-    wezterm = {
-      enable = true;
-      extraConfig = builtins.readFile ./managed/wezterm/wezterm.lua;
     };
 
     zsh = {
