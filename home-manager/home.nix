@@ -23,7 +23,7 @@
     };
 
     packages = with pkgs; [
-      colima 
+      colima
       dasel
       delta
       docker
