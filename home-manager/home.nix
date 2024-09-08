@@ -43,6 +43,7 @@
       obsidian
       ripgrep
       spotify
+      starship
       vale
       zoxide
     ];

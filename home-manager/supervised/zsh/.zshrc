@@ -19,6 +19,7 @@ setopt emacs \
   sharehistory
 
 eval "$(direnv hook zsh)"
+eval "$(starship init zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 
 source "$ZDOTDIR/.aliases"
