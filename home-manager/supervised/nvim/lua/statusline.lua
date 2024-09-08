@@ -76,8 +76,9 @@ local pos_info = function()
 end
 
 local lsp_name = function()
-  if vim.lsp.buf_get_clients()[1] ~= nil then
-    return vim.lsp.buf_get_clients()[1].config.name
+  local currLspBuffer = vim.lsp.get_clients({buffer=0})[1]
+  if currLspBuffer ~= nil then
+    return currLspBuffer.config.name
   else
     return ""
   end
