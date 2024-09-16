@@ -93,8 +93,8 @@ require("mason-lspconfig").setup {
     end,
 
     -- https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
-    tsserver = function()
-      require("lspconfig").tsserver.setup {
+    ts_ls = function()
+      require("lspconfig").ts_ls.setup {
         settings = {
           javascript = {
             inlayHints = {
