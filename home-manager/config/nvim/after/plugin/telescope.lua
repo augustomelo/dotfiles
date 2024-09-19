@@ -6,6 +6,11 @@ require("telescope").setup({
         file_browser = true,
         folder_browser = true
       },
+      mappings = {
+        i = {
+          ["<A-e>"] = require("telescope").extensions.file_browser.actions.rename,
+        },
+      },
     },
   },
   pickers = {
@@ -32,9 +37,9 @@ require("telescope").setup({
     },
     mappings = {
       i = {
-        ["<esc>"] = require("telescope.actions").close,
-        ["<c-j>"] = require("telescope.actions").move_selection_next,
-        ["<c-k>"] = require("telescope.actions").move_selection_previous,
+        ["<Esc>"] = require("telescope.actions").close,
+        ["<C-j>"] = require("telescope.actions").move_selection_next,
+        ["<C-k>"] = require("telescope.actions").move_selection_previous,
       },
     },
   },
