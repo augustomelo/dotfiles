@@ -20,24 +20,13 @@
 
   cm = commit
 
-  co = "!f() { \
-    if [ $# -eq 0 ]; then \
-      defaultbranch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p'); \
-      git switch $defaultbranch; \
-      git pull origin $defaultbranch; \
-    else\
-      git switch $1; \
-      git pull origin $1; \
-    fi \
-  }; f"
+  cma = commit --amend
+
+  cmane = commit --amend --no-edit
 
   commitsAtDate = "!f() { \
     git log --after=\"$1 0:00\" --before=\"$1 23:59\"; \
   }; f"
-
-  default = "!git remote show origin | sed -n '/HEAD branch/s/.*: //p'"
-
-  find = "!git fetch && git switch $(git branch -a | grep -v $(git rev-parse --abbrev-ref HEAD) | fzf | sed 's|remotes/origin/||')"
 
   pl = "!git pull origin "$(git symbolic-ref --short HEAD)""
 
@@ -52,6 +41,12 @@
   root = rev-parse --show-toplevel
 
   st = status
+
+  sync = "!f() { \
+    defaultbranch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p'); \
+    git fetch origin $defaultbranch:$defaultbranch; \
+    git rebase $defaultbranch; \
+  }; f"
 
   tidy = "!f() { \
     defaultbranch=$(git remote show origin | sed -n '/HEAD branch/s/.*: //p'); \
