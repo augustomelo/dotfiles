@@ -55,6 +55,9 @@ require("mason-lspconfig").setup {
       require("lspconfig").jdtls.setup {
         settings = {
           java = {
+            autobuild = {
+              enabled = false,
+            },
             inlayHints = {
               parameterNames = {
                 enabled = "all",
