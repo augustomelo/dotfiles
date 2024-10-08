@@ -75,13 +75,28 @@ local pos_info = function()
   return string.format("%s:%s/%s", v_column_number, current_line, total_lines)
 end
 
-local lsp_name = function()
-  local currLspBuffer = vim.lsp.get_clients({buffer=0})[1]
-  if currLspBuffer ~= nil then
-    return currLspBuffer.config.name
-  else
-    return ""
+local table_contains = function(tbl, x)
+  for _, v in pairs(tbl) do
+    if v == x then
+      return true
+    end
   end
+
+  return false
+end
+
+local lsp_name = function()
+  local buff_clients = vim.lsp.get_clients({buffer=0})
+
+  if buff_clients ~=nil then
+    for _, client in pairs(buff_clients) do
+      if table_contains(client.config.filetypes, vim.bo.filetype) then
+        return client.name
+      end
+    end
+  end
+
+  return ""
 end
 
 local file_format = function()
