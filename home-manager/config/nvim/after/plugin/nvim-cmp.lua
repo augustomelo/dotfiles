@@ -11,7 +11,7 @@ local cmp = require("cmp")
 
 cmp.setup({
   completion = {
-    completeopt = vim.opt.completeopt,
+    completeopt =  table.concat(vim.opt.completeopt:get(), ","),
   },
   mapping = {
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
