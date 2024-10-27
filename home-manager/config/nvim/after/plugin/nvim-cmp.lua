@@ -10,6 +10,9 @@ end
 local cmp = require("cmp")
 
 cmp.setup({
+  completion = {
+    completeopt = vim.opt.completeopt,
+  },
   mapping = {
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
