@@ -95,6 +95,11 @@ require("mason-lspconfig").setup {
       }
     end,
 
+    -- https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
+    pylsp = function ()
+      require("lspconfig").pylsp.setup{}
+    end,
+
     -- https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md
     ts_ls = function()
       require("lspconfig").ts_ls.setup {
