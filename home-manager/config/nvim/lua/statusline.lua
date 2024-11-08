@@ -103,6 +103,17 @@ local file_format = function()
   return vim.o.fileformat
 end
 
+local search_count = function()
+  local search = vim.fn.searchcount({maxcount = 0}) -- maxcount = 0 makes the number not be capped at 99
+  local current = search.current
+
+  if current ~= nil and  current > 0 then
+    return "/"..vim.fn.getreg("/").." ["..current.."/"..search.total.."]"
+  end
+
+  return ""
+end
+
 local M = {}
 
 M.statusline = function()
@@ -115,6 +126,7 @@ M.statusline = function()
     { left = "", info = recording_info, right = "" },
     { left = "", info = create_group, right = "" },
     { left = "", info = create_group, right = "" },
+    { left = "▊", info = search_count, right = "" },
     { left = "▊", info = lsp_name, right = "" },
     { left = "▊", info = file_format, right = "" },
     { left = "▊", info = buffer_encoding, right = "" },
