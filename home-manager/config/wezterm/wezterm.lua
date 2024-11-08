@@ -51,7 +51,7 @@ return {
     { key = "n", mods = "LEADER",         action = wezterm.action.ActivateTabRelative(1), },
     { key = "p", mods = "LEADER",         action = wezterm.action.ActivateTabRelative(-1), },
     { key = "s", mods = "LEADER",         action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY | WORKSPACES" }), },
-    { key = "x", mods = "LEADER",         action = wezterm.action.CloseCurrentTab({ confirm = true }) },
+    { key = "x", mods = "LEADER",         action = wezterm.action.CloseCurrentPane { confirm = true }, },
     { key = "z", mods = "LEADER",         action = wezterm.action.TogglePaneZoomState, },
     { key = "-", mods = "LEADER",         action = wezterm.action.SplitPane({ direction = "Down", size = { Percent = 50 }, }), },
     { key = "|", mods = "LEADER | SHIFT", action = wezterm.action.SplitPane({ direction = "Right", size = { Percent = 50 }, }), },
