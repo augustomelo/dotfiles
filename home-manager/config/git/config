@@ -86,8 +86,13 @@
   strategy = incremental
 
 [merge]
-  conflictstyle = diff3
-  tool = nvimdiff
+  tool = nvim
+
+[mergetool]
+  keepBackup = false
+
+[mergetool "nvim"]
+  cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""
 
 [pull]
   ff = only
