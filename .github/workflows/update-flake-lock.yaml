@@ -19,3 +19,4 @@ jobs:
           path-to-flake-dir: ./home-manager
           commit-msg: "build: update flake.lock"
           pr-title: "build: update flake.lock"
+          pr-body: "Sync"
