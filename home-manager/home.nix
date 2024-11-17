@@ -108,5 +108,13 @@
     };
   };
 
+  nix.gc = {
+    automatic = true;
+    frequency = "weekly";
+    randomizedDelaySec = "10m";
+    persistent = true;
+    options = "--delete-older-than 15d";
+  };
+
   xdg.enable = true;
 }
