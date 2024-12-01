@@ -8,6 +8,7 @@ end)
 
 return {
   adjust_window_size_when_changing_font_size = false,
+  animation_fps = 120,
   color_scheme = "nord",
   default_cwd = wezterm.home_dir .. "/workspace/personal",
   default_workspace = "personal",
@@ -29,6 +30,7 @@ return {
     timeout_milliseconds = 2000,
   },
 
+  max_fps = 120,
   pane_focus_follows_mouse = true,
   set_environment_variables = {
     TERMINFO_DIRS = os.getenv("HOME") .. "/.nix-profile/share/terminfo",
