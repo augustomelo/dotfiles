@@ -6,12 +6,28 @@ wezterm.on("update-right-status", function(window, _)
   window:set_right_status(window:active_workspace() .. "  ")
 end)
 
+-- https://github.com/wez/wezterm/issues/3542#issuecomment-1794798227
+wezterm.on("user-var-changed", function(window, pane, name, value)
+  if name == "switch-workspace" then
+    local cmd_context = wezterm.json_parse(value)
+    window:perform_action(
+      wezterm.action.SwitchToWorkspace {
+        name = cmd_context.workspace,
+        spawn = {
+          cwd = cmd_context.cwd,
+        },
+      },
+      pane
+    )
+  end
+end)
+
 return {
   adjust_window_size_when_changing_font_size = false,
   animation_fps = 120,
   color_scheme = "nord",
-  default_cwd = wezterm.home_dir .. "/workspace/personal",
-  default_workspace = "personal",
+  default_cwd = wezterm.home_dir .. "/workspace/personal/dotfiles",
+  default_workspace = "dotfiles",
 
   font = wezterm.font({
     family = "Monaspace Neon Var",
@@ -52,7 +68,6 @@ return {
     { key = "l", mods = "LEADER",         action = wezterm.action.ActivateLastTab },
     { key = "n", mods = "LEADER",         action = wezterm.action.ActivateTabRelative(1), },
     { key = "p", mods = "LEADER",         action = wezterm.action.ActivateTabRelative(-1), },
-    { key = "s", mods = "LEADER",         action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY | WORKSPACES" }), },
     { key = "x", mods = "LEADER",         action = wezterm.action.CloseCurrentPane { confirm = true }, },
     { key = "z", mods = "LEADER",         action = wezterm.action.TogglePaneZoomState, },
     { key = "-", mods = "LEADER",         action = wezterm.action.SplitPane({ direction = "Down", size = { Percent = 50 }, }), },
