@@ -1,3 +1,4 @@
+#!/bin/zsh
 # vim: set filetype=zsh:
 
 k8smergecfg() {
