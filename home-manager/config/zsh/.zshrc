@@ -26,5 +26,5 @@ source "$ZDOTDIR/.aliases"
 source "$ZDOTDIR/.fzf"
 source "$ZDOTDIR/.zshcompletion"
 
-bindkey -s '^Z' 'fg^M'
+bindkey -s "^Z" " fg^M"
 bindkey -s "^W" "sessionizer^M"
