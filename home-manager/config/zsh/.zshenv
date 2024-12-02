@@ -9,8 +9,8 @@ export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 export fpath=($XDG_DATA_HOME/zsh/completion $ZDOTDIR/functions $fpath)
 
 export BAT_THEME="Nord" # this is needed for delta when running the command git blame
-export DICPATH=$XDG_DATA_HOME/dictionaries # used by vale as other resources to dictionaries
+export DICPATH="$XDG_DATA_HOME/dictionaries" # used by vale as other resources to dictionaries
 export EDITOR="nvim"
+export KUBECONFIG="$HOME/.kube/config"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
-export KUBECONFIG="$HOME/.kube/config"
