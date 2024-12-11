@@ -49,7 +49,7 @@ return {
   max_fps = 120,
   pane_focus_follows_mouse = true,
   set_environment_variables = {
-    TERMINFO_DIRS = os.getenv("HOME") .. "/.nix-profile/share/terminfo",
+    TERMINFO_DIRS = wezterm.home_dir .. "/.nix-profile/share/terminfo",
   },
   term = "wezterm",
   unix_domains = { { name = "unix", }, },
