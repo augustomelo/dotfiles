@@ -41,6 +41,7 @@
       monaspace
       neovim
       obsidian
+      raycast
       ripgrep
       spotify
       starship
