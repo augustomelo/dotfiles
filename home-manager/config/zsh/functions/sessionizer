@@ -17,7 +17,7 @@ else
 fi
 
 if [[ -z $selected_cwd ]]; then
-  exit 0
+  return 0
 fi
 
 selected_name=$(basename "$selected_cwd" | tr . _)
