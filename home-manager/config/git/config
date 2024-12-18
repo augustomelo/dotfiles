@@ -99,3 +99,7 @@
 
 [push]
   autoSetupRemote = true
+
+[rebase]
+  updateRefs = true
+
