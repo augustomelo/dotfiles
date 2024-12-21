@@ -19,3 +19,18 @@ Regarding the vale, oto configure other spelling dictionaries besides english, w
 
 1. [Configure spelling](https://vale.sh/docs/topics/styles/#spelling) 
 1. [Download spelling (*.dic and *.aff)](https://github.com/wooorm/dictionaries/tree/main/dictionaries) 
+
+### MacOS nice to have 
+
+```
+# Ctrl + Cmd + Click to move window
+defaults write -g NSWindowShouldDragOnGesture -bool true
+
+# to disable
+defaults delete -g NSWindowShouldDragOnGesture
+
+# allow close finder
+defaults write com.apple.finder QuitMenuItem -bool true
+
+# need to restart afterwards 
+``
