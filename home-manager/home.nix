@@ -15,6 +15,9 @@
     activation = {
       aliasApplications = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         app_folder=$(echo ~/Applications);
+        if [[ ! -e $app_folder ]]; then
+          mkdir $app_folder
+        fi
         for app in $(find "$newGenPath/home-path/Applications" -type l); do
           $DRY_RUN_CMD rm -f $app_folder/$(basename $app)
           $DRY_RUN_CMD /usr/bin/osascript -e "tell app \"Finder\"" -e "make new alias file to POSIX file \"$(readlink $app)\" at POSIX file \"$app_folder\"" -e "set name of result to \"$(basename $app)\"" -e "end tell"
