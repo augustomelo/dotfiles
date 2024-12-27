@@ -1,6 +1,4 @@
-require("nord").setup({
-  diff = { mode = "fg" },
-  errors = { mode = "fg" },
-  search = { theme = "vscode" },
+require("catppuccin").setup({
+   flavour = "macchiato",
 })
-vim.cmd.colorscheme("nord")
+vim.cmd.colorscheme("catppuccin")

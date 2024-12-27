@@ -2,16 +2,18 @@
   description = "Flake configuration";
 
   inputs = {
-    nixpkgs.url =  "github:nixos/nixpkgs/nixpkgs-unstable";
+    catppuccin.url = "github:catppuccin/nix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs.url =  "github:nixos/nixpkgs/nixpkgs-unstable";
   };
 
   outputs = { 
-    nixpkgs, 
+    catppuccin,
     home-manager,
+    nixpkgs, 
     ... 
   }: let
     system = "aarch64-darwin";
@@ -26,7 +28,10 @@
           allowUnfree = true;
         };
       };
-      modules = [ ./home.nix ];
+      modules = [
+        ./home.nix  
+        catppuccin.homeManagerModules.catppuccin
+      ];
       extraSpecialArgs = {
         inherit username;
       };

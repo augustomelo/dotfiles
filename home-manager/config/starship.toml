@@ -1,67 +1,80 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
 add_newline = true
-palette = 'nord'
+palette = 'catppuccin_macchiato'
 
 format = '''
-[┌─$username$hostname─$directory](nord3)
-[└─$git_branch$git_state$git_status─$character](nord3)
+[┌─$username$hostname─$directory](overlay2)
+[└─$git_branch$git_state$git_status─$character](overlay2)
 '''
 
-right_format = '[$time](nord3)'
+right_format = '[$time](overlay2)'
 
 [character]
-success_symbol = '[❯](nord4)'
-error_symbol = '[❯](nord4)'
+success_symbol = '[❯](text)'
+error_symbol = '[❯](text)'
 
 [directory]
 format = '\([$path]($style)[$read_only]($read_only_style)\)'
-read_only_style = 'nord11'
-style = 'nord9'
+read_only_style = 'red'
+style = 'blue'
 truncation_length = 7
 truncation_symbol = '…/'
 
 [git_branch]
 format = '\([$branch$symbol]($style) '
-style = 'nord9'
+style = 'blue'
 symbol = ' '
 
 [git_state]
-style = 'nord9'
+style = 'blue'
 
 [git_status]
 format = '([\[$all_status$ahead_behind\]]($style))\)'
-style = 'nord9'
+style = 'blue'
 
 [hostname]
 format = '[@$hostname]($style)\)'
 ssh_only = false
-style = 'nord9'
+style = 'blue'
 
 [time]
 disabled = false
 format = '\([$time]($style)\)'
-style = 'nord9'
+style = 'blue'
 time_format = '%H:%M %d/%m/%y'
 
 [username]
 format = '\([$user]($style)'
 show_always = true
-style_root = 'nord11 bold'
-style_user = 'nord9'
+style_root = 'red bold'
+style_user = 'blue'
 
-[palettes.nord]
-nord0 = "#2e3440"
-nord1 = "#3b4252"
-nord2 = "#434c5e"
-nord3 = "#4c566a"
-nord4 = "#d8dee9"
-nord5 = "#e5e9f0"
-nord6 = "#eceff4"
-nord7 = "#8fbcbb"
-nord8 = "#88c0d0"
-nord9 = "#81a1c1"
-nord10 = "#5e81ac"
-nord11 = "#bf616a"
-nord12 = "#d08770"
-nord13 = "#ebcb8b"
-nord14 = "#a3be8c"
-nord15 = "#b48ead"
+# https://github.com/catppuccin/starship
+[palettes.catppuccin_macchiato]
+rosewater = "#f4dbd6"
+flamingo = "#f0c6c6"
+pink = "#f5bde6"
+mauve = "#c6a0f6"
+red = "#ed8796"
+maroon = "#ee99a0"
+peach = "#f5a97f"
+yellow = "#eed49f"
+green = "#a6da95"
+teal = "#8bd5ca"
+sky = "#91d7e3"
+sapphire = "#7dc4e4"
+blue = "#8aadf4"
+lavender = "#b7bdf8"
+text = "#cad3f5"
+subtext1 = "#b8c0e0"
+subtext0 = "#a5adcb"
+overlay2 = "#939ab7"
+overlay1 = "#8087a2"
+overlay0 = "#6e738d"
+surface2 = "#5b6078"
+surface1 = "#494d64"
+surface0 = "#363a4f"
+base = "#24273a"
+mantle = "#1e2030"
+crust = "#181926"

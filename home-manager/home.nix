@@ -4,6 +4,13 @@
   lib,
   ...
 }: {
+  catppuccin = {
+    bat.enable = true;
+    flavor = "macchiato";
+    fzf.enable = true;
+    k9s.enable = true;
+  };
+
   home = {
     file.".config" = { source = ./config; recursive = true; };
     homeDirectory = "/Users/${username}";
@@ -57,9 +64,6 @@
   programs = {
     bat = {
       enable = true;
-      config = {
-        theme = "Nord";
-      };
     };
 
     direnv = {
@@ -73,20 +77,6 @@
       changeDirWidgetOptions = [
         "--preview 'eza --tree --color=always {} | head -200'"
       ];
-      colors = {
-        "bg+" = "#3B4252";
-        bg = "#2E3440";
-        "fg+" = "#D8DEE9";
-        fg = "#D8DEE9";
-        header = "#616E88";
-        "hl+" = "#81A1C1";
-        hl = "#616E88";
-        info = "#81A1C1";
-        marker = "#81A1C1";
-        pointer = "#81A1C1";
-        prompt = "#81A1C1";
-        spinner = "#81A1C1";
-      };
       defaultCommand = "fd --hidden --strip-cwd-prefix --exclude .git";
       defaultOptions = [
         "--bind 'ctrl-u:preview-up,ctrl-d:preview-down'"
@@ -99,11 +89,6 @@
 
     k9s = {
       enable = true;
-      settings = {
-        k9s = {
-          ui.skin = "nord";
-        };
-      };
     };
 
     zsh = {

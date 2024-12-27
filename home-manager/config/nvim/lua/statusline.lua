@@ -1,8 +1,8 @@
--- colors based on nord color pallet
--- https://www.nordtheme.com/docs/colors-and-palettes
+-- colors based on catpuccin macchiato color pallet
+-- https://catppuccin.com/palette
 local init_colors = function()
-  vim.api.nvim_set_hl(0, "Statusline", { fg = "#D8DEE9", bg = "#2E3440" })
-  vim.api.nvim_set_hl(0, "StatuslineSeparator", { fg = "#3B4252", bg = "#3B4252" })
+  vim.api.nvim_set_hl(0, "Statusline", { fg = "#cad3f5", bg = "#24273a" })
+  vim.api.nvim_set_hl(0, "StatuslineSeparator", { fg = "#494d64", bg = "#494d64" })
 end
 
 local base_color = function()

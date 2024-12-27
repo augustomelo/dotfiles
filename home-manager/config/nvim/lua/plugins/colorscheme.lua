@@ -1,3 +1,3 @@
 return {
-  "gbprod/nord.nvim",
+  { "catppuccin/nvim", name = "catppuccin" },
 }
