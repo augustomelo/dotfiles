@@ -29,13 +29,6 @@ return {
   default_cwd = wezterm.home_dir .. "/workspace/personal/dotfiles",
   default_workspace = "dotfiles",
 
-  font = wezterm.font({
-    family = "Monaspace Neon Var",
-    weight = "Bold",
-    harfbuzz_features = { "calt", "liga", "dlig", "ss01", "ss02", "ss03", "ss04", "ss05", "ss06", "ss07", "ss08" },
-  }),
-
-  font_size = 12,
   front_end = "WebGpu",
   initial_cols = 160,
   initial_rows = 48,

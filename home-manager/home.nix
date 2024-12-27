@@ -48,7 +48,6 @@
       hurl
       kubectl
       kubelogin-oidc
-      monaspace
       neovim
       obsidian
       raycast
