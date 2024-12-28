@@ -17,9 +17,11 @@ if [[ ! -d $script_folder ]]; then
   mkdir -p $script_folder
 fi
 
+bat --completion zsh > "$completion_folder/_bat"
 colima completion zsh > "$completion_folder/_colima"
 dasel completion zsh >"$completion_folder/_dasel"
 docker completion zsh > "$completion_folder/_docker"
+# ghostty completion comes bundle up with the application
 kubectl completion zsh > "$completion_folder/_kubectl"
 rg --generate complete-zsh > "$completion_folder/_rg"
 wezterm shell-completion --shell zsh > "$completion_folder/_wezterm" 
