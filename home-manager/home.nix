@@ -9,6 +9,7 @@
     flavor = "macchiato";
     fzf.enable = true;
     k9s.enable = true;
+    tmux.enable = true;
   };
 
   home = {
@@ -88,6 +89,20 @@
 
     k9s = {
       enable = true;
+    };
+
+    tmux = {
+      enable = true;
+      aggressiveResize = true;
+      baseIndex = 1;
+      clock24 = true;
+      escapeTime = 5;
+      extraConfig = builtins.readFile ./extra/tmux/tmux.conf;
+      focusEvents = true;
+      historyLimit = 50000;
+      keyMode = "vi";
+      mouse = true;
+      prefix = "C-s";
     };
 
     zsh = {

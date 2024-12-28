@@ -1,15 +1,5 @@
 #!/bin/zsh
 
-# Unforntunatelly there is no way to switch into a pane-id which the workspace
-# is not visible, wezterm cli dosen't offer this funcionality
-# https://github.com/wez/wezterm/issues/3542
-# Hack solution https://github.com/wez/wezterm/issues/3542#issuecomment-1794798227
-wezterm-switch-workspace() {
-  args=$(echo '{}' | dasel put -r json -t string -v "$1" workspace | dasel put -r json -t string -v "$2" cwd | base64)
-  printf "\033]1337;SetUserVar=%s=%s\007" switch-workspace $args
-}
-
-
 if [[ $# -eq 1 ]]; then
   selected_cwd=$1
 else
@@ -21,4 +11,9 @@ if [[ -z $selected_cwd ]]; then
 fi
 
 selected_name=$(basename "$selected_cwd" | tr . _)
-wezterm-switch-workspace $selected_name $selected_cwd
+
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
+    tmux new-session -ds $selected_name -c $selected_cwd
+fi
+
+tmux switch-client -t $selected_name
