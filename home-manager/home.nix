@@ -56,7 +56,6 @@
       spotify
       starship
       vale
-      wezterm
       zoxide
     ];
   };
