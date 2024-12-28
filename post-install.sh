@@ -2,18 +2,18 @@
 
 # History
 hist_folder="$XDG_CACHE_HOME/zsh"
-if [[ ! -e $hist_folder ]]; then
+if [[ ! -d $hist_folder ]]; then
   mkdir -p $hist_folder
 fi
 
 # Completion
 completion_folder="$XDG_DATA_HOME/zsh/completion"
-if [[ ! -e $completion_folder ]]; then
+if [[ ! -d $completion_folder ]]; then
   mkdir -p $completion_folder
 fi
 
 script_folder="$XDG_DATA_HOME/zsh/script"
-if [[ ! -e $script_folder ]]; then
+if [[ ! -d $script_folder ]]; then
   mkdir -p $script_folder
 fi
 

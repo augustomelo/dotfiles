@@ -23,7 +23,7 @@
     activation = {
       aliasApplications = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         app_folder=$(echo ~/Applications);
-        if [[ ! -e $app_folder ]]; then
+        if [[ ! -d $app_folder ]]; then
           mkdir $app_folder
         fi
         for app in $(find "$newGenPath/home-path/Applications" -type l); do
