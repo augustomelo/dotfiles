@@ -4,11 +4,12 @@ add_newline = true
 palette = 'catppuccin_macchiato'
 
 format = '''
-[┌─$username$hostname─$directory](overlay2)
+[┌─$username$hostname─$directory](overlay2)$fill[$time](overlay2)
 [└─$git_branch$git_state$git_status─$character](overlay2)
 '''
 
-right_format = '[$time](overlay2)'
+[fill]
+symbol = ' '
 
 [character]
 success_symbol = '[❯](text)'
