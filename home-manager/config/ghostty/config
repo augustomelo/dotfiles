@@ -1,4 +1,5 @@
 cursor-style = block
+link-url = true
 macos-option-as-alt = left
 macos-titlebar-style = hidden
 shell-integration = zsh
