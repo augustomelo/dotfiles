@@ -112,6 +112,7 @@
         set-option -gF  status-right "#{@catppuccin_status_directory}"
 
         bind-key r source-file ~/.config/tmux/tmux.conf \; display-message "~/.tmux.conf reloaded"
+        bind-key o run-shell -b "tmux capture-pane -J -p | grep -oE '(https?):\/\/.*[^>]' | fzf-tmux -d20 --multi --bind alt-a:select-all,alt-d:deselect-all | xargs open"
         bind-key s run-shell "tmux new-window ~/.config/zsh/functions/sessionizer"
         bind-key - split-window -v
         bind-key | split-window -h
