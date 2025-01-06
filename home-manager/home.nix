@@ -50,7 +50,6 @@
       eza
       fd
       fzf-git-sh
-      ghostty
       git
       go
       home-manager
