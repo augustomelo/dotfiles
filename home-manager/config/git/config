@@ -56,6 +56,16 @@
 
   unstage = reset HEAD --
 
+  wcb = "!f() { \
+    if [ $# -eq 0 ]; then \
+      echo \"You need to provide a branch name\"; \
+    else\
+      currdir=$(basename $(pwd)); \
+      dstdir=$(echo $currdir-$1 | tr / -); \
+      git worktree add "../$dstdir"  -b $1; \
+    fi \
+  }; f"
+
 [core]
   editor = nvim
   excludesFile = ~/.config/git/ignore
