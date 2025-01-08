@@ -95,6 +95,12 @@ require("mason-lspconfig").setup {
       }
     end,
 
+    -- https://github.com/oxalica/nil/blob/main/docs/configuration.md
+    nil_ls = function ()
+      require("lspconfig").nil_ls.setup{}
+    end,
+
+
     -- https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
     pylsp = function ()
       require("lspconfig").pylsp.setup{}
